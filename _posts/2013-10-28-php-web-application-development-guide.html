@@ -1,0 +1,61 @@
+---
+layout: post
+title: PHP Web Application Development Guide
+date: 2013-10-28 07:43:26.000000000 +08:00
+categories:
+- coding
+- featured
+- howto
+- php
+- template
+tags:
+- php development
+- web application guide
+- web application setup
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+  _thumbnail_id: '1103'
+  _wpas_done_all: '1'
+  _wpas_skip_1611607: '1'
+  _wpas_skip_2452381: '1'
+  _wpas_skip_2203490: '1'
+  _wpas_skip_2452385: '1'
+  dsq_thread_id: '2958451002'
+author:
+  login: Darwin
+  email: buonzz@gmail.com
+  display_name: Darwin
+  first_name: Darwin
+  last_name: Biler
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<ul>
+<li>Use Test-Driven Development as much as possible - Behaviour-driven development is also an emerging practice, <a href="http://behat.org/" target="_blank">Behat</a> and <a href="http://phpunit.de/manual/current/en/index.html" target="_blank">PHPUnit</a> are the best one so far. Test first makes development much easier to maintain and re-factor.</li>
+<li>Try to decouple the logic from the user-interface by having a RESTful API for you business logic. This way, you can change your user-interface without having to worry about your business logic. It also allows you to centralize the business logic  in one place and use it across multiple sites. For example if you have a website, a mobile site and a mobile app, you can just point all of those apps in your RESTful API instead of developing all the business logic for each app. <a href="https://github.com/Luracast/Restler" target="_blank">Restler</a> or <a href="http://laravel.com/" target="_blank">Laravel</a> is the best frameworks to use for developing REST API.</li>
+<li>Try to analyze the different components of your application that performs specific function then make a<a href="http://getcomposer.org/" target="_blank"> Composer</a> <a href="http://getcomposer.org/doc/02-libraries.md" target="_blank">package</a> for each of those. For example if you have a group of related classes for handling biller payments, you can develop a Composer package that handles billing logic. If the logic of your application is not meant to be published, you can instead create a <a href="http://getcomposer.org/doc/articles/handling-private-packages-with-satis.md" target="_blank">private repository</a> instead of  publishing it in <a href="http://packagist.org" target="_blank">packagist.org</a></li>
+<li>Make sure you read and understand the PHP coding standards like <a href="http://www.php-fig.org/psr/psr-0" target="_blank">PSR-0</a>, <a href="http://www.php-fig.org/psr/psr-1" target="_blank">PSR-1</a>, <a href="http://www.php-fig.org/psr/psr-3" target="_blank">PSR-2</a> and <a href="http://www.php-fig.org/psr/psr-3" target="_blank">PSR-3</a>. This will help you develop easy-to-read codes/libraries and compliant to the standards of the PHP community.</li>
+<li>Use front-end frameworks like <a href="http://emberjs.com/" target="_blank">Ember</a> or <a href="http://backbonejs.org/" target="_blank">Backbone.js</a> to organize your Javascript, CSS and HTML codes. This will allow you prevent memory leaks and spaghetti code as you develop your apps.</li>
+<li>Automate browser-testing by using <a href="http://docs.seleniumhq.org/" target="_blank">Selenium</a>. Since it would be very tedious to repeteadly fill up and click buttons and other stuffs in your application manually.</li>
+<li>You can automate capturing of screencap of your site by using <a href="http://phantomjs.org/" target="_blank">PhantomJS</a> . This will make sure there is no layout messed in other pages of the application when you are trying to experiment with some changes.</li>
+<li>Make sure you know what <a href="http://en.wikipedia.org/wiki/Search_engine_optimization" target="_blank">SEO</a> and<a href="http://en.wikipedia.org/wiki/RSS" target="_blank"> RSS</a> feeds are. Implement this to your pages as much as possible.</li>
+<li>Refactor your Javascript codes by making them a jQuery Plugin. This will lead into a mantainable and reusable codes. It will also avoid possible conflicts among other codes in the global namespace.</li>
+<li>If your applications has large volume of read-only requests. Consider putting the data to be served in a NoSQL database like <a href="http://www.mongodb.org/" target="_blank">MongoDB</a> or <a href="http://couchdb.apache.org/" target="_blank">CouchDB</a>. Usually, you should have all your INSERT/UPDATE/DELETE  in relational database like <a href="http://www.mysql.com/" target="_blank">MySQL</a> then cleanse/sanitize it, move it to NoSQL database and let the read-operations go in NoSQL database. This will avoid your MySQL database from getting overloaded. NoSQL database as well can be distributed and load-balanced easily compare to relational databases.</li>
+<li>If you have created a  REST API for your application, make sure you make a documentation of it using <a href="https://developers.helloreverb.com/swagger/">Swagger</a></li>
+<li>Make your application easy to use by developing a Google Chrome browser <a href="http://developer.chrome.com/extensions/getstarted.html" target="_blank">Extension</a> for it.</li>
+<li>If the application you are developing is a part of larger system. Consider using <a href="http://en.wikipedia.org/wiki/Directory_service" target="_blank">Directory Services</a> and <a href="http://www.openldap.org/" target="_blank">LDAP</a>  instead of making users database table. This will make it easier for the organization to manage the user's credential of your application. It will also provide Single-Sign-On to end-users which will make it easier for them to use your app.</li>
+<li>Start coding your front-end by using well-tested CSS frameworks like <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a></li>
+<li>Use <a href="http://laravel.com/" target="_blank">Laravel Framework </a>as much as possible to start a new project. It is by far the best framework out there.</li>
+<li>Use cloud-computing as much as possible to host your application. <a href="http://aws.amazon.com/" target="_blank">Amazon Web Services</a> and <a href="http://www.windowsazure.com/" target="_blank">Windows Azure</a> is one of the best out there.</li>
+<li>If you are trying to put up a small business online. Consider enrolling to <a href="http://www.microsoft.com/bizspark/" target="_blank">Microsoft BizSpark</a>. You could get financial and connection boost from there, not to mention the free hosting and software that you could use for your startup.</li>
+<li>If your application needs to analyze and process huge amount of spatial and geographic data, consider using <a href="http://www.arcgis.com/features/" target="_blank">ArcGIS</a>.</li>
+</ul>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>

@@ -1,0 +1,86 @@
+---
+layout: post
+title: What is HTTPS?
+date: 2012-06-20 12:00:55.000000000 +08:00
+categories:
+- security
+tags:
+- encryption
+- hash
+- https
+- md5
+- security
+- ssl
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+  fb_mentioned_pages: a:0:{}
+  fb_mentioned_pages_message: ''
+  fb_mentioned_friends: a:0:{}
+  fb_mentioned_friends_message: ''
+  fb_author_message: ''
+  fb_fan_page_message: ''
+  tumblrize_post-type: regular
+  tumblrize_post-group: buonzz.tumblr.com
+  fb_mentioned_friends_post_ids: a:0:{}
+  fb_mentioned_pages_post_ids: a:0:{}
+  tumblrize_post-id: '25500088521'
+  dsq_thread_id: '3034094025'
+author:
+  login: Darwin
+  email: buonzz@gmail.com
+  display_name: Darwin
+  first_name: Darwin
+  last_name: Biler
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p><a href="http://www.darwinbiler.com/wp-content/uploads/2012/06/2012-06-20_15h35_04.png"><img class="alignnone size-full wp-image-341" title="2012-06-20_15h35_04" src="assets/2012-06-20_15h35_04.png" alt="" width="298" height="110" /></a></p>
+<p>You always see that when you are using Facebook, but I bet you have little or no idea what https is for.</p>
+<p>Some of you might say, "it is simply makes my Facebook secure"</p>
+<p>Well, that is a correct answer, but secure from what? in what way it was secured? -- those answers I guess is what most of users don't understand.</p>
+<p>There is a bunch of articles written about HTTPS, ssl, internet security and such, but, they were all filled with jargons that only computer security experts is able to understand.</p>
+<p>This time, I will present to you the same topic, with less jargon and funky words that is easy to understand, without knowing the technicalities and such.</p>
+<p>To start with, let me tell you a story of 2 people trying to send out message to each other.</p>
+<p>Bob and Alice</p>
+<p>So Bob and Alice are good friends, they love to talk and exchange messages. One day, they want to talk about a certain thing while making sure they are the only one who can hear/read and know of.</p>
+<p>What Bob did is, he send his message with password protection. Then told Alice the password so that she can open the message once she received it.</p>
+<p>So Alice received both the password and the message, and she responded to that message using the same password and sent it back to Bob.</p>
+<p>Bob was very happy upon receiving the response since he is now being able to communicate with Alice while preventing other people from knowing what they are talking about (that is because , it is only Bob and Alice knows the password)</p>
+<p>Until one day, one of the naughty guy in their neighborhood had happened to make Bob tell him the password. All their messages was then exposed and they both need to change the passwords so that public wont sneak on their messages anymore. They do this very often, change the passwords and it worked for a week, until...</p>
+<p>Bob keeps sending messages but Alice said she ain't receiving any message from Bob, but instead she said Bob sends him a message that he don't want to be friends with her anymore. Bob started to scratch his head confused of what happened. Then he found out that, someone tricked him, someone pretended to be Alice, thus receiving both the password and the messages, exposing again their messages to the public, then the same way, the guy also pretend to be Bob and send some message to Alice which Bob did not really sent.</p>
+<p>Then after a long hours of thinking, Bob devised a plan. He thinks, if he can encrypt those messages using a set of particular "keys" : one to encrypt the message and one to read the message (total of 2 keys) . He can just give the "key to read the message" to Alice, while keeping with him the "key to encrypt the message" and securing it in a very secret place.</p>
+<p>Thus, that way, if only Bob has the "key to encrypt the message" (we will call it <em>private key</em>), then Alice is sure that the message she is reading came from Bob and no other else who happened to know the password.</p>
+<p>Likewise, since Bob only gave the "key to read the message" (we will call it <em>public key</em>) to Alice and nobody else, he knows that only Alice can read his messages, even if the passwords they are using is being stolen by someone else.</p>
+<p>Now the question is this, since the public key is a critical file for this scheme to work, Alice needs to make sure that the public key she had received is really from Bob.</p>
+<p>Thus, Bob's solution led to another problem - how to make sure that the public key presented was really from Bob and not from somebody else who pretends to be Bob?</p>
+<p>After sometime, they came into an idea : what if we ask another trusted person who can justify that this public key is really from Bob. In this case, the third person should know Bob very well, and he should issue a certificate to serve as proof that it is indeed Bob.</p>
+<p>Now, Bob passed again to Alice the public key along with a certificate from a person whom they both trust.</p>
+<p>At this point you will notice 3 things:<br />
+1. messages are encrypted when it is passed from Bob to Alice and vice versa<br />
+2. Alice is now sure that it is Bob she is exchanging message with<br />
+3. Bob is now sure that it is Alice she is exchanging message with</p>
+<p>It is quite a very secure connection now between Bob and Alice!</p>
+<p>BUT, not so fast.<br />
+Think about this, given that security in place, what if, the physical wire or the signal on which the message is being sent was altered by someone else along the way?</p>
+<p>the message would still appear a valid message from Alice or Bob. But if someone altered it when it pass along the wires, then the message is compromised.</p>
+<p>The solution to this is along with the message the Alice had sent, she will also include a "message digest" or a signature of that message</p>
+<p>To understand this, you can think of it as fingerprint of each message. No message can have the same "message digest"</p>
+<p>The usefulness of this to our story was, for Bob and Alice to be assured that the message that they send to each other was not modified along its way, one can just simply get the digest message of the message itself to the digest message sent by the sender.</p>
+<p>If the message was modified along the way, the digest message would not match since no two different message can have the same exact fingerprint or digest message.</p>
+<p>Going back to our story you can now see this security measures:</p>
+<p>1. messages are encrypted when it is passed from Bob to Alice and vice versa<br />
+2. Alice is now sure that it is Bob she is exchanging message with<br />
+3. Bob is now sure that it is Alice she is exchanging message with<br />
+4. Messages are ensured that it wont be tampered / modified along the way.</p>
+<p>Bob and Alice then lived happily ever after.</p>
+<p>Now, if you are still with me.<br />
+If you will analyze the story, the communication between Bob and Alice is actually what happens between your browser and the Facebook server</p>
+<p>HTTPS communication means<br />
+- the data you are viewing and posting into Facebook server is encrypted<br />
+- Digital certificate was issued to Facebook by a Certificate Authority to ensure that you are indeed communicating with real facebook server rather than a fake site<br />
+- public key was installed to your browser to ensure that you are actually the one who posts data to your account and not a hacker<br />
+- each data sent back and forth was checked by facebook for its integrity to ensure that it was not tampered along the way</p>
+<p>and that would be the secret of how https works in a most basic level. In reality, that is more complex than that, but that is the most basic concept behind that.</p>

@@ -1,0 +1,46 @@
+---
+layout: post
+title: Do you want to build a homestead?
+date: 2014-07-05 04:50:50.000000000 +08:00
+categories:
+- coding
+- featured
+- howto
+- php
+tags:
+- create base box in vagrant
+- customized homestead box
+- vagrant box for laravel
+status: publish
+type: post
+published: true
+meta:
+  _oembed_469c9652cbcbf6de826dce7cf46b135b: '{{unknown}}'
+  _edit_last: '2'
+  dsq_thread_id: '2964351671'
+author:
+  login: Darwin
+  email: buonzz@gmail.com
+  display_name: Darwin
+  first_name: Darwin
+  last_name: Biler
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>What is "homestead" in the first place. Well, its the official vagrant box of Laravel, it can be found in the official Laravel <a href="http://laravel.com/docs/homestead" target="_blank">documentation</a></p>
+<p>Homestead allows you create a development environment with a single "vagrant up" command. This basically downloads the "base box" from the https://vagrantcloud.com/laravel/homestead and run the configuration files in the Vagrantfile and other sort of scripts.</p>
+<p>The secret recipe for all the sort of the functionality of homestead lies on how the base box itself was built. By surprise, the script that build this is not a secret! it's called <a href="https://github.com/laravel/settler" target="_blank">Settler</a> in the official Laravel github account.</p>
+<p>All the sorts of installation procedures can be found in the provision.sh<br />
+https://github.com/laravel/settler/blob/master/scripts/provision.sh</p>
+<p>Which installs all the necessary software like PHP, Nginx, Redis, MySQL etc. The advantage of this is, since its just a plain shell script, unlike others that use Puppet or Chef (which is itself has a learning curve), you only need to know basic shell scripting in able to customize the box.</p>
+<p>If you are thinking ahead, you can easily conclude that, in able to customize my homestead box one could just easily fork this project, add your own commands in the provision.sh and that's it, you have your own homestead version!</p>
+<p>But how do I make the box available in vagrant command?<br />
+There are two ways to do that, you can add the vagrant box locally</p>
+<p>$ vagrant box add my-box /path/to/the/new.box</p>
+<p>or publish it to https://vagrantcloud.com<br />
+If you do the latter, your box can be accessed by just </p>
+<p>vagrant box add USER/BOX</p>
+<p>since by default, vagrant will look for vagrantcloud.com for available boxes with that name (kinda some sort of packagist.com eh)</p>
+<p>Don't forget to study the guidelines on creating a basebox in here<br />
+<a href="http://docs.vagrantup.com/v2/boxes/base.html" target="_blank">http://docs.vagrantup.com/v2/boxes/base.html</a></p>
+<p>It's also recommended that you read this <a href="http://www.skoblenick.com/vagrant/creating-a-custom-box-from-scratch/" target="_blank">article</a> for a complete workflow on building the box down to packing it to base box format that vagrant can read.</p>

@@ -1,0 +1,86 @@
+---
+layout: post
+title: WAMP server not working
+date: 2012-06-20 06:09:03.000000000 +08:00
+categories:
+- coding
+- php
+- windows
+tags:
+- apache
+- php
+- server
+- troubleshooting
+- wamp
+- windows
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+  fb_author_message: ''
+  fb_fan_page_message: ''
+  fb_mentioned_friends_post_ids: a:0:{}
+  fb_mentioned_pages_post_ids: a:0:{}
+  tumblrize_post-group: buonzz.tumblr.com
+  tumblrize_post-type: regular
+  tumblrize_post-id: '25490631795'
+  author: Darwin Biler
+  uri: https://plus.google.com/117859824066667225419
+  review_rating: ''
+  _wpas_skip_1611607: '1'
+  _wpas_skip_2203490: '1'
+  dsq_thread_id: '2973399091'
+author:
+  login: Darwin
+  email: buonzz@gmail.com
+  display_name: Darwin
+  first_name: Darwin
+  last_name: Biler
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>WAMP (Windows/Apache/MySQL/PHP stack) is one of the most popular server package that was known to man.<br />
+It's popularity is due to widespread use of Windows Operating System on which WAMP is meant to be deployed.</p>
+<p>However, like any other software in this planet, it could sometime not work because of some conditions or some conflict, not as a flaw of WAMP itself but more of the setup of the user's OS.</p>
+<p>Common factors are:</p>
+<p><strong>HTTP Port conflict</strong></p>
+<p>Some services under WAMP, needs it's own port, so that other software  (even running in localhost) is able to communicate with it. Commonly, Apache uses 80 and MySQL uses 3306.</p>
+<p>Common symptom of this issue is, when you click any WAMP menu, it will pop-up a dialog</p>
+<p>"Could not execute menu item (internal error) Could not perform service action"</p>
+<p>or</p>
+<p>The WAMP icon starts, but kinda stuck with the yellow icon and never turns green</p>
+<p>This might be the first thing you need to look for, check your firewall (either built-in or anti-virus) and make sure those ports are open and has capability to serve incoming requests.</p>
+<p>Another common scenario is, other programs might be using port number 80 (Skype for example) and 3306 (very rare to happen).  But the thing is - check if those port numbers are being used.</p>
+<p>Apache in WAMP has it's own tool for checking if port number 80 is in use.</p>
+<p>Click the WAMP icon in the taskbar &gt; Apache &gt; Service &gt; Test Port 80</p>
+<p>Another thing you can do is, edit the httpd.conf file, change the value of "listen" directive to other values aside from 80 and check it out if it worked.</p>
+<p>XAMPP when installed along WAMP can also cause issue, same is true if Apache standalone service is already installed before you install WAMP.</p>
+<p><strong>You re-installed WAMP but with the old configuration file still intact</strong></p>
+<p>Sometimes, we tweak with the configuration files of each services or enable/disable some modules on it and we might found ourselves with a broken WAMP install.</p>
+<p>Some might resort to just uninstalling the WAMP program itself, then just re-install it. The catch is, that doesn't work all the time. The surefire method is, after uninstalling WAMP, delete the whole folder of it in c:\wamp  in your hard drive. It will ensure that no old configuration file was being used.</p>
+<p><strong>Low User Account Privilige</strong></p>
+<p>This is a very rare scenario. Apache and MySQL service requires some higher privilige Windows User Account to carry out it's task, by default, each time you run the WAMP service manually, Windows will prompt you to grant an access for it to run since it is trying to execute routines with a higher priviliges, make sure you either run the WAMP service using an Administrator account or an account with higher privilige.</p>
+<p>When you reached this point and you still can't figure out why you'r wamp service is not running properly, other things that you could try is:</p>
+<ul>
+<li>uninstall Skype or XAMPP or IIS</li>
+<li>get an updated installer from the WAMP website</li>
+<li>try both http://localhost and http://127.0.0.1 in your browser</li>
+<li>try tweaking the port number of Apache with random port numbers</li>
+<li>open a command prompt, type netstat -aon, get the PID number for the row which is using the Port number 80, then Start Task Manager and look up which program is that (Whatever program you will find other than Apache, uninstall it)</li>
+</ul>
+<p>&nbsp;</p>
+<p>Commonly, WAMP issues were solved by all those stuffs, if it happens that you still cant get it working, feel free to leave a comment here and I'm willing to help you out.</p>
+<p>&nbsp;</p>
+<table>
+<tr>
+<td><iframe src="http://rcm.amazon.com/e/cm?t=darbilsoffweb-20&o=1&p=8&l=as1&asins=0596157134&ref=tf_til&fc1=000000&IS2=1&lt1=_blank&m=amazon&lc1=0000FF&bc1=FFFFFF&bg1=FFFFFF&f=ifr" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+</td>
+<td><iframe src="http://rcm.amazon.com/e/cm?t=darbilsoffweb-20&o=1&p=8&l=as1&asins=B007QOBZGG&ref=tf_til&fc1=000000&IS2=1&lt1=_blank&m=amazon&lc1=0000FF&bc1=FFFFFF&bg1=FFFFFF&f=ifr" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+</td>
+<td><iframe src="http://rcm.amazon.com/e/cm?t=darbilsoffweb-20&o=1&p=8&l=as1&asins=B007MAORFK&ref=tf_til&fc1=000000&IS2=1&lt1=_blank&m=amazon&lc1=0000FF&bc1=FFFFFF&bg1=FFFFFF&f=ifr" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+</td>
+<td><iframe src="http://rcm.amazon.com/e/cm?t=darbilsoffweb-20&o=1&p=8&l=as1&asins=B0007A1G9W&ref=tf_til&fc1=000000&IS2=1&lt1=_blank&m=amazon&lc1=0000FF&bc1=FFFFFF&bg1=FFFFFF&f=ifr" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+</td>
+</tr>
+</table>

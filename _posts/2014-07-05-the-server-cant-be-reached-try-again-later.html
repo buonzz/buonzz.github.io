@@ -1,0 +1,29 @@
+---
+layout: post
+title: The Server cant be reached, try again later
+date: 2014-07-05 04:57:40.000000000 +08:00
+categories:
+- howto
+- wordpress
+tags:
+- wordpress stucked when upgrade
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+  dsq_thread_id: '2989971357'
+author:
+  login: Darwin
+  email: buonzz@gmail.com
+  display_name: Darwin
+  first_name: Darwin
+  last_name: Biler
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>Had experienced this in your WordPress site? annoying isnt' it?<br />
+For me it happens when I install Jetpack of WordPress, that is why I completely abandoned the shit out of it and just using Google Analytics for my stuffs.</p>
+<p>But just in case you are stucked in that nasty message, just delete the ".maintenance" file in root folder of your blog. It contains some stuff like</p>
+<p>&lt;?php $upgrading = 1404504112; ?&gt;</p>
+<p>Which wordpress uses internally to lock the site while it's upgrading. But the problem is, if something goes wrong in the middle of the process and this file is still there, your blog will be stucked in that message forever. If that happens, your last resort is to delete that file manually via ftp.</p>

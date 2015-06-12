@@ -1,0 +1,56 @@
+---
+layout: post
+title: Composer is very slow in downloading your dependencies and repositories?  I've
+  got a mirror you can use
+date: 2014-08-30 17:54:47.000000000 +08:00
+categories:
+- coding
+- git
+- laravel
+- php
+tags:
+- composer caching issues
+- faster composer install
+- free mirror of laravel
+- packagist alternative
+- packagist is down
+- public repository
+- satis mirror
+status: publish
+type: post
+published: true
+meta:
+  dsq_thread_id: '2972128497'
+  _edit_last: '2'
+  _thumbnail_id: '1334'
+author:
+  login: Darwin
+  email: buonzz@gmail.com
+  display_name: Darwin
+  first_name: Darwin
+  last_name: Biler
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>I feel you guys, when you hit up "composer install" or "composer update", things are very slow and really annoying if you are in hurry and need to get things installed immediately. Just to remind you though that packagist.org, the one which by default hosts all the repositories is not a supercomputer that can attend to all our needs. </p>
+<p>So to contribute back to the community, I've decided to put up a mirror of most commonly used repositories (specially the ones used by Laravel) to provide a faster experience when running composer operations. Note that this is just a Satis so this is static one. I'm trying my best though to get it updated as often as possible, so bear with me if its not always updated with the latest releases.</p>
+<p>The list of packages that I'm hosting can be found in here<br />
+<a href="http://packages.buonzz.com/">http://packages.buonzz.com/</a></p>
+<p>You can use my repository by the following methods:</p>
+<h3>Specifying this in your composer.json file (per project)</h3>
+<p><script src="https://gist.github.com/buonzz/239ecccb167485f5dff1.js"></script></p>
+<h3>Via command line (per project)</h3>
+<p>You can also create projects by specifying it via command line:<br />
+<script src="https://gist.github.com/buonzz/536ce621c15782714b21.js"></script></p>
+<h3>Disable packagist and use my repo (per project)</h3>
+<p>Another example of using the repo is, for example, you want to completely don't want to use packagist.org, but wanted to download symfony console component. You can do this in your composer.json file<br />
+<script src="https://gist.github.com/buonzz/2e47c3b893e9bf44321c.js"></script></p>
+<h3>Set it as the default globally and disable packagist (global)</h3>
+<p>you need to edit the global config of the composer, to do this, open the </p>
+<pre lang="shell">
+~/.composer/config.json
+</pre>
+<p>then open put this setting<br />
+<script src="https://gist.github.com/buonzz/9033bb52acdb0631d0aa.js"></script></p>
+<p>That should now disable packagist and use packages.buonzz.com whenever you hit composer install or composer update commands.</p>
+<p>If you need any additional packages installed in my mirror, feel free to drop a comment below so that I can add it and update the build.</p>

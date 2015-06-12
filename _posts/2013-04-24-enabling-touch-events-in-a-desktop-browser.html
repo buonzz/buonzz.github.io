@@ -1,0 +1,54 @@
+---
+layout: post
+title: Enabling Touch events in a desktop browser
+date: 2013-04-24 15:04:46.000000000 +08:00
+categories:
+- coding
+- Copy Paste
+- howto
+- tablet
+tags:
+- chrome flag to enable touch
+- enable touch in desktop
+- fingerblast to handle desktop event
+- touch event in chrome
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+  _thumbnail_id: '949'
+  _wpas_done_all: '1'
+  _wpas_mess: Enabling Touch events in a desktop browser
+  _wpas_skip_1611607: '1'
+  _wpas_skip_2452381: '1'
+  _wpas_skip_2203490: '1'
+  _wpas_skip_2452385: '1'
+  _wpas_skip_2452386: '1'
+  dsq_thread_id: '3004369070'
+author:
+  login: Darwin
+  email: buonzz@gmail.com
+  display_name: Darwin
+  first_name: Darwin
+  last_name: Biler
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>When you are developing a mobile site, you must keep in mind that the devices with touchscreen input has entirely different set of events compared to your computer which is getting its events from the mouse.</p>
+<p>However, debugging and checking your site in your phone is not that easy and would be sometimes uncomfortable. This is because all of your web developer tools is in your computer. Sometimes, you also need to make sure that certain function will work in case someone visited your mobile site. The trick here is to, map each touch events to the appropriate events for the desktop browser.</p>
+<p>If you just want to do it in your local browser (not to all visitors of the site), you could just do this in your Google Chrome browser:</p>
+<ol>
+<li>Type chrome://flags/ in address bar</li>
+<li>then enable "Force enable touch events"</li>
+</ol>
+<p>But if you want to have this enabled in all visitors, obviously, you cant ask all of them one by one to tweak their Chrome setting. What you can do is use the <a href="https://github.com/maker/ratchet/blob/master/docs/js/fingerblast.js" target="_blank">fingerblast.js</a> library to map each touch event.</p>
+<p>To use fingerblast.js, all you need to do is of course load it in your page, then right before the closing body tag, put this:</p>
+<pre lang="javascript"><script type="text/javascript">
+// <![CDATA[
+    var fb = new FingerBlast ('body');
+// ]]>
+</script>
+</pre>
+<p>This will create a new fingerblast object and set listeners to the body tag.</p>
+<p>Note that at the time of writing, this is only possible with Chrome browser. If you are looking for some kind of cross-browser compatibility, you should start considering porting your application to <a href="http://jquerymobile.com/" target="_blank">jQuery Mobile</a>.</p>

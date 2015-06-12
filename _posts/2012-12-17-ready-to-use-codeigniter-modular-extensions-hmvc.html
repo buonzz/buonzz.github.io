@@ -1,0 +1,64 @@
+---
+layout: post
+title: Ready to use Codeigniter Modular Extensions HMVC
+date: 2012-12-17 04:44:31.000000000 +08:00
+categories:
+- Copy Paste
+- howto
+- php
+tags:
+- ci hmvc download
+- hmvc download
+- modular extensions hmvc download
+- plug and play ci hmvc
+- ready to use ci hmvc
+status: publish
+type: post
+published: true
+meta:
+  review_rating: ''
+  _edit_last: '2'
+  _wpas_done_all: '1'
+  _thumbnail_id: '853'
+  _wpas_skip_1611607: '1'
+  _wpas_skip_2452381: '1'
+  _wpas_skip_2203490: '1'
+  _wpas_skip_2452385: '1'
+  _wpas_skip_2452386: '1'
+  dsq_thread_id: '2955478479'
+author:
+  login: Darwin
+  email: buonzz@gmail.com
+  display_name: Darwin
+  first_name: Darwin
+  last_name: Biler
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>Hierarchical Model-View-Controller (HMVC) breaks down an application into manageable smaller components. The best analogy for this is your PC computer. A PC has smaller parts like power supply, microprocessor, hard disk, mouse, keyboard etc. Each part is doing specific function to make the whole PC run.<br />
+<!--more--><br />
+The advantage of this is when your hard disk malfunctioned, you just need to troubleshoot or replace the hard disk. Likewise, when other component seems malfunctioning, all you need to do is identify the part that is responsible for that functionality and just replace/fix it. You could even bring your hard disk with you and plug it in other computer and you can use your data right away without any hassle.</p>
+<p>Going back to CodeIgniter, when you are developing complex CI application, let's say you have 3 different controllers for each different component of the application. The problem here is, those 3 different controllers shares the same set of models/views/helpers.</p>
+<p>So let's say you just want to transfer 1 controller to another CI application, you need to trace all of the models/views/helpers it uses and transfer those as well. Sometimes, when you transfer those files to another complex CI application, it is easy to get conflicts on class/function names to the target application.</p>
+<p><script type="text/javascript"><!--<br />
+google_ad_client = "ca-pub-0845730634111642";<br />
+/* inline to posts */<br />
+google_ad_slot = "8010460709";<br />
+google_ad_width = 250;<br />
+google_ad_height = 250;<br />
+//--><br />
+</script><br />
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"><br />
+</script></p>
+<p>With all the controllers sharing the same set of models/libraries/models, it is also very hard to fix errors (specially logic errors) since a fix on one controller could conflict with another controller.</p>
+<p>With HMVC, it will break down your CI application into independent, portable, easy to debug parts which enables developers to isolate different parts of the applications.</p>
+<p><a href="http://www.darwinbiler.com/wp-content/uploads/2012/12/hmvc11.png"><img src="assets/hmvc11.png" alt="hmvc1" width="434" height="412" class="aligncenter size-full wp-image-920" /></a></p>
+<p>On the image above, you will see that the application is composed of 6 modules. These modules are like mini-applications tied together in a single application since each has its own set of Controllers/Models/View/Helpers.</p>
+<p>Module 4 has no models, helpers or even view files of its own and just calls the Module 1 and 2 for its needs.<br />
+Module 5 and 6 has some of the files, but some functionality is also present in Module 2 and 3 (accessing the database for example). Instead of re-implementing the functionality, he just can call the other modules for it's needs w/o needing to know the internal details of the other modules.</p>
+<p>This strategy makes the application easy to maintain since the dependency of each part is reduced and you can simply fix the defective modules w/o worrying that the change could possibly conflict with another.</p>
+<p>Now, on the implementation part. Everything is the same like an ordinary CI application, except that you will just put the mini-applications in the applications/modules subfolder. Each folder in modules folder is like an isolated application of its own in a sense that each can have their own set of libraries/models/views/helpers completely isolated to each other.</p>
+<p>If you had just happened to read the Modular Extensions HMVC stuffs on either via <a href="https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc" target="_blank">wiredesigns</a> or <a href="http://net.tutsplus.com/tutorials/php/hvmc-an-introduction-and-application/" target="_blank">nettuts+</a> you might find that it is quite tedious to do all those code changes/moving of files that they are asking for you to do just to get started in using the Hierarchical Model View Controller in CodeIgniter.</p>
+<p>This post will not repeat all the tutorial and concepts which is already mentioned in those tutorials. But rather, it focuses on giving you the actual files that is needed to get started with CI-HMVC, so that you can skip ahead the gory details of setting it up by yourself and either start using it right away or have a glimpse on how do a working copy should look like when finished.</p>
+<p>Note that this is just an ordinary CodeIgniter 2.1.0 installation with HMVC already setup and ready to be dropped in any folder in your web-server. The only thing you need to do is of course adjust the base_url in the config.php file and maybe some database settings (if you need to).</p>
+<p><a href="https://docs.google.com/file/d/0Bw2qIQzYbkDkRXp6TEE5bmpVeDQ/edit" target="_blank">Click Here to download the zip file ( direct download)</a></p>

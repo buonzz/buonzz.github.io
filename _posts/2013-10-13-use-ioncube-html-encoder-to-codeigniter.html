@@ -1,0 +1,111 @@
+---
+layout: post
+title: Use Ioncube HTML Encoder to CodeIgniter
+date: 2013-10-13 16:04:03.000000000 +08:00
+categories:
+- coding
+- php
+- privacy
+- security
+tags:
+- Cannot use output buffering in output buffering display handlers
+- codeigniter and iconcube html encoder
+- html encoder for codeigniter
+- ioncube html encoder getting blank page
+- use ioncube to ci
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+  _thumbnail_id: '1099'
+  _wpas_done_all: '1'
+  _wpas_mess: Use Ioncube HTML Encoder to CodeIgniter http://wp.me/p2kRRS-hy
+  _wpas_skip_1611607: '1'
+  _wpas_skip_2452381: '1'
+  dsq_thread_id: '2958796289'
+  dsq_needs_sync: '1'
+author:
+  login: Darwin
+  email: buonzz@gmail.com
+  display_name: Darwin
+  first_name: Darwin
+  last_name: Biler
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>If you want to obfuscate your HTML markup and you want to use the Ioncube's HTML encoder, this is a quickfix on how to make it work at least in CodeIgniter.</p>
+<p>These are the versions of the software that I had tested with this setup:</p>
+<p>Ubuntu 13.04 - http://www.ubuntu.com/<br />
+PHP 5.4.9 http://www.php.net/<br />
+CI  2.1.4 - http://ellislab.com/codeigniter<br />
+Obfuscating HTML Encoder 1.9 by IonCube - http://www.ioncube.com/html_encoder.php</p>
+<p>I'm not sure with other version combinations, but most likely it will work in your end as well.</p>
+<blockquote><p><b>Disclaimer:</b> Ok, ok, I know now that PHP 5.3 and 5.4 is coming, there is a lot of new things that comes along. I know CodeIgniter is not maintained anymore and Laravel is taking over already. However, there are tons of web apps there that are still running in CI, and not all company is able to rewrite their whole thing to newer framework. This is for those who will deal with CI, and I emphasize, do not use this instructions when there is a better/cleaner option since this one requires modifying some core files of CI.</p></blockquote>
+<p>So here are the steps.</p>
+<p>1. Check the server if it has Ioncube Loader installed. This can be done by putting a php script in the webserver with the following code on it:</p>
+<pre lang="php">
+<?php phpinfo(); ?>
+</pre>
+<p>Look for this particular area (or you can do a search of "Zend Scripting Language Engine")</p>
+<p><img src="assets/zend_setting.png" alt="zend_setting" width="653" height="101" class="aligncenter size-full wp-image-1091" /></p>
+<p>see that "ionCube PHP Loader v4.4.3" part? that indicates that IonCube is already installed. That needs to be installed since the encoder itself to be added in your application is an encoded file. Without the ionCube loader installed, the server wont be able to figure out how to execute the encoder file.</p>
+<p>2. (Follow these instructions if you dont have ionCube Loader installed)</p>
+<p>login to linux terminal and execute the following commands:</p>
+<pre lang="bash">
+cd /usr/local
+sudo wget http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz
+sudo tar xzf ioncube_loaders_lin_x86-64.tar.gz
+</pre>
+<p>Check the module is added and enabled in the php configuration file by :</p>
+<pre lang="bash">
+sudo cat /etc/php5/conf.d/ioncube.ini
+</pre>
+<p>You should see this in there</p>
+<pre lang="bash">
+zend_extension=/usr/local/ioncube/ioncube_loader_lin_5.4.so
+</pre>
+<p>If not, then manually add that line there. Make sure you check the version number matches with your PHP version. If PHP is 5.4 then the file enabled should be  <b>ioncube_loader_lin_5.4.so</b> not <b>ioncube_loader_lin_5.3.so</b></p>
+<p>Restart apache for the new settings to take effect</p>
+<pre lang="bash">
+sudo /etc/init.d/apache2 restart
+</pre>
+<p>check again the phpinfo on step 1 to make sure the ioncube is showing up now.</p>
+<p>3. Download the encoder file in http://www.ioncube.com/html_encoder.php<br />
+(i used the http://www.ioncube.com/html_encoder_1.9.zip)<br />
+Extract it to your local disk. the encoder file is <b>html_encoder_1.9.php</b><br />
+Note: that is a binary file! don't open it in a text editor since you could accidentally corrupt it.<br />
+Save it on CI project on this folder  /application/hooks/</p>
+<p>4. In your CodeIgniter, you need to enable hooks<br />
+application/config/config.php</p>
+<pre lang="php">
+$config['enable_hooks'] = TRUE;
+</pre>
+<p>5. Then define a hook<br />
+application/config/hooks.php</p>
+<pre lang="php">
+$hook['display_override'] = array(
+				'class'    => 'IoncubeHTMLEncoder',
+				'function' => 'obfuscate',
+				'filename' => 'IoncubeHTMLEncoder.php',
+				'filepath' => 'hooks'
+				);
+</pre>
+<p>6.  Test the page.<br />
+if you got a blank page. check the apache error log</p>
+<pre lang="bash">
+ sudo tail -n 10 /var/log/apache2/error.log
+</pre>
+<p>if you see stuffs like "Cannot use output buffering in output buffering display handlers"<br />
+edit the system/core/Exceptions.php<br />
+(I know you can override core classes by putting a class in the application/core instead of editing the core files, but for some reason, that didn't worked for me)<br />
+Edit the lines 181 and 184 so that the ob_start and ob_end_clean is commented out</p>
+<pre lang="php">
+  //ob_start();
+  include(APPPATH.'errors/error_php.php');
+  $buffer = ob_get_contents();
+  //ob_end_clean();
+</pre>
+<p>(I know this is a dirty way of fixing up things, that is why I call this a quickfix. Use this instructions only in case of emergency)</p>
+<p>7. Reload again your CI app and see if you are not getting a blank page anymore.</p>
+<p>That's all I know.</p>

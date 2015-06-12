@@ -1,0 +1,730 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Your awesome title</title>
+    <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+</description>
+    <link>http://yourdomain.com/</link>
+    <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Fri, 12 Jun 2015 19:31:16 +0800</pubDate>
+    <lastBuildDate>Fri, 12 Jun 2015 19:31:16 +0800</lastBuildDate>
+    <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Welcome to Jekyll!</title>
+        <description>&lt;p&gt;You’ll find this post in your &lt;code&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;To add new posts, simply add a file in the &lt;code&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Tom&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &amp;#39;Hi, Tom&amp;#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://github.com/jekyll/jekyll-help&quot;&gt;Jekyll’s dedicated Help repository&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 13 Jun 2015 03:25:18 +0800</pubDate>
+        <link>http://yourdomain.com/jekyll/update/2015/06/13/welcome-to-jekyll.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/jekyll/update/2015/06/13/welcome-to-jekyll.html</guid>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+      <item>
+        <title>Installing Neo4j in Vagrant</title>
+        <description>&lt;p&gt;If you are a seasoned  developer and you want to try out Neo4j, this might be helpful for you.&lt;/p&gt;
+&lt;p&gt;First, I would recommend you use Vagrant. In my case, I have my own basebox for all my PHP projects, which is &lt;a href=&quot;https://atlas.hashicorp.com/buonzz/boxes/bamp&quot; target=&quot;_blank&quot;&gt;BAMP&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;to install the basebox in your local host&lt;/p&gt;
+&lt;pre lang=&quot;bash&quot;&gt;
+git clone https://github.com/buonzz-systems/bamp.git
+cd bamp
+vagrant up
+vagrant ssh
+&lt;/pre&gt;
+&lt;p&gt;Once you had successfully installed BAMP, you now have an Ubuntu instance running in  192.168.33.60&lt;br /&gt;
+Now, time to install Neo4j&lt;/p&gt;
+&lt;pre lang=&quot;bash&quot;&gt;
+sudo -i
+wget -O - http://debian.neo4j.org/neotechnology.gpg.key | apt-key add -
+echo &#39;deb http://debian.neo4j.org/repo stable/&#39; &gt; /etc/apt/sources.list.d/neo4j.list
+apt-get update
+apt-get install neo4j
+service neo4j-service status
+&lt;/pre&gt;
+&lt;p&gt;Neo4j should not be installed, you can confirm it by executing the command below and make sure the 7474 port is running&lt;/p&gt;
+&lt;pre lang=&quot;bash&quot;&gt;
+netstat -ntlp | grep LISTEN
+&lt;/pre&gt;
+&lt;p&gt;If you want to access the Neo4j browser, you need to adjust the neo4j-server.properties file&lt;/p&gt;
+&lt;pre lang=&quot;bash&quot;&gt;
+sudo nano /etc/neo4j/neo4j-server.properties
+&lt;/pre&gt;
+&lt;p&gt;adjust the following settings&lt;/p&gt;
+&lt;pre lang=&quot;bash&quot;&gt;
+org.neo4j.server.webserver.address=0.0.0.0
+dbms.security.auth_enabled=false
+&lt;/pre&gt;
+&lt;p&gt;Now, open the neo4j browser in http://192.168.33.60:7474&lt;br /&gt;
+you should be able to see something like this&lt;br /&gt;
+&lt;a href=&quot;http://www.darwinbiler.com/wp-content/uploads/2015/06/Screen-Shot-2015-06-10-at-4.55.47-PM.png&quot;&gt;&lt;img src=&quot;assets/Screen-Shot-2015-06-10-at-4.55.47-PM.png&quot; alt=&quot;Screen Shot 2015-06-10 at 4.55.47 PM&quot; width=&quot;1199&quot; height=&quot;672&quot; class=&quot;aligncenter size-full wp-image-1451&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Wed, 10 Jun 2015 16:59:31 +0800</pubDate>
+        <link>http://yourdomain.com/devops/howto/2015/06/10/installing-neo4j-in-vagrant.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/devops/howto/2015/06/10/installing-neo4j-in-vagrant.html</guid>
+        
+        <category>laravel and neo4j</category>
+        
+        <category>neo4j basics</category>
+        
+        
+        <category>devops</category>
+        
+        <category>howto</category>
+        
+      </item>
+    
+      <item>
+        <title>Basic &quot;Hello World&quot; Tutorial for Puppet using Vagrant</title>
+        <description>&lt;p&gt;Like any new technology, the best way to quickly show and explain it is by giving a very basic tutorial like the classical &quot;Hello World&quot; example. And today, you are going to see one for Puppet. In case you haven&#39;t heard it yet, its a tool to automate the management of your entire IT infrastructure. There are tons of articles about it in the Internet, but beware -- most of those are targeted towards System Administrators and alike.&lt;/p&gt;
+&lt;p&gt;If you are a web developer like me, chances are you&#39;ll end up confused reading many of those. That is why I written this article to provide a very basic tutorial in web developers perspective. So lets get started!&lt;/p&gt;
+&lt;p&gt;Things you&#39;ll need:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;VirtualBox&lt;/li&gt;
+&lt;li&gt;Vagrant&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;First thing you need to do is create a folder where you want to place this tutorial. Lets say the folder name is &quot;hellopuppet&quot;&lt;/p&gt;
+&lt;pre lang=&quot;bash&quot;&gt;mkdir hellopuppet
+&lt;/pre&gt;
+&lt;p&gt;go inside the folder and initialize a vagrant file by specifiying an Ubuntu basebox.&lt;/p&gt;
+&lt;pre lang=&quot;bash&quot;&gt;cd hellopuppet
+vagrant init hashicorp/precise32
+&lt;/pre&gt;
+&lt;p&gt;What basically happens here is, vagrant init creates an &quot;Vagrantfile&quot; inside the hellopuppet folder. This file tells vagrant what kind of box we want to build. For this case, we specified we want it to be an Ubuntu box by Hashicorp. The good news is, this box already comes with puppet installed, so you wont need to install Puppet yourself and we can just focus in trying it out.&lt;/p&gt;
+&lt;p&gt;Next is, booting up the box&lt;/p&gt;
+&lt;pre lang=&quot;bash&quot;&gt;vagrant up
+&lt;/pre&gt;
+&lt;p&gt;If the precise32 box was not present yet in your computer, this command will download it (that could take a long time so grab a coffee first ). Once the box was fully loaded, you are ready to write your first Puppet codes!&lt;/p&gt;
+&lt;p&gt;At this point, it should be like this:&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;aligncenter size-full wp-image-1443&quot; src=&quot;assets/Screen-Shot-2015-03-29-at-9.33.24-PM.png&quot; alt=&quot;Screen Shot 2015-03-29 at 9.33.24 PM&quot; width=&quot;697&quot; height=&quot;478&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;There might be more output messages than the one displayed above. But there should not be red messages. IF there are, check the vagrant documentation as it is outside the scope of this tutorial.&lt;/p&gt;
+&lt;p&gt;Now login to the Virtual Machine you just had created by executing&lt;/p&gt;
+&lt;pre lang=&quot;bash&quot;&gt;
+vagrant ssh
+&lt;/pre&gt;
+&lt;p&gt;You should be now inside the VM. Now there is where we will try out Puppet.&lt;/p&gt;
+&lt;p&gt;Inside the VM, create a file called &quot;hellopuppet.pp&quot;&lt;/p&gt;
+&lt;pre lang=&quot;bash&quot;&gt;
+nano hellopuppet.pp
+&lt;/pre&gt;
+&lt;p&gt;and put the following code:&lt;/p&gt;
+&lt;pre lang=&quot;bash&quot;&gt;
+file {&#39;/vagrant/helloworld.txt&#39;:
+  ensure  =&gt; present,
+  content =&gt; &quot;Hello World!&quot;,
+}
+&lt;/pre&gt;
+&lt;p&gt;Save the file and exit by pressing Ctrl+O then Ctrl+X&lt;/p&gt;
+&lt;p&gt;What you just had did is you created a Puppet manifest, which for us PHP Developers are called PHP source codes.&lt;br /&gt;
+The filename extension it is using is .pp like how we set .php for our PHP files.&lt;/p&gt;
+&lt;p&gt;The fragment of code you just had pasted is called a &quot;Resource declaration&quot; . There, we are declaring a file with the filename of &quot;helloworld.txt&quot; should be present (via ensure=&gt; present parameter)  in the /vagrant directory, and its content should be the text &quot;Hello World!&quot;&lt;/p&gt;
+&lt;p&gt;Unlike ordinary scripts that we are used to, Puppet language is declarative, it describes how things should be, rather than what are the things to be done.&lt;/p&gt;
+&lt;p&gt;Lets try running the script!&lt;/p&gt;
+&lt;p&gt;You can run the script by &lt;/p&gt;
+&lt;pre lang=&quot;bash&quot;&gt;
+puppet apply hellopuppet.pp
+&lt;/pre&gt;
+&lt;p&gt;It should output something like this:&lt;br /&gt;
+&lt;img src=&quot;assets/Screen-Shot-2015-03-29-at-10.05.34-PM.png&quot; alt=&quot;Screen Shot 2015-03-29 at 10.05.34 PM&quot; width=&quot;739&quot; height=&quot;436&quot; class=&quot;aligncenter size-full wp-image-1444&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;What the script did is it checked the /vagrant folder if there is a helloworld.txt file present. It figured out there is none so it had created one and put the contents &quot;Hello World!&quot;.&lt;/p&gt;
+&lt;p&gt;Uhmm, what is special in here.. I can do that as well in PHP..&lt;/p&gt;
+&lt;p&gt;Well, though our sample is just for writing a simple hello world file, Puppet is for some bigger purpose, like:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It can check your server periodically if it matches the declaration, if its not, it will automatically &quot;fix things&quot;&lt;/li&gt;
+&lt;li&gt;Puppet is not limited in creating simple files, it can install entire software stack like Nginx, PHP, MySQL etc.&lt;/li&gt;
+&lt;li&gt;The same code can run in multiple platforms. For example, you want to ensure MySQL is installed in both Ubuntu and CentOS server, in normal circumstances, you would have to manually login to those two box and execute the commands meant for each OS, with Puppet, you&#39;ll just declare once the .pp file, and it can run in any machine&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;There is a lot of things to cover about Puppet. From here, I suggest you continue your learning by reading more in &lt;a href=&quot;http://docs.puppetlabs.com/learning/ral.html&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sun, 29 Mar 2015 22:17:37 +0800</pubDate>
+        <link>http://yourdomain.com/bash/cloud%20computing/howto/2015/03/29/basic-hello-world-tutorial-for-puppet-using-vagrant.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/bash/cloud%20computing/howto/2015/03/29/basic-hello-world-tutorial-for-puppet-using-vagrant.html</guid>
+        
+        <category>basic tutorial for puppet</category>
+        
+        <category>puppet</category>
+        
+        <category>vagrant + puppet</category>
+        
+        
+        <category>bash</category>
+        
+        <category>cloud computing</category>
+        
+        <category>howto</category>
+        
+      </item>
+    
+      <item>
+        <title>Recording GitHub Repo push as NewRelic Deployment</title>
+        <description>&lt;p&gt;NewRelic Deployments feature allows you to determine if the a certain change in the codes of your application negatively/positively impacts the actual performance of your web apps.&lt;/p&gt;
+&lt;p&gt;For example, when you go to the APM dashboard of NewRelic Admin. It shows a line like the one below that clearly plots the time when a change was been deployed. &lt;a href=&quot;http://www.darwinbiler.com/wp-content/uploads/2015/03/Screen-Shot-2015-03-22-at-9.21.38-PM.png&quot;&gt;&lt;img src=&quot;assets/Screen-Shot-2015-03-22-at-9.21.38-PM.png&quot; alt=&quot;Screen Shot 2015-03-22 at 9.21.38 PM&quot; width=&quot;603&quot; height=&quot;406&quot; class=&quot;aligncenter size-full wp-image-1437&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can then easily see in the charts if there is a sudden change in the pattern of memory/CPU/disk usage of the web application -- real time!&lt;/p&gt;
+&lt;p&gt;In the deployment page, you can also perform comparison of all deployments, so you can figure out the relative performance of the app, before and after the code change was implemented.&lt;br /&gt;
+&lt;a href=&quot;http://www.darwinbiler.com/wp-content/uploads/2015/03/Screen-Shot-2015-03-22-at-9.20.41-PM.png&quot;&gt;&lt;img src=&quot;assets/Screen-Shot-2015-03-22-at-9.20.41-PM.png&quot; alt=&quot;Screen Shot 2015-03-22 at 9.20.41 PM&quot; width=&quot;846&quot; height=&quot;347&quot; class=&quot;aligncenter size-full wp-image-1438&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;If you are using GitHub to manage your source codes. You can put a webhook in the repository settings, so that each time a developer pushes a change into the repository, it will submit a deployment in the NewRelic. &lt;/p&gt;
+&lt;p&gt;First, you need to download the script that will be receiving the Github Hook.&lt;/p&gt;
+&lt;p&gt;via Composer&lt;/p&gt;
+&lt;p&gt;&lt;code lang=&quot;bash&quot;&gt;&lt;br /&gt;
+composer create-project buonzz/github-newrelic-deploy hooks&lt;br /&gt;
+cd hooks&lt;br /&gt;
+&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;or direct download in &lt;a href=&quot;https://github.com/buonzz-systems/github-newrelic-deploy/releases/latest&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;edit the config.sample.php  and rename it to config.php.&lt;br /&gt;
+Then to adjust your configuration settings.&lt;/p&gt;
+&lt;p&gt;$apikey - should be the REST Api key for NewRelic, it is required so that NewRelic api could accept the post from your script. &lt;a href=&quot;https://docs.newrelic.com/docs/apm/apis/requirements/api-key#viewing&quot;&gt;Here&lt;/a&gt; is the instruction on how you can get this value in NewRelic Admin.&lt;/p&gt;
+&lt;p&gt;$app_ids - is an array which associates your GitHub urls to your NewRelic APM AppID.&lt;br /&gt;
+You can get this by logging into NewRelic. Go to APM. Then click the application. The last number in the url when you are currently viewing the application is the AppID.&lt;br /&gt;
+example: https://rpm.newrelic.com/accounts/&lt;account id&gt;/applications/&lt;appid&gt;&lt;/p&gt;
+&lt;p&gt;Once you had added it to the config those information. You can then upload the whole folder to a publicly accessible web server. After you had uploaded it. make sure the logs folder is writable by web server (execute chmod -R 777 logs).&lt;/p&gt;
+&lt;p&gt;Once all is set, go to the settings of your Github Repository.&lt;br /&gt;
+In the Webhook and Services settings. Add the url to the script you had uploaded earlier under the Webhooks settings.&lt;/p&gt;
+&lt;p&gt;Once done, each time someone pushes their commits into that repository, a deployment will be sent to NewRelic.&lt;br /&gt;
+&lt;/appid&gt;&lt;/account&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sun, 22 Mar 2015 21:31:45 +0800</pubDate>
+        <link>http://yourdomain.com/git/howto/newrelic/2015/03/22/recording-github-repo-push-as-newrelic-deployment.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/git/howto/newrelic/2015/03/22/recording-github-repo-push-as-newrelic-deployment.html</guid>
+        
+        <category>newrelic apm tips</category>
+        
+        <category>newrelic deployments</category>
+        
+        <category>realtime profiling</category>
+        
+        
+        <category>git</category>
+        
+        <category>howto</category>
+        
+        <category>newrelic</category>
+        
+      </item>
+    
+      <item>
+        <title>How to share your local Homestead box in Internet</title>
+        <description>&lt;p&gt;Homestead is the standard development box for Laravel developers. But it would be great if for example you can paste a url to your colleagues so that they see what you are seeing in your local box?&lt;/p&gt;
+&lt;p&gt;Here is a simple trick. Vagrant has a feature called &lt;a href=&quot;https://docs.vagrantup.com/v2/share/index.html&quot; target=&quot;_blank&quot;&gt;Vagrant Share&lt;/a&gt; . It basically allows you to generate a publicly available url of your local vagrant box, so that they can access your web app.&lt;/p&gt;
+&lt;p&gt;First thing you need to do is to create an account in VagrantCloud (if you don&#39;t have one yet).  You can sign up in &lt;a href=&quot;https://atlas.hashicorp.com/account/new&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;After you had signed-up and verified your account to be working. You need to login to your local vagrant. To do this, just execute&lt;/p&gt;
+&lt;pre lang=&quot;bash&quot;&gt;
+vagrant login
+&lt;/pre&gt;
+&lt;p&gt;It will ask for your username/password that you just had created earlier.&lt;br /&gt;
+After that, you need to locate where is the Vagrantfile of Homestead. In  *nix machines, this can be found in&lt;/p&gt;
+&lt;pre lang=&quot;bash&quot;&gt;~/.composer/vendor/laravel/homestead
+&lt;/pre&gt;
+&lt;p&gt;So, just go into that folder and execute &quot;vagrant share&quot;.&lt;/p&gt;
+&lt;p&gt;This is how it looked like when I did it in my end.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.darwinbiler.com/wp-content/uploads/2015/01/Screen-Shot-2015-01-19-at-12.57.43-AM.png&quot;&gt;&lt;img class=&quot;aligncenter size-full wp-image-1431&quot; src=&quot;assets/Screen-Shot-2015-01-19-at-12.57.43-AM.png&quot; alt=&quot;Screen Shot 2015-01-19 at 12.57.43 AM&quot; width=&quot;657&quot; height=&quot;232&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;In my case, my Homestead box was assigned with this url:&lt;/p&gt;
+&lt;p&gt;http://sultry-ground-2423.vagrantshare.com&lt;/p&gt;
+&lt;p&gt;That means, anyone in the Internet which can have this url will be able to access my Homestead box and see the locally hosted apps I&#39;m developing as long as I&#39;m not hitting &quot;Ctrl+C&quot; in my end.&lt;/p&gt;
+&lt;p&gt;Note that those urls changes each time you execute vagrant share. So its only actually useful for quick demo or tests that you want to show to someone else.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 19 Jan 2015 01:05:46 +0800</pubDate>
+        <link>http://yourdomain.com/bash/cloud%20computing/coding/howto/laravel/linux/2015/01/19/how-to-share-your-local-homestead-box-in-internet.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/bash/cloud%20computing/coding/howto/laravel/linux/2015/01/19/how-to-share-your-local-homestead-box-in-internet.html</guid>
+        
+        <category>homestead share</category>
+        
+        <category>publish local site</category>
+        
+        <category>share vagrant homestead</category>
+        
+        
+        <category>bash</category>
+        
+        <category>cloud computing</category>
+        
+        <category>coding</category>
+        
+        <category>howto</category>
+        
+        <category>laravel</category>
+        
+        <category>linux</category>
+        
+      </item>
+    
+      <item>
+        <title>Creating your own github.io website</title>
+        <description>&lt;p&gt;So I decided I&#39;ll launch a site for one of the Facebook pages that I own which is &lt;a href=&quot;https://www.facebook.com/webdevelopersmeme&quot; target=&quot;_blank&quot;&gt;Web Developers Meme&lt;/a&gt; . Instead of buying a hosting for it, i just decided I&#39;ll just host this thing in github to conserve the cost of hosting, given that this site was just an start-up.&lt;/p&gt;
+&lt;p&gt;I decided to use Jekyll as my publishing platform, since it was very easy to work with, specially for static web sites like this. It&#39;s also the best way to publish sites in github.io, so there is  a clear-cut decision for choosing it.&lt;/p&gt;
+&lt;p&gt;This post basically use the &lt;a href=&quot;http://www.webdevelopersmeme.com&quot; target=&quot;_blank&quot;&gt;webdevelopersmeme.com&lt;/a&gt; site as a sample, for showing how the process is made.&lt;/p&gt;
+&lt;h3&gt;Create the github organization&lt;/h3&gt;
+&lt;p&gt;Though you can use your github username to create your github.io site, I would recommend to just create a new github organization for it. You can do that by going to your &lt;a href=&quot;https://github.com/settings/profile&quot; target=&quot;_blank&quot;&gt;account settings&lt;/a&gt; then clicking the organizations  menu on the left side.  Just click the &quot;New Organization&quot; button in the upper right to create your new organization. Be sure to name your organization properly, since that will be the one in assigned in the url. For example, in my case, my new organization is webdevelopersmeme. So, the url of that will gonna be&lt;/p&gt;
+&lt;p&gt;webdevelopersmeme.github.io&lt;/p&gt;
+&lt;h3&gt;Create the repository where the site files will be committed pushed into.&lt;/h3&gt;
+&lt;p&gt;In order to serve web pages in your github pages, you need to create a new repository under the organisation you just had created.  The repo name should be the same as the github pages url. So it should be webdevelopersmeme.github.io in my case.&lt;/p&gt;
+&lt;p&gt;thus https://github.com/webdevelopersmeme/webdevelopersmeme.github.io&lt;/p&gt;
+&lt;h3&gt;Push static files in your repository&lt;/h3&gt;
+&lt;p&gt;You can just put a static html files, js and css in that repository that you just had created. But since in my case, I would need to make it so that its not so hard to manually copy paste every change in each static HTML files, there is somewhat a need to make it dynamic, without using PHP or any scripting language. That is when I used Jekyll.&lt;/p&gt;
+&lt;p&gt;I would not go over what is Jekyll, since that is its own long topic, but you can check that in its own &lt;a href=&quot;http://jekyllrb.com/docs/home/&quot; target=&quot;_blank&quot;&gt;website&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This is the steps I&#39;ve made in able to setup a very basic Jekyll site and publish it to my repo.&lt;br /&gt;
+&lt;script src=&quot;https://gist.github.com/buonzz/686e64aff0bbde1a0ae4.js&quot;&gt;&lt;/script&gt;&lt;br /&gt;
+Once you had pushed it, you might think you can check the site load the pages you just had pushed right away -- but its not.&lt;br /&gt;
+When I go to webdevelopersmeme.github.io after I had pushed my first Jekyll site, this is what I get&lt;br /&gt;
+&lt;a href=&quot;http://www.darwinbiler.com/wp-content/uploads/2015/01/Screen-Shot-2015-01-10-at-7.09.09-PM.png&quot;&gt;&lt;img src=&quot;assets/Screen-Shot-2015-01-10-at-7.09.09-PM.png&quot; alt=&quot;Screen Shot 2015-01-10 at 7.09.09 PM&quot; width=&quot;538&quot; height=&quot;581&quot; class=&quot;aligncenter size-full wp-image-1423&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I would still need to wait for more than 30 minutes, for my Jekyll site to serve my contents.  So I think I&#39;ll just wait for that. Patience is a virtue, remember? :-)&lt;/p&gt;
+&lt;p&gt;after 40 minutes of waiting ..&lt;/p&gt;
+&lt;p&gt;hurray, its loading now:&lt;br /&gt;
+&lt;a href=&quot;http://www.darwinbiler.com/wp-content/uploads/2015/01/Screen-Shot-2015-01-10-at-7.36.22-PM.png&quot;&gt;&lt;img src=&quot;assets/Screen-Shot-2015-01-10-at-7.36.22-PM.png&quot; alt=&quot;Screen Shot 2015-01-10 at 7.36.22 PM&quot; width=&quot;920&quot; height=&quot;573&quot; class=&quot;aligncenter size-full wp-image-1426&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I got a basic Jekyll site running, all for me to do is to put actual contents and customize colors and design.&lt;br /&gt;
+Soon, I&#39;ll put a custom domain for this, instead of the standard webdevelopersmeme.github.io&lt;br /&gt;
+For now, I&#39;ll start focusing in creating the contents itself, before I even publish it in its own domain, so stay tuned!&lt;/p&gt;
+</description>
+        <pubDate>Sat, 10 Jan 2015 19:35:06 +0800</pubDate>
+        <link>http://yourdomain.com/featured/howto/2015/01/10/creating-your-own-github-io-website.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/featured/howto/2015/01/10/creating-your-own-github-io-website.html</guid>
+        
+        <category>create simple jekylll site</category>
+        
+        <category>how to make github pages with jekyll</category>
+        
+        <category>publish own github.io site</category>
+        
+        
+        <category>featured</category>
+        
+        <category>howto</category>
+        
+      </item>
+    
+      <item>
+        <title>Tips on Building a scalable Web Application</title>
+        <description>&lt;h2&gt;Scale Out NOT Scale Up&lt;/h2&gt;
+&lt;p&gt;By intuition, one would beef up a server with more RAM, larger disk or more powerful CPU when there is a need to grow up. Not only this is the easiest way to accommodate larger traffic load but its also lot easier to deploy. Small and medium sites can usually get away with this solution but as you hit some serious traffic, you will realize that you can&#39;t continue doing this forever. Problems occur down the road when the data you have can&#39;t fit into the memory of  a single server. There are some hard limit as well on how much you can upgrade a particular server -- both physical limit and budget limits.&lt;/p&gt;
+&lt;h2&gt;Asynchronous Communication&lt;/h2&gt;
+&lt;p&gt;When something needs to be saved into your database, or an API call needs to be fetch from a third-party, we usually block the execution of the app until it was fulfilled - this doesn&#39;t scale up. You have to put long running operations in the background, so that your site stays responsive and recover resources like connection handles, memory and cpu as soon as possible.&lt;/p&gt;
+&lt;h2&gt;Persist chunky, not chatty Data&lt;/h2&gt;
+&lt;p&gt;Lets say you are saving every click details for a particular button. Most developers execute INSERT operations to the underlying database for each actual click made by users. This will pose a bottleneck in your database and cause serious issues. Not to mention the network latency it requires specially if your database server was not in the same local network as the web server. What is more ideal is to accumulate first the data in some local storage like text file or cache. Then send the data to the database as a batch. This reduces network congestion and also makes a very efficient use of database connection.&lt;/p&gt;
+&lt;h2 class=&quot;subHeading&quot;&gt;Retry for Fault Tolerance&lt;/h2&gt;
+&lt;p&gt;If someone submitted a form and the database server is currently down, what happens to the info? It was lost isn&#39;t it. Not too many users are willing to fill up again the same info specially if the alternative site is just one click away. You to make sure the data you accept from your users is placed into a temporary holding area. Then a asynchronous background process will pick it up and try to save it to the database, when the database is offline at that time, the background process should be smart enough to retry it at a later point of time, thus making it possible to still accept transactions while the database server is being revived.&lt;/p&gt;
+&lt;h2&gt;Caching&lt;/h2&gt;
+&lt;p&gt;You don&#39;t want to hit the database server every time you need data. Make use of Memcached or Redis to store the data you retrieved from the database, then just refresh those when something was changed into the database.&lt;/p&gt;
+&lt;h2 class=&quot;subHeading&quot;&gt;Horizontal Data Partitioning&lt;/h2&gt;
+&lt;p&gt;Don&#39;t store your data into just single database server. Identify which tables you think will grow in enormous size and split it up in multiple servers. NoSQL has a built-in support for this kind of things called &quot;sharding&quot;. MySQL have attempts to do this kind of thing but with no success. Note that Replication is entirely different from Sharding. In replication, you are putting a full copy of the entire data into another server and continuously sync the two together, while in sharding, you are splitting up your data into multiple server. So that means if you have 1 million rows table, one server has the 500k rows, while the other server have the other 500k rows. This is critical specially when you have very large amount of data and it would not fit into a single database server.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 04 Jan 2015 09:12:35 +0800</pubDate>
+        <link>http://yourdomain.com/big%20data/cloud%20computing/hadoop/howto/nosql/scalability/2015/01/04/tips-on-building-a-scalable-web-application.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/big%20data/cloud%20computing/hadoop/howto/nosql/scalability/2015/01/04/tips-on-building-a-scalable-web-application.html</guid>
+        
+        <category>horizontal scale</category>
+        
+        <category>scale out vs scale up</category>
+        
+        <category>techniques on large applications</category>
+        
+        
+        <category>big data</category>
+        
+        <category>cloud computing</category>
+        
+        <category>hadoop</category>
+        
+        <category>howto</category>
+        
+        <category>nosql</category>
+        
+        <category>scalability</category>
+        
+      </item>
+    
+      <item>
+        <title>How do you define a &quot;Slow&quot; web application?</title>
+        <description>&lt;p&gt;Most of the people will say the &quot;response time&quot; are the best way to determine whether a web application is slow or not. As it turns out, the whole concept of response time as ultimate metric to determine whether an app is slow or not is wrong. This blog post will try to explain why many developers usually falls into this kind of misconception.&lt;/p&gt;
+&lt;p&gt;First thing first, lets define what is &quot;slow&quot;?&lt;/p&gt;
+&lt;p&gt;In the context of web application, there are many ways this could be expressed by different people:&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;&quot;If I clicked a button in a web page, and it took more than 5 seconds to reload or go to the next page, it is slow&quot;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;or &lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;&quot;When I visit a particular link and it displays the contents immediately, then its not slow&quot;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;or &lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;&quot;If I hit the play button on the video player of the clip I wanted to watch and it played immediately, then its now slow&quot;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;or&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;&quot;When I send traffic like 1000 users simultaneously and the page loads fine still around 4 seconds, then it is not slow&quot;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;You&#39;ll notice in those common examples the following observations:&lt;/p&gt;
+&lt;h3&gt;Slowness of an application is a relative value depending on the users goal&lt;/h3&gt;
+&lt;p&gt;In the case of web application, it is relative to what the user is trying to achieve. Interestingly, when a certain activity like &quot;transferring funds via online banking&quot; or &quot;streaming a high resolution video&quot;,  users perception about slowness of an application is different compare to simple activity like &quot;browsing the facebook activity&quot; or &quot;watching a short clip about neighbor&#39;s cat&quot;. &lt;/p&gt;
+&lt;p&gt;Users tend to be more patient when a certain process is something that of value for them. Like for example when streaming a high resolution video, even though it would take a while  for it to load they would consider it &quot;fast&quot; if it played like lets say 10 seconds after hitting the play button. That is in comparison to just watching a clip about a cat but takes 2-3 seconds to load.&lt;/p&gt;
+&lt;h3&gt;You cannot rely on a single test to determine the slowness of an application&lt;/h3&gt;
+&lt;p&gt;When a certain web application is reported to be slow by 2 out of 100 users, did you consider the web application as slow? . No right? first instinct is, you will check what is wrong with those 2 users. There are many factors that could chime in once your web app is being hit by thousands of traffic, there goes the scalability concerns, concurrency, hardware issues. It boils down to this principle -- slowness cannot be measured by just doing a single test, you need to gather higher samples and compute its &lt;a href=&quot;http://en.wikipedia.org/wiki/Central_tendency&quot; target=&quot;_blank&quot;&gt;central tendencies&lt;/a&gt; (e.g. mean, average , mode etc).&lt;/p&gt;
+&lt;h3&gt;It&#39;s not about the response time, it&#39;s about user satisfaction&lt;/h3&gt;
+&lt;p&gt;Imagine this - you have a script which the sole purpose is to ping the web server if it responds within 3 seconds. When you check the logs, everything is fine, all requests is within 3 seconds some are even less than that. But then when you check the site itself, it is full of 404 page and 500 (Internal Server Error). At this point, you will realize that even though the web server &quot;technically&quot; is responding fast to web requests, you should somehow check if those responses are something users would like to receive. Thus, it is actually being user satisfaction.&lt;/p&gt;
+&lt;p&gt;There would be many other ways and scenarios like above which could affect how do you define the slowness of a web application. That very same issue for example makes it very hard for us (developers) to compare two different web applications that is using different technologies and process (like for example Java vs PHP, RoR vs Laravel, ASP.NET vs RoR) even using the most accurate bench marking tools.&lt;/p&gt;
+&lt;p&gt;Is there any hope we could have a &quot;global&quot; comparison metric so that it actually measures accurately the slowness  of a web application?&lt;/p&gt;
+&lt;p&gt;Yes there is!&lt;/p&gt;
+&lt;p&gt;Enter &lt;strong&gt;Apdex&lt;/strong&gt; (short for Application Performance Index).&lt;/p&gt;
+&lt;p&gt;Apdex is an open standard developed by an alliance of companies that defines a standardized method to report, benchmark, and track application performance. It basically aims to provide a solution to the above-mentioned issues we are encountering in our everyday struggle to measure our web applications performance.&lt;/p&gt;
+&lt;p&gt;In Apdex, things are simple: you just have number on a uniform scale of 0-to-1 wherein&lt;br /&gt;
+0 = no users satisfied&lt;br /&gt;
+1 = all users satisfied&lt;/p&gt;
+&lt;p&gt;At the very basic level, it is centered on why you are measuring things anyway : end-users satisfaction.&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;The index translates many individual response times, measured at the user-task level, into a single number. A Task is an individual interaction with the system, within a larger process. Task response time is defined as the elapsed time between when a user does something (mouse click, hits enter or return, etc) and when the system (client, network, servers) responds such that the user can proceed with the process. This is the time during which the human is waiting for the system. These individual waiting periods are what define the &quot;responsiveness&quot; of the application to the user.
+&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h3&gt;How it Works&lt;/h3&gt;
+&lt;p&gt;The index is based on three zones of application responsiveness:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Satisfied:  The user is fully productive. This represents the time value (T seconds) below which users are not impeded by application response time.&lt;/li&gt;
+&lt;li&gt;Tolerating:  The user notices performance lagging within responses greater than T, but continues the process.&lt;/li&gt;
+&lt;li&gt;Frustrated:  Performance with a response time greater than F seconds is unacceptable, and users may abandon the process.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.darwinbiler.com/wp-content/uploads/2014/12/overview_figure1_performancezones_256_111.gif&quot;&gt;&lt;img src=&quot;assets/overview_figure1_performancezones_256_111.gif&quot; alt=&quot;overview_figure1_performancezones_256_111&quot; width=&quot;256&quot; height=&quot;111&quot; class=&quot;aligncenter size-full wp-image-1407&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The Apdex formula is the number of satisfied samples plus half of the tolerating samples plus none of the frustrated samples, divided by all the samples:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.darwinbiler.com/wp-content/uploads/2014/12/overview_formula1_241_75.gif&quot;&gt;&lt;img src=&quot;assets/overview_formula1_241_75.gif&quot; alt=&quot;overview_formula1_241_75&quot; width=&quot;241&quot; height=&quot;75&quot; class=&quot;aligncenter size-full wp-image-1408&quot; /&gt;&lt;/a&gt;&lt;br /&gt;
+So it is easy to see how this ratio is always directly related to users&#39; perceptions of satisfactory application responsiveness. To understand the full meaning of the ratio, it is always presented as a decimal value with a sub-script representing the target time T. For example, if there are 100 samples with a target time of 3 seconds, where 60 are below 3 seconds, 30 are between 3 and 12 seconds, and the remaining 10 are above 12 seconds, the Apdex is:&lt;br /&gt;
+&lt;a href=&quot;http://www.darwinbiler.com/wp-content/uploads/2014/12/overview_formula2_106_58.gif&quot;&gt;&lt;img src=&quot;assets/overview_formula2_106_58.gif&quot; alt=&quot;overview_formula2_106_58&quot; width=&quot;106&quot; height=&quot;58&quot; class=&quot;aligncenter size-full wp-image-1409&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;More detailed explanation about the standard can be found in the official &lt;a href=&quot;http://apdex.org/specs.html&quot; target=&quot;_blank&quot;&gt;Apdex site&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;There you have it. That is the &quot;correct way&quot; of measuring slowness of a web application. &lt;/p&gt;
+&lt;p&gt;But how do I actually implement this concept in my web application?&lt;/p&gt;
+&lt;p&gt;There are tools that considers Apdex standard to measure application performance, like for example &lt;a href=&quot;https://docs.newrelic.com/docs/apm/new-relic-apm/apdex/apdex-measuring-user-satisfaction&quot; target=&quot;_blank&quot;&gt;NewRelic&#39;s APM&lt;/a&gt; is using Apdex heavily to give reports.&lt;br /&gt;
+Though you can implement this standard as well by yourself, I recommend checking out some tools first like NewRelic  to get a hold of how to use the apdex standard in a real-world applications.&lt;/p&gt;
+&lt;p&gt;I hope you learned something new today, so next time someone asked you how &quot;slow&quot; a web application is? well, simply give them the Apdex of your web app and give him/her the  link  to this article :)&lt;/p&gt;
+</description>
+        <pubDate>Mon, 15 Dec 2014 07:57:22 +0800</pubDate>
+        <link>http://yourdomain.com/coding/howto/scalability/2014/12/15/how-do-you-define-a-slow-web-application.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/coding/howto/scalability/2014/12/15/how-do-you-define-a-slow-web-application.html</guid>
+        
+        <category>apdex</category>
+        
+        <category>measure perfomance</category>
+        
+        <category>scalability</category>
+        
+        
+        <category>coding</category>
+        
+        <category>howto</category>
+        
+        <category>scalability</category>
+        
+      </item>
+    
+      <item>
+        <title>How does the “replace” property work in Composer?</title>
+        <description>&lt;p&gt;This article tries to elaborate and explain the simple, yet very important property in composer.json file -- the replace property.&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&quot;https://getcomposer.org/doc/04-schema.md#replace&quot; target=&quot;_blank&quot;&gt;official&lt;/a&gt; explanation in Composer website is very brief and doesn&#39;t really explains the use of it that much.&lt;/p&gt;
+&lt;p&gt;Lets try to break it down into its details so we can see the bigger picture.The official documentation says:&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;Lists packages that are replaced by this package. This allows you to fork a package, publish it under a different name with its own version numbers, while packages requiring the original package continue to work with your fork because it replaces the original package.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Note the word &quot;this&quot;. That means when it is defined in your library, that package replaces whatever package you specify it on. This could be useful if you have forked a library and you want to use your fork always. To better understand this. Lets take an example&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I have an application called &quot;My App&quot;&lt;/li&gt;
+&lt;li&gt;&quot;My App&quot; requires two packages as dependency, namely &quot;original/library&quot; and &quot;other/package&quot;&lt;/li&gt;
+&lt;li&gt;&quot;other/package&quot; has dependency on &quot;original/library&quot;&lt;/li&gt;
+&lt;li&gt;The maintainer of &quot;original/library&quot; is not updating it anymore, and there is a lot of bugs on it&lt;/li&gt;
+&lt;li&gt;You want to fix the issues on &quot;original/library&quot; but they are not accepting your Pull Requests&lt;/li&gt;
+&lt;li&gt;You forked the &quot;original/library&quot; instead, in a package called &quot;yourfork/library&quot;&lt;/li&gt;
+&lt;li&gt;You specify in your &quot;My App &quot; project to use &quot;yourfork/library&quot;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This is illustrated in the diagram below&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.darwinbiler.com/wp-content/uploads/2014/10/Replace-New-Page.png&quot;&gt;&lt;img class=&quot;aligncenter size-large wp-image-1381&quot; src=&quot;assets/Replace-New-Page-1024x475.png&quot; alt=&quot;Replace - New Page&quot; width=&quot;650&quot; height=&quot;301&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Now, the problem is, the &quot;other/package&quot; has dependency on &quot;original/library&quot;. Which results into having both copies loaded in your app! This is not good, since the buggy package (&quot;original/library&quot;) is still loaded and can wreak havoc in your application.&lt;/p&gt;
+&lt;p&gt;There has something to be done, so that whenever there is a need to use  &quot;original/library&quot;, Composer knows that it should &quot;replace it&quot; by your fork, which is &quot;yourfork/library&quot;.&lt;/p&gt;
+&lt;p&gt;Enter the replace propery&lt;/p&gt;
+&lt;p&gt;To fix this, you need to specify replace property in &quot;yourfork/library&quot;, so that Composer knows that it can serve as a replacement for &quot;original/library&quot;, whenever that package is being required.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.darwinbiler.com/wp-content/uploads/2014/10/Replace-New-Page-1.png&quot;&gt;&lt;img src=&quot;assets/Replace-New-Page-1-1024x475.png&quot; alt=&quot;Replace - New Page (1)&quot; width=&quot;650&quot; height=&quot;301&quot; class=&quot;aligncenter size-large wp-image-1383&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Now. even though you haven&#39;t &quot;told&quot; directly the &quot;other/package&quot; to stop using the &quot;original/library&quot;, Composer will not load the &quot;original/library&quot; anymore, since you told him that it can be replaced by &quot;yourfork/library&quot;.&lt;/p&gt;
+&lt;p&gt;Does that makes sense?&lt;/p&gt;
+&lt;p&gt;The other angle:&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;This is also useful for packages that contain sub-packages, for example the main symfony/symfony package contains all the Symfony Components which are also available as individual packages. If you require the main package it will automatically fulfill any requirement of one of the individual components, since it replaces them.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Example Scenario:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I have an application called &quot;My App&quot;&lt;/li&gt;
+&lt;li&gt;&quot;vendor/framework&quot; is a cool but heavy framework with different components under it&lt;/li&gt;
+&lt;li&gt;You can require the entire &quot;vendor/framework&quot; in your project, or just the individual components you prefer&lt;/li&gt;
+&lt;li&gt;At initial stage, &quot;My App&quot; only required the &quot;vendor/component1&quot;, since lets say the project only requires only that feature&lt;/li&gt;
+&lt;li&gt;later on, you decided to use the full framework&lt;/li&gt;
+&lt;li&gt;Now, your &quot;My App&quot; requires two packages as dependency namely &quot;vendor/framework&quot; and &quot;vendor/component1&quot;&lt;/&gt;
+	&lt;/li&gt;
+&lt;li&gt;But &quot;vendor/component1&quot; classes is already present on &quot;vendor/framework&quot;&lt;/li&gt;
+&lt;li&gt;This seems a redundant code and prone to conflicts!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The situation is depicted in the diagram below:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.darwinbiler.com/wp-content/uploads/2014/10/Replace-framework-New-Page.png&quot;&gt;&lt;img src=&quot;assets/Replace-framework-New-Page.png&quot; alt=&quot;Replace - framework - New Page&quot; width=&quot;961&quot; height=&quot;420&quot; class=&quot;aligncenter size-full wp-image-1387&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;At first thought, you may think you can just simply remove the depedency of my &quot;My App&quot; to &quot;vendor/component1&quot;. But the thing is, most of the time, users don&#39;t know which component is already present to which package!&lt;br /&gt;
+Even if you knew, there are tons of dependency and relations of each package that it would be a nightmare to trace that by hand.&lt;/p&gt;
+&lt;p&gt;So there&#39;s  got to be way for Composer to know, so that when a &quot;vendor/component1&quot; is already &quot;included&quot; in &quot;vendor/framework&quot; package, it should tell it that there is no need for the &quot;vendor/component1&quot; seperately anymore.&lt;/p&gt;
+&lt;p&gt;This can be achieved by putting a replace property in the &quot;vendor/framework&quot;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.darwinbiler.com/wp-content/uploads/2014/10/Replace-framework-New-Page-1.png&quot;&gt;&lt;img src=&quot;assets/Replace-framework-New-Page-1.png&quot; alt=&quot;Replace - framework - New Page (1)&quot; width=&quot;1001&quot; height=&quot;440&quot; class=&quot;aligncenter size-full wp-image-1390&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4&gt;Security Considerations&lt;/h4&gt;
+&lt;p&gt;There are apparently unwanted side-effects of this behaviour though. Because if you require a package that does not exist, and a replacer replaces it with their own fork (which has malicious codes on it) -- you are doomed.&lt;/p&gt;
+&lt;p&gt;The explanation of the issue is beyond the scope of this article, but it is a &lt;b&gt;MUST&lt;/b&gt; that you educate yourself about this, so that you can prevent someone from &quot;injecting&quot; malicious codes in your codebase.&lt;/p&gt;
+&lt;p&gt;You can check the following threads to have a better understanding of this security implication:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/composer/packagist/issues/335&quot; target=&quot;_blank&quot;&gt;Security -- how are malicious or insecure Packagist packages reported&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/composer/packagist/issues/362&quot; target=&quot;_blank&quot;&gt;Packages using `replace` are in need&lt;br /&gt;
+of moderating&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/composer/composer/issues/2690&quot; target=&quot;_blank&quot;&gt;Limit Replace / Provides to packages required by name in root package or any dep&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://blog.naderman.de/2014/02/17/replace-conflict-forks-explained/&quot; target=&quot;_blank&quot;&gt;COMPOSER: REPLACE, CONFLICT &amp; FORKS EXPLAINED&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 06 Oct 2014 09:20:37 +0800</pubDate>
+        <link>http://yourdomain.com/coding/composer/howto/laravel/security/2014/10/06/how-does-the-replace-property-work-in-composer.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/coding/composer/howto/laravel/security/2014/10/06/how-does-the-replace-property-work-in-composer.html</guid>
+        
+        <category>composer replace</category>
+        
+        <category>securing composer</category>
+        
+        <category>wrong composer library is loading</category>
+        
+        
+        <category>coding</category>
+        
+        <category>composer</category>
+        
+        <category>howto</category>
+        
+        <category>laravel</category>
+        
+        <category>security</category>
+        
+      </item>
+    
+      <item>
+        <title>OpenStack - Creating and Attaching a Volume into an Instance</title>
+        <description>&lt;p&gt;In physical servers, whenever you need to add additional storage capacity in a server, what you usually do is physically put a faster and better hard drive in the the physical server itself, then you will setup some RAID configuration and etc to make sure the storage device is secure and provides data redundancy to prevent loss of data.&lt;/p&gt;
+&lt;p&gt;Gone are those days, because unlike attaching a physical hard disk, OpenStack allows you to create a virtual storage device (volumes) that you can attach in to your virtual machines (Instance).&lt;/p&gt;
+&lt;p&gt;Now let&#39;s get started on creating the first Volume.&lt;/p&gt;
+&lt;p&gt;In the OpenStack dashboard, click the Volumes menu under Project.&lt;br /&gt;
+&lt;a href=&quot;http://www.darwinbiler.com/wp-content/uploads/2014/09/15.png&quot;&gt;&lt;img class=&quot;aligncenter size-full wp-image-1369&quot; src=&quot;assets/15.png&quot; alt=&quot;1&quot; width=&quot;226&quot; height=&quot;315&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Click the &quot;Create Volume&quot; button on the top right side.&lt;br /&gt;
+the dialog opens and asks for the volume information you want to create. Let&#39;s say we wanted to create a volume to store the files that are going to serve by Nginx.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.darwinbiler.com/wp-content/uploads/2014/09/31.png&quot;&gt;&lt;img class=&quot;aligncenter size-full wp-image-1370&quot; src=&quot;assets/31.png&quot; alt=&quot;3&quot; width=&quot;689&quot; height=&quot;550&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Note: The type and Availability Zone parameters may vary depending on your Cloud Provider.&lt;/p&gt;
+&lt;p&gt;Once you had filled up the information, click the &quot;Create Volume&quot; button.&lt;br /&gt;
+It should be now listed in the Volumes table.&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;If you get an error when creating a Volume, try lowering the size&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Now that you had a Volume created, how do you actually use this to a VM instance to create files?&lt;/p&gt;
+&lt;p&gt;First, you need to have a working Instance and you should be able to connect to it via SSH. If you haven&#39;t configured a VM instance yet, please read my article about &lt;a title=&quot;How to SSH to the VM instance in OpenStack&quot; href=&quot;http://www.darwinbiler.com/how-to-ssh-to-the-vm-instance-in-openstack/&quot; target=&quot;_blank&quot;&gt;How to SSH to the VM instance in OpenStack&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To attach the Volume into an instance, click the More dropdown button in the Actions column of your Volume:&lt;br /&gt;
+&lt;a href=&quot;http://www.darwinbiler.com/wp-content/uploads/2014/09/4.png&quot;&gt;&lt;img class=&quot;aligncenter size-full wp-image-1372&quot; src=&quot;assets/4.png&quot; alt=&quot;4&quot; width=&quot;200&quot; height=&quot;201&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Click &quot;Edit Attachments&quot;, you will see a dialog like this&lt;br /&gt;
+&lt;a href=&quot;http://www.darwinbiler.com/wp-content/uploads/2014/09/51.png&quot;&gt;&lt;img class=&quot;aligncenter size-full wp-image-1373&quot; src=&quot;assets/51.png&quot; alt=&quot;5&quot; width=&quot;688&quot; height=&quot;446&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;In my example, I have a Debian instance called &quot;webserver1&quot;, so I just selected it and hit the &quot;Attach Volume&quot; button.&lt;/p&gt;
+&lt;p&gt;You will see now in the &quot;Attached To&quot; column that the volume is attached into &quot;webserver1&quot; instance, in a device called &quot;/dev/vdc1&quot;&lt;br /&gt;
+&lt;a href=&quot;http://www.darwinbiler.com/wp-content/uploads/2014/09/61.png&quot;&gt;&lt;img class=&quot;aligncenter size-full wp-image-1375&quot; src=&quot;assets/61.png&quot; alt=&quot;6&quot; width=&quot;159&quot; height=&quot;105&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Now let&#39;s login to webserver1 instance as root.&lt;/p&gt;
+&lt;p&gt;To verify if the volume was attached properly, execute:&lt;/p&gt;
+&lt;pre lang=&quot;bash&quot;&gt;fdisk -l
+&lt;/pre&gt;
+&lt;p&gt;Somewhere on the output, you should see some message like this:&lt;/p&gt;
+&lt;pre&gt;Disk /dev/vdc: 10.7 GB, 10737418240 bytes
+16 heads, 63 sectors/track, 20805 cylinders, total 20971520 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0x00000000
+
+Disk /dev/vdc doesn&#39;t contain a valid partition table
+&lt;/pre&gt;
+&lt;p&gt;If you didn&#39;t see the /dev/vdc getting detected, try rebooting the instance and check it again.&lt;/p&gt;
+&lt;p&gt;Now that the Volume is detected by the instance, you need to format it in able for you to use it.&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;&lt;b&gt;Copy-Paste habit Warning!&lt;/b&gt; /dev/vdc is just an example in here and it could vary, please replace it with proper name of the device in your case, to prevent accidentally formatting your other volumes!&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;To format your device, execute&lt;/p&gt;
+&lt;pre lang=&quot;bash&quot;&gt;fdisk /dev/vdc
+&lt;/pre&gt;
+&lt;p&gt;it will output something like this:&lt;/p&gt;
+&lt;pre&gt;root@webserver1:~# fdisk /dev/vdc
+Device contains neither a valid DOS partition table, nor Sun, SGI or OSF disklabel
+Building a new DOS disklabel with disk identifier 0x7fd6e1b3.
+Changes will remain in memory only, until you decide to write them.
+After that, of course, the previous content won&#39;t be recoverable.
+
+Warning: invalid flag 0x0000 of partition table 4 will be corrected by w(rite)
+
+Command (m for help):
+&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Press n to create a new disk partition.&lt;/li&gt;
+&lt;li&gt;Press p to create a primary disk partition.&lt;/li&gt;
+&lt;li&gt;Press 1 to denote it as 1st disk partition.&lt;/li&gt;
+&lt;li&gt;Press ENTER twice to accept the default of 1st and last cylinder – to convert the remainder of hard disk to a single disk partition&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;it should now look like this:&lt;/p&gt;
+&lt;pre&gt;
+root@webserver1:~# fdisk /dev/vdc
+Device contains neither a valid DOS partition table, nor Sun, SGI or OSF disklabel
+Building a new DOS disklabel with disk identifier 0x7fd6e1b3.
+Changes will remain in memory only, until you decide to write them.
+After that, of course, the previous content won&#39;t be recoverable.
+
+Warning: invalid flag 0x0000 of partition table 4 will be corrected by w(rite)
+
+Command (m for help): n
+Partition type:
+   p   primary (0 primary, 0 extended, 4 free)
+   e   extended
+Select (default p): p
+Partition number (1-4, default 1): 1
+First sector (2048-20971519, default 2048):
+Using default value 2048
+Last sector, +sectors or +size{K,M,G} (2048-20971519, default 20971519):
+Using default value 20971519
+
+Command (m for help):
+&lt;/pre&gt;
+&lt;p&gt;Now, the next thing to do is enter these commands:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Press t, then select the new partition you made.&lt;/li&gt;
+&lt;li&gt;Press 83 change your new partition to 83, i.e. Linux partition type.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;It will take you back to this prompt:&lt;/p&gt;
+&lt;pre lang=&quot;bash&quot;&gt;
+Command (m for help): t
+Selected partition 1
+Hex code (type L to list codes): 83
+Command (m for help):
+&lt;/pre&gt;
+&lt;p&gt;Enter these commands:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Press p to display the hard disk partition setup. Please take note that the first partition is denoted as /dev/vdc1 in your instance.&lt;/li&gt;
+&lt;li&gt;
+&lt;/li&gt;
+&lt;li&gt;Press w to write the partition table and exit fdisk upon completion.&lt;/li&gt;
+&lt;ul&gt;
+&lt;p&gt;It should look like this:&lt;/p&gt;
+&lt;pre&gt;
+Command (m for help): p
+
+Disk /dev/vdc: 10.7 GB, 10737418240 bytes
+16 heads, 63 sectors/track, 20805 cylinders, total 20971520 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0x7fd6e1b3
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/vdc1            2048    20971519    10484736   83  Linux
+
+Command (m for help): w
+The partition table has been altered!
+
+Calling ioctl() to re-read partition table.
+Syncing disks.
+&lt;/pre&gt;
+&lt;p&gt;Logout in the SSH and reboot the instance by going to Projects &amp;gt; Instances, select the checkbox next to your instance and click the &quot;Soft Reboot Instances&quot;.&lt;/p&gt;
+&lt;p&gt;Now, login to SSH again as root.  Check if the system had mounted the filesystem by executing this command:&lt;/p&gt;
+&lt;pre lang=&quot;bash&quot;&gt;
+mount
+&lt;/pre&gt;
+&lt;p&gt;if you see some sort of  &quot;/dev/vdc on&quot; etc in the output, unmount it by &lt;/p&gt;
+&lt;pre lang=&quot;bash&quot;&gt;
+umount -l /dev/vdc
+&lt;/pre&gt;
+&lt;p&gt;Now, create the filesystem in the /dev/vdc1 partition by&lt;/p&gt;
+&lt;pre lang=&quot;bash&quot;&gt;
+ mkfs.ext4 /dev/vdc1
+&lt;/pre&gt;
+&lt;p&gt;it should output something like&lt;/p&gt;
+&lt;pre&gt;
+root@webserver1:~# mkfs.ext4 /dev/vdc1
+mke2fs 1.42.5 (29-Jul-2012)
+Filesystem label=
+OS type: Linux
+Block size=4096 (log=2)
+Fragment size=4096 (log=2)
+Stride=0 blocks, Stripe width=0 blocks
+655360 inodes, 2621184 blocks
+131059 blocks (5.00%) reserved for the super user
+First data block=0
+Maximum filesystem blocks=2684354560
+80 block groups
+32768 blocks per group, 32768 fragments per group
+8192 inodes per group
+Superblock backups stored on blocks:
+        32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632
+
+Allocating group tables: done
+Writing inode tables: done
+Creating journal (32768 blocks): done
+Writing superblocks and filesystem accounting information: done
+&lt;/pre&gt;
+&lt;p&gt;Next is, you need to mount the volume to a directory. &lt;/p&gt;
+&lt;p&gt;Check the UUID of the volume by executing:&lt;/p&gt;
+&lt;pre lang=&quot;bash&quot;&gt;
+blkid
+&lt;/pre&gt;
+&lt;p&gt;it should multiple lines of output something like &lt;/p&gt;
+&lt;p&gt;/dev/vdc1: UUID=&quot;46218071-3b2f-4d9d-8eb3-61e313fa1325&quot; TYPE=&quot;ext4&quot;&lt;/p&gt;
+&lt;p&gt;the line with /dev/vdc1 is what we are interested with.&lt;/p&gt;
+&lt;p&gt;in this example, the 46218071-3b2f-4d9d-8eb3-61e313fa1325 is the UUID.&lt;/p&gt;
+&lt;p&gt;Now lets, say I want to mount the Volume in /data/www folder&lt;br /&gt;
+so that scripts and users can store/retrieve data in that path, i will need to create first that folder.&lt;/p&gt;
+&lt;pre lang=&quot;bash&quot;&gt;
+mkdir /data
+mkdir /data/www
+&lt;/pre&gt;
+&lt;p&gt;Mount the volume to that directory using the volume UUID and the directory you just created&lt;/p&gt;
+&lt;pre lang=&quot;bash&quot;&gt;
+mount /dev/disk/by-uuid/46218071-3b2f-4d9d-8eb3-61e313fa1325 /data/www
+&lt;/pre&gt;
+&lt;p&gt;If you want your volume mount to persist after a reboot then you&#39;ll need to edit your fstab file to add the mount command:&lt;/p&gt;
+&lt;p&gt;edit the fstab file by&lt;/p&gt;
+&lt;pre lang=&quot;bash&quot;&gt;
+nano /etc/fstab
+&lt;/pre&gt;
+&lt;p&gt;Add the following line to the bottom of the file:&lt;/p&gt;
+&lt;p&gt;/dev/disk/by-uuid/46218071-3b2f-4d9d-8eb3-61e313fa1325 /data/www auto defaults,nofail 0 3&lt;/p&gt;
+&lt;p&gt;Save the file and Exit.&lt;/p&gt;
+&lt;p&gt;Verify if the Volume was attached properly by executing:&lt;/p&gt;
+&lt;pre lang=&quot;bash&quot;&gt;
+df -h
+&lt;/pre&gt;
+&lt;p&gt;you should see some sort of &lt;/p&gt;
+&lt;pre&gt;
+Filesystem                                              Size  Used Avail Use% Mounted on
+--------------- other lines in here ---------------
+/dev/vdc1                                               9.9G  151M  9.2G   2% /data/www
+&lt;/pre&gt;
+&lt;p&gt;if you see that, Congratulations! you had now attached a Volume in an instance!&lt;/p&gt;
+&lt;p&gt;You can now start saving and storing data in the /data/www folder, and whatever you store there will be stored in the Volume you just had created.&lt;/p&gt;
+&lt;p&gt;the main benefit of this is, even if your instance config gets messed up or something. You can just re-built a new instance and re-attach the volume.&lt;/p&gt;
+&lt;/ul&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Fri, 26 Sep 2014 19:09:47 +0800</pubDate>
+        <link>http://yourdomain.com/bash/big%20data/cloud%20computing/howto/linux/2014/09/26/openstack-creating-and-attaching-a-volume-into-an-instance.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/bash/big%20data/cloud%20computing/howto/linux/2014/09/26/openstack-creating-and-attaching-a-volume-into-an-instance.html</guid>
+        
+        <category>basics of instance</category>
+        
+        <category>basics of volume in openstack</category>
+        
+        <category>example use of block storage</category>
+        
+        <category>openstack volume example</category>
+        
+        
+        <category>bash</category>
+        
+        <category>big data</category>
+        
+        <category>cloud computing</category>
+        
+        <category>howto</category>
+        
+        <category>linux</category>
+        
+      </item>
+    
+  </channel>
+</rss>

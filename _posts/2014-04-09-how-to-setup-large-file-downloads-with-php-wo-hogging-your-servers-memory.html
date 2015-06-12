@@ -1,0 +1,58 @@
+---
+layout: post
+title: How to setup large file downloads with PHP w/o hogging your servers memory
+date: 2014-04-09 17:45:11.000000000 +08:00
+categories:
+- howto
+- php
+- security
+tags:
+- mod_xsendfile
+- php file download tutorial
+- secured downloads in php
+- send file in php
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+  _thumbnail_id: '1215'
+  _wpas_mess: How to setup large file downloads with PHP w/o hogging your servers
+    memory
+  _wpas_skip_1611607: '1'
+  _wpas_done_all: '1'
+  dsq_thread_id: '2965182182'
+author:
+  login: Darwin
+  email: buonzz@gmail.com
+  display_name: Darwin
+  first_name: Darwin
+  last_name: Biler
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>Whether you are trying to secure a set of files so that it can be only accessed when a certain condition are met, or it was just a plain "download counter" feature in your site, PHP developers often resorts to this type of code:</p>
+<p><script src="https://gist.github.com/buonzz/10245645.js"></script></p>
+<p>Well for basic stuffs like small images, that works.</p>
+<p>But let's say you have a download link for a 10 Gigabyte 1080p video file... uhm</p>
+<p>Yes, you will certainly hit the maximum PHP limit. Even if you have that large memory in your server, imagine 10 thousand users hitting the download link simultaneously.</p>
+<p>More often, confused website owners resorts to Amazon S3 or other pricey CDN for solution to this, but you know what, before you dump lot of money to those solutions, try this one first, which doesn't cost anything except your time.</p>
+<p>There must be better ways of processing downloads in PHP than this.<br />
+Fortunately, there is, and I will going to tell you how.</p>
+<p>The secret ingredient lies in this little gem :  <a href="https://tn123.org/mod_xsendfile/" title="mod_xsendfile" target="_blank">mod_xsendfile</a></p>
+<p>This is an Apache module that you need to install in your web server.<br />
+( see <a href="https://tn123.org/mod_xsendfile/" target="_blank">https://tn123.org/mod_xsendfile/</a> how to install it )</p>
+<p>Once installed, the only thing you will change in your PHP code is just set a special HTTP header<br />
+header('X-Sendfile: /path/to/your/file);</p>
+<p>The main advantage of this are:</p>
+<ul>
+<li>Once the X-Sendfile directive is detected, it will discard any output of your PHP file and send the file right away as if the file was directly clicked</li>
+<li>The file doesn't have to be publicly accessible - means better security and control on who can access the file</li>
+<li>You don't have to read the entire file into memory, so its basically faster and doesn't eats up memory</li>
+<li>Minimal code changes in your existing PHP code</li>
+<li>End-User will not see the folder path where the file is stored physically in the server</li>
+<li>It is free</li>
+</ul>
+<p>Going back to our example, here is the modified code with the mod_xsendfile header enabled</p>
+<p><script src="https://gist.github.com/buonzz/10247308.js"></script></p>
+<p>That's it. You now have a secure file download script by just adding a single line of code!</p>

@@ -1,0 +1,47 @@
+---
+layout: post
+title: Clear Composer Cache
+date: 2014-08-30 22:16:46.000000000 +08:00
+categories:
+- coding
+- composer
+tags:
+- composer cache location
+- force clear cache composer
+- loading from cache
+status: publish
+type: post
+published: true
+meta:
+  dsq_thread_id: '2972633467'
+  _edit_last: '2'
+author:
+  login: Darwin
+  email: buonzz@gmail.com
+  display_name: Darwin
+  first_name: Darwin
+  last_name: Biler
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>Whatever your intention of looking for it, you can find it by running</p>
+<pre lang="shell">
+composer config cache-dir
+</pre>
+<p>Usually, in Windows it's on %LOCALAPPDATA%\Composer\<br />
+While in *nix, its usually on ~/.composer/cache</p>
+<p>You can always force empty it by deleting those manually. At the time of writing, there is no available command "yet" to clear that. So removing the folder is your best chance on clearing things up.</p>
+<h3>Why would anyone clear the composer cache anyway?</h3>
+<p>Quick answer to that is you want to make sure your copy is always fresh. Some reasons is, when you published something in packagist, it takes time for the new release to take "effect", maybe because packagist.org is getting overloaded for some reasons.</p>
+<p>They had added the cache stuffs in composer maybe for optimizing the resource usage of the tool, and of course to lessen the load in packagist.<br />
+If you really don't want to use the caching process altogether, you can specify this option in the composer.json file</p>
+<pre lang="js">
+{
+  "config":{
+      "cache-files-ttl":0
+  }
+}
+</pre>
+<p>If you set the cach-files-ttl to zero, composer won't cache the packages at all.</p>
+<p>But guess what, I have a mirror repository that you can use if you think packagist.org is so slow. Please check <a href="http://www.darwinbiler.com/composer-is-very-slow-in-downloading-your-dependencies-and-repositories-ive-got-a-mirror-you-can-use/" title="Composer is very slow in downloading your dependencies and repositories?  I’ve got a mirror you can use">this</a> article about it. </p>
+<p>Hope I helped you in some way in this article. Good Day!</p>

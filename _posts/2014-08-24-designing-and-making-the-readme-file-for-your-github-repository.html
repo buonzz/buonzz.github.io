@@ -1,0 +1,71 @@
+---
+layout: post
+title: Designing and Making the README file for your GitHub Repository
+date: 2014-08-24 11:46:20.000000000 +08:00
+categories:
+- coding
+- git
+- howto
+- laravel
+- php
+tags:
+- basics of markdown
+- create laravel package documentation
+- how to make readme file
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+  _thumbnail_id: '1311'
+  dsq_thread_id: '2955463700'
+author:
+  login: Darwin
+  email: buonzz@gmail.com
+  display_name: Darwin
+  first_name: Darwin
+  last_name: Biler
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>If you are sharing code in GitHub, the README.md file is the first thing that the viewer will gonna see in your repo. So it is very important that it is professional looking and easy to understand. Today, we'll go over some tips and tricks on how to come up with a better README file.</p>
+<h2>Anatomy of a README.md file</h2>
+<p><a href="http://www.darwinbiler.com/wp-content/uploads/2014/08/3-copy.jpg"><img class="aligncenter size-full wp-image-1311" src="assets/3-copy.jpg" alt="3 copy" width="528" height="664" /></a></p>
+<p>In the image above, you'll see there are some major parts of a README file</p>
+<ol>
+<li>Title</li>
+<li>Badges</li>
+<li>Description</li>
+<li>Requirements</li>
+<li>Installation</li>
+<li>Usage</li>
+<li>Credits (Optional)</li>
+</ol>
+<p>&nbsp;</p>
+<h4>Title</h4>
+<p>This is usually the human-readable version of the repository name. Like for example, if you have https://github.com/buonzz/laravel-4-freegeoip repository, the value of the title would be "FreeGeoIP for Laravel 4".</p>
+<h4>Badges</h4>
+<p>Those are the little images that you see in the repo's page. Here are the commonly used ones:</p>
+<ul>
+<li><img src="assets/laravel-4-freegeoip.svg?branch=master" />&nbsp;<b>Travis CI Build status</b> - this is the status of the codes (failed/passing) in travis-ci.org. Continous-Integration is the process of automatic testing of the codes, whether it is running properly in many platforms (multiple PHP versions, HHVM etc) and triggering the PHPUnit/Behat or any other Tests. You can read more about CI in <a href="http://en.wikipedia.org/wiki/Continuous_integration" target="_blank">here</a>. Simply put, this is usually an indicator if the repo is safe to use in your own project or not. A passing (green) green indicates it had passed all the tests and good to use.</li>
+<li><img src="assets/stable.svg" />&nbsp;<b>Stable version name </b>- the latest stable release in packagist.org. This also corresponds to the Releases on the Github repo, which is what packagist.org is using to determine the latest version.</li>
+<li><img src="assets/downloads.svg" />&nbsp;<b>Number of installs via packagist.org -</b> everytime you require this package in composer.json and its downloaded from packagist, this is incremented by one. This indicates how many developers had downloaded this and used in their project.</li>
+<li><img src="assets/unstable.svg" />&nbsp;<b>un-stable version name -</b> the development version of the package, contains the latest un-tested version.</li>
+<li><img src="assets/license.svg" />&nbsp;<b>license  -</b> the license which governs this repository codes</li>
+</ul>
+<p>Except for the Travis CI badge, you can grab the rest of those in <a href="https://poser.pugx.org/" target="_blank">https://poser.pugx.org/</a> . For Travis results though, you need to enable the build process in travis-ci.org site for the repo, then grab the badge in the results page there. You can read more about Travis CI on <a href="http://www.sitepoint.com/php-continuous-integration-travis-ci/" target="_blank">here</a> and <a href="http://docs.travis-ci.com/user/build-configuration/" target="_blank">here</a>.</p>
+<h4>Description</h4>
+<p>This contains the basic explanation of what your repository is all about. This is a good place to put links to the documentation page and any other overview info about your repository.</p>
+<h4>Requirements</h4>
+<p>This is usually a list of dependencies that is needed in able to run your library. For example Laravel 4.2 requires PHP 5.4 and Mcrypt to run properly, those list of requirements is best placed in this section.</p>
+<h4>Installation</h4>
+<p>This contains the step by step instruction on how to install your library. For Laravel packages, this usually involves the instructions on adding the ServiceProviders in the config file, changing the database settings, publishing the assets etc.</p>
+<h4>Usage</h4>
+<p>This section shows sample codes on how to use the package, usually in a form of "Hello World" sample, so that it's easier for a developer to use it in his own project.</p>
+<h4>Credits</h4>
+<p>if the project is sponsored by some company, forked from another repo, relying on another external service. This is a good place to put the links to those or mention their names. This can be optional and not necessarily required if you have nothing to mention at all.</p>
+<p>Knowing the parts is half of the story though, writing it is not straightforward since README files in GitHub is not using HTML for generating that format.</p>
+<p>The README file has a filename extension "md" which means <b>m</b>ark<b>d</b>own. Markdown is a markup language which performs text-to-HTML conversion for web writers. Markdown allows you to write using an easy-to-read, easy-to-write plain text format, then convert it to structurally valid XHTML (or HTML). You can read more about the markdown syntax in <a href="http://daringfireball.net/projects/markdown/" target="_blank">here</a>.<br />
+However, Github md files is special, since there is a so-called GFM (GitHub Flavored Markdown), which is a customized version of original markdown language. You can read more about GFM in <a href="https://help.github.com/articles/github-flavored-markdown">here</a>.</p>
+<p>The fastest way to learn it is by looking at the examples and learn some basic syntax of GFM. Below is the GFM markup the had generated the image above in the anatomy. Take a couple of hours of learning GFM while viewing the sample below. I assure you, you will be creating an awesome README file in no time.</p>
+<p><script src="https://gist.github.com/buonzz/0573544e13d63bdffb9b.js"></script></p>

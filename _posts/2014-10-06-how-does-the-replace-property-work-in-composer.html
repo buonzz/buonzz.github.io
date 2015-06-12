@@ -1,0 +1,85 @@
+---
+layout: post
+title: How does the “replace” property work in Composer?
+date: 2014-10-06 09:20:37.000000000 +08:00
+categories:
+- coding
+- composer
+- howto
+- laravel
+- security
+tags:
+- composer replace
+- securing composer
+- wrong composer library is loading
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+  _thumbnail_id: '1390'
+  dsq_thread_id: '3086907092'
+author:
+  login: Darwin
+  email: buonzz@gmail.com
+  display_name: Darwin
+  first_name: Darwin
+  last_name: Biler
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>This article tries to elaborate and explain the simple, yet very important property in composer.json file -- the replace property.</p>
+<p>The <a href="https://getcomposer.org/doc/04-schema.md#replace" target="_blank">official</a> explanation in Composer website is very brief and doesn't really explains the use of it that much.</p>
+<p>Lets try to break it down into its details so we can see the bigger picture.The official documentation says:</p>
+<blockquote><p>Lists packages that are replaced by this package. This allows you to fork a package, publish it under a different name with its own version numbers, while packages requiring the original package continue to work with your fork because it replaces the original package.</p></blockquote>
+<p>Note the word "this". That means when it is defined in your library, that package replaces whatever package you specify it on. This could be useful if you have forked a library and you want to use your fork always. To better understand this. Lets take an example</p>
+<ul>
+<li>I have an application called "My App"</li>
+<li>"My App" requires two packages as dependency, namely "original/library" and "other/package"</li>
+<li>"other/package" has dependency on "original/library"</li>
+<li>The maintainer of "original/library" is not updating it anymore, and there is a lot of bugs on it</li>
+<li>You want to fix the issues on "original/library" but they are not accepting your Pull Requests</li>
+<li>You forked the "original/library" instead, in a package called "yourfork/library"</li>
+<li>You specify in your "My App " project to use "yourfork/library"</li>
+</ul>
+<p>This is illustrated in the diagram below</p>
+<p><a href="http://www.darwinbiler.com/wp-content/uploads/2014/10/Replace-New-Page.png"><img class="aligncenter size-large wp-image-1381" src="assets/Replace-New-Page-1024x475.png" alt="Replace - New Page" width="650" height="301" /></a></p>
+<p>Now, the problem is, the "other/package" has dependency on "original/library". Which results into having both copies loaded in your app! This is not good, since the buggy package ("original/library") is still loaded and can wreak havoc in your application.</p>
+<p>There has something to be done, so that whenever there is a need to use  "original/library", Composer knows that it should "replace it" by your fork, which is "yourfork/library".</p>
+<p>Enter the replace propery</p>
+<p>To fix this, you need to specify replace property in "yourfork/library", so that Composer knows that it can serve as a replacement for "original/library", whenever that package is being required.</p>
+<p><a href="http://www.darwinbiler.com/wp-content/uploads/2014/10/Replace-New-Page-1.png"><img src="assets/Replace-New-Page-1-1024x475.png" alt="Replace - New Page (1)" width="650" height="301" class="aligncenter size-large wp-image-1383" /></a></p>
+<p>Now. even though you haven't "told" directly the "other/package" to stop using the "original/library", Composer will not load the "original/library" anymore, since you told him that it can be replaced by "yourfork/library".</p>
+<p>Does that makes sense?</p>
+<p>The other angle:</p>
+<blockquote><p>This is also useful for packages that contain sub-packages, for example the main symfony/symfony package contains all the Symfony Components which are also available as individual packages. If you require the main package it will automatically fulfill any requirement of one of the individual components, since it replaces them.</p></blockquote>
+<p>Example Scenario:</p>
+<ul>
+<li>I have an application called "My App"</li>
+<li>"vendor/framework" is a cool but heavy framework with different components under it</li>
+<li>You can require the entire "vendor/framework" in your project, or just the individual components you prefer</li>
+<li>At initial stage, "My App" only required the "vendor/component1", since lets say the project only requires only that feature</li>
+<li>later on, you decided to use the full framework</li>
+<li>Now, your "My App" requires two packages as dependency namely "vendor/framework" and "vendor/component1"</>
+	</li>
+<li>But "vendor/component1" classes is already present on "vendor/framework"</li>
+<li>This seems a redundant code and prone to conflicts!</li>
+</ul>
+<p>The situation is depicted in the diagram below:</p>
+<p><a href="http://www.darwinbiler.com/wp-content/uploads/2014/10/Replace-framework-New-Page.png"><img src="assets/Replace-framework-New-Page.png" alt="Replace - framework - New Page" width="961" height="420" class="aligncenter size-full wp-image-1387" /></a></p>
+<p>At first thought, you may think you can just simply remove the depedency of my "My App" to "vendor/component1". But the thing is, most of the time, users don't know which component is already present to which package!<br />
+Even if you knew, there are tons of dependency and relations of each package that it would be a nightmare to trace that by hand.</p>
+<p>So there's  got to be way for Composer to know, so that when a "vendor/component1" is already "included" in "vendor/framework" package, it should tell it that there is no need for the "vendor/component1" seperately anymore.</p>
+<p>This can be achieved by putting a replace property in the "vendor/framework"</p>
+<p><a href="http://www.darwinbiler.com/wp-content/uploads/2014/10/Replace-framework-New-Page-1.png"><img src="assets/Replace-framework-New-Page-1.png" alt="Replace - framework - New Page (1)" width="1001" height="440" class="aligncenter size-full wp-image-1390" /></a></p>
+<h4>Security Considerations</h4>
+<p>There are apparently unwanted side-effects of this behaviour though. Because if you require a package that does not exist, and a replacer replaces it with their own fork (which has malicious codes on it) -- you are doomed.</p>
+<p>The explanation of the issue is beyond the scope of this article, but it is a <b>MUST</b> that you educate yourself about this, so that you can prevent someone from "injecting" malicious codes in your codebase.</p>
+<p>You can check the following threads to have a better understanding of this security implication:</p>
+<ul>
+<li><a href="https://github.com/composer/packagist/issues/335" target="_blank">Security -- how are malicious or insecure Packagist packages reported</a></li>
+<li><a href="https://github.com/composer/packagist/issues/362" target="_blank">Packages using `replace` are in need<br />
+of moderating</a></li>
+<li><a href="https://github.com/composer/composer/issues/2690" target="_blank">Limit Replace / Provides to packages required by name in root package or any dep</a></li>
+<li><a href="http://blog.naderman.de/2014/02/17/replace-conflict-forks-explained/" target="_blank">COMPOSER: REPLACE, CONFLICT & FORKS EXPLAINED</a></li>
+</ul>
