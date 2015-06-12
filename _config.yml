@@ -9,3 +9,10 @@ github_username:  buonzz
 
 # Build settings
 markdown: kramdown
+
+defaults:
+  -
+    scope:
+      type: "posts"
+    values:
+      permalink: /:title
