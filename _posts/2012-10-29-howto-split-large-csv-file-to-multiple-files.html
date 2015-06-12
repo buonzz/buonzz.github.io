@@ -1,6 +1,7 @@
 ---
 layout: post
 title: How to split a large CSV file into multiple files
+permalink: howto-split-large-csv-file-to-multiple-files
 date: 2012-10-29 05:26:45.000000000 +08:00
 categories:
 - coding
@@ -29,8 +30,6 @@ author:
   display_name: Darwin
   first_name: Darwin
   last_name: Biler
-excerpt: !ruby/object:Hpricot::Doc
-  options: {}
 ---
 <p>So one day, someone gave you a CSV file (Comma-Separated Values). Then it needs to be uploaded to a website.<br />
 One of the major problem is, if the file is extremely huge (1 Gigabyte for example), most probably, you will hit the maximum file limit of the web server you are uploading that file into. Even if you adjust the maximum file limit, the problem is, the memory that will be consumed by the processing of that file is enormous. So one way to solve that problem is simple - split the huge CSV file into smaller fragments that the script can consume.<br />
