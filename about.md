@@ -4,8 +4,37 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
-
-You can find the source code for the Jekyll new theme at: [github.com/jglovier/jekyll-new](https://github.com/jglovier/jekyll-new)
-
-You can find the source code for Jekyll at [github.com/jekyll/jekyll](https://github.com/jekyll/jekyll)
+<p><img style="float:left;margin:10px;" src="{{ site.url }}/assets/IMG_2063-287x300.jpg" alt="IMG_2063" width="287" height="300" class="alignnone size-medium wp-image-755" />Darwin Biler is a freelance web developer which has intensive experience using MySQL and PHP. He has been on Web Development since 2009 and had worked in multitude of companies here and abroad. </p>
+<p>He graduated at City College of Lucena with the degree of Bachelor of Science in Information Management. After working in some IT company, he decided to be a freelance developer.</p>
+<div style="clear:both;"></div>
+<h2>Programming Languages</h2>
+<ul>
+<li>PHP</li>
+<li>Java</li>
+<li>C++</li>
+<li>C#</li>
+<li>ActionScript</li>
+<li>Visual Basic 6.0</li>
+<li>Visual Basic.NET</li>
+<li>Visual Basic for Applications</li>
+<li>JavaScript</li>
+<li>C</li>
+<li>Python</li>
+<li>Ruby</li>
+</ul>
+<h2>Frameworks</h2>
+<ul>
+<li>Laravel</li>
+<li>CodeIgniter</li>
+<li>jQuery</li>
+<li>Twitter Bootstrap</li>
+<li>PHP Zend</li>
+<li>NodeJS</li>
+</ul>
+<h2>Web Technologies</h2>
+<ul>
+<li>HTML 4.0 / HTML 5</li>
+<li>CSS 2.1 / CSS3</li>
+<li>Git</li>
+<li>SVN</li>
+</ul>
