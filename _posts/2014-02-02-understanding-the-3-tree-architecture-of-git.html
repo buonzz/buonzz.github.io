@@ -39,13 +39,13 @@ author:
 <p>You cannot however change or get the files  in a repository directly, in able to retrieve a specific file from there, you have to <em>checkout  </em></p>
 <p><strong>Checking-out</strong> is the process of getting files from repository to your working copy.  This is because you can only edit files when it is on your working copy. When you are done editing the file, you will save it back to the repository by <em>commiting</em> it.</p>
 <p><strong>Committing</strong> is the process of putting back the files from working copy to repository.</p>
-<p><a href="http://www.darwinbiler.com/wp-content/uploads/2014/02/2-tree-New-Page.jpeg"><img class="aligncenter size-full wp-image-1171" alt="2-tree - New Page" src="assets/2-tree-New-Page.jpeg" width="512" height="364" /></a></p>
+<p><a href="http://www.darwinbiler.com/wp-content/uploads/2014/02/2-tree-New-Page.jpeg"><img class="aligncenter size-full wp-image-1171" alt="2-tree - New Page" src="{{ site.baseurl }}/assets/2-tree-New-Page.jpeg" width="512" height="364" /></a></p>
 <p>&nbsp;</p>
 <p>In this process, Working Copy and  Repository is saved in the disk as series of folders and files like a <em>Tree, </em>since files and directories resembles a tree wherein folder represents a branch of a tree and files represents the leaf. Hence, this architecture is called <strong>2 Tree Architecture</strong>. Because you have two tree in there -- Working Copy and Repository. <span style="line-height: 1.5em;">The famous VCS with this kind of architecture is Subversion or SVN.</span></p>
 <p>Now, that you know what a 2 Tree Architecture looks like, interesting to say Git has different one, it is instead powered by 3 Trees!</p>
 <p>Why three you might ask?</p>
 <p>Well, interestingly, Git has also the Working Copy and Repository as well, but it had added an extra tree in between:</p>
-<p><a href="http://www.darwinbiler.com/wp-content/uploads/2014/02/3-tree.jpeg"><img class="aligncenter size-full wp-image-1172" alt="3-tree" src="assets/3-tree.jpeg" width="660" height="520" /></a></p>
+<p><a href="http://www.darwinbiler.com/wp-content/uploads/2014/02/3-tree.jpeg"><img class="aligncenter size-full wp-image-1172" alt="3-tree" src="{{ site.baseurl }}/assets/3-tree.jpeg" width="660" height="520" /></a></p>
 <p>&nbsp;</p>
 <p>As you can see above, there is a new tree called Staging. What this is for?</p>
 <p>This is one of the fundamental difference of Git that sets it apart from other VCS, this Staging tree (usually termed as Staging area) is a place where you prepare all the things that you are going to commit.</p>

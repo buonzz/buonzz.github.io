@@ -61,11 +61,11 @@ author:
 <li>Tolerating:  The user notices performance lagging within responses greater than T, but continues the process.</li>
 <li>Frustrated:  Performance with a response time greater than F seconds is unacceptable, and users may abandon the process.</li>
 </ul>
-<p><a href="http://www.darwinbiler.com/wp-content/uploads/2014/12/overview_figure1_performancezones_256_111.gif"><img src="assets/overview_figure1_performancezones_256_111.gif" alt="overview_figure1_performancezones_256_111" width="256" height="111" class="aligncenter size-full wp-image-1407" /></a></p>
+<p><a href="http://www.darwinbiler.com/wp-content/uploads/2014/12/overview_figure1_performancezones_256_111.gif"><img src="{{ site.baseurl }}/assets/overview_figure1_performancezones_256_111.gif" alt="overview_figure1_performancezones_256_111" width="256" height="111" class="aligncenter size-full wp-image-1407" /></a></p>
 <p>The Apdex formula is the number of satisfied samples plus half of the tolerating samples plus none of the frustrated samples, divided by all the samples:</p>
-<p><a href="http://www.darwinbiler.com/wp-content/uploads/2014/12/overview_formula1_241_75.gif"><img src="assets/overview_formula1_241_75.gif" alt="overview_formula1_241_75" width="241" height="75" class="aligncenter size-full wp-image-1408" /></a><br />
+<p><a href="http://www.darwinbiler.com/wp-content/uploads/2014/12/overview_formula1_241_75.gif"><img src="{{ site.baseurl }}/assets/overview_formula1_241_75.gif" alt="overview_formula1_241_75" width="241" height="75" class="aligncenter size-full wp-image-1408" /></a><br />
 So it is easy to see how this ratio is always directly related to users' perceptions of satisfactory application responsiveness. To understand the full meaning of the ratio, it is always presented as a decimal value with a sub-script representing the target time T. For example, if there are 100 samples with a target time of 3 seconds, where 60 are below 3 seconds, 30 are between 3 and 12 seconds, and the remaining 10 are above 12 seconds, the Apdex is:<br />
-<a href="http://www.darwinbiler.com/wp-content/uploads/2014/12/overview_formula2_106_58.gif"><img src="assets/overview_formula2_106_58.gif" alt="overview_formula2_106_58" width="106" height="58" class="aligncenter size-full wp-image-1409" /></a></p>
+<a href="http://www.darwinbiler.com/wp-content/uploads/2014/12/overview_formula2_106_58.gif"><img src="{{ site.baseurl }}/assets/overview_formula2_106_58.gif" alt="overview_formula2_106_58" width="106" height="58" class="aligncenter size-full wp-image-1409" /></a></p>
 <p>More detailed explanation about the standard can be found in the official <a href="http://apdex.org/specs.html" target="_blank">Apdex site</a>. </p>
 <p>There you have it. That is the "correct way" of measuring slowness of a web application. </p>
 <p>But how do I actually implement this concept in my web application?</p>
