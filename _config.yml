@@ -16,3 +16,4 @@ defaults:
       type: "posts"
     values:
       permalink: /:title/
+paginate: 5
