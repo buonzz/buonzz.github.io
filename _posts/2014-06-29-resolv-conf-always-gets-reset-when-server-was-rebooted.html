@@ -1,6 +1,7 @@
 ---
 layout: post
 title: resolv.conf Always gets reset when server was rebooted
+permalink: resolv-conf-always-gets-reset-when-server-was-rebooted
 date: 2014-06-29 11:34:44.000000000 +08:00
 categories:
 - linux
@@ -21,8 +22,6 @@ author:
   display_name: Darwin
   first_name: Darwin
   last_name: Biler
-excerpt: !ruby/object:Hpricot::Doc
-  options: {}
 ---
 <p>This is one of the annoying things that happened to me in my CentOS box. The DCHP and network manager always overwrites the values in resolv.conf when the box is rebooted. In my case, its always being set to 192.168.1.1 which is the IP of the modem that my ISP had given.<br />
 What is my problem with my ISP's nameserver is is its so shitty and always gives me 404 errors all over the place. So I rather manually set my nameserver in my box to counter their crappy nameserver.</p>

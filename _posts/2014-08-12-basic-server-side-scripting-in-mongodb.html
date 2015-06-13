@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Basic Server Side Scripting in MongoDB
+permalink: basic-server-side-scripting-in-mongodb
 date: 2014-08-12 08:54:38.000000000 +08:00
 categories:
 - mongodb
@@ -20,8 +21,6 @@ author:
   display_name: Darwin
   first_name: Darwin
   last_name: Biler
-excerpt: !ruby/object:Hpricot::Doc
-  options: {}
 ---
 <p>There might be times that you need to execute MongoDB commands via command line. One of the obvious reason for this is latency -- unlike hitting the MongoDB server across the network, executing the commands via shell is way very fast, specially if you are retrieving/processing huge amount of data.</p>
 <p>Fortunately, MongoDB supports Server Side scripting, using JavaScript as programming language. It is as easy as creating a .js file in your server. In this tutorial, lets create a create_record.js file that will do the following tasks:</p>
