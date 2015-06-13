@@ -29,7 +29,7 @@ author:
 ---
 <p>If you are sharing code in GitHub, the README.md file is the first thing that the viewer will gonna see in your repo. So it is very important that it is professional looking and easy to understand. Today, we'll go over some tips and tricks on how to come up with a better README file.</p>
 <h2>Anatomy of a README.md file</h2>
-<p><a href="http://www.darwinbiler.com/wp-content/uploads/2014/08/3-copy.jpg"><img class="aligncenter size-full wp-image-1311" src="{{ site.baseurl }}/assets/3-copy.jpg" alt="3 copy" width="528" height="664" /></a></p>
+<p><a href="http://www.darwinbiler.com/wp-content/uploads/2014/08/3-copy.jpg"><img class="aligncenter size-full wp-image-1311" src="{{ site.url }}/assets/3-copy.jpg" alt="3 copy" width="528" height="664" /></a></p>
 <p>In the image above, you'll see there are some major parts of a README file</p>
 <ol>
 <li>Title</li>
@@ -46,11 +46,11 @@ author:
 <h4>Badges</h4>
 <p>Those are the little images that you see in the repo's page. Here are the commonly used ones:</p>
 <ul>
-<li><img src="{{ site.baseurl }}/assets/laravel-4-freegeoip.svg?branch=master" />&nbsp;<b>Travis CI Build status</b> - this is the status of the codes (failed/passing) in travis-ci.org. Continous-Integration is the process of automatic testing of the codes, whether it is running properly in many platforms (multiple PHP versions, HHVM etc) and triggering the PHPUnit/Behat or any other Tests. You can read more about CI in <a href="http://en.wikipedia.org/wiki/Continuous_integration" target="_blank">here</a>. Simply put, this is usually an indicator if the repo is safe to use in your own project or not. A passing (green) green indicates it had passed all the tests and good to use.</li>
-<li><img src="{{ site.baseurl }}/assets/stable.svg" />&nbsp;<b>Stable version name </b>- the latest stable release in packagist.org. This also corresponds to the Releases on the Github repo, which is what packagist.org is using to determine the latest version.</li>
-<li><img src="{{ site.baseurl }}/assets/downloads.svg" />&nbsp;<b>Number of installs via packagist.org -</b> everytime you require this package in composer.json and its downloaded from packagist, this is incremented by one. This indicates how many developers had downloaded this and used in their project.</li>
-<li><img src="{{ site.baseurl }}/assets/unstable.svg" />&nbsp;<b>un-stable version name -</b> the development version of the package, contains the latest un-tested version.</li>
-<li><img src="{{ site.baseurl }}/assets/license.svg" />&nbsp;<b>license  -</b> the license which governs this repository codes</li>
+<li><img src="{{ site.url }}/assets/laravel-4-freegeoip.svg?branch=master" />&nbsp;<b>Travis CI Build status</b> - this is the status of the codes (failed/passing) in travis-ci.org. Continous-Integration is the process of automatic testing of the codes, whether it is running properly in many platforms (multiple PHP versions, HHVM etc) and triggering the PHPUnit/Behat or any other Tests. You can read more about CI in <a href="http://en.wikipedia.org/wiki/Continuous_integration" target="_blank">here</a>. Simply put, this is usually an indicator if the repo is safe to use in your own project or not. A passing (green) green indicates it had passed all the tests and good to use.</li>
+<li><img src="{{ site.url }}/assets/stable.svg" />&nbsp;<b>Stable version name </b>- the latest stable release in packagist.org. This also corresponds to the Releases on the Github repo, which is what packagist.org is using to determine the latest version.</li>
+<li><img src="{{ site.url }}/assets/downloads.svg" />&nbsp;<b>Number of installs via packagist.org -</b> everytime you require this package in composer.json and its downloaded from packagist, this is incremented by one. This indicates how many developers had downloaded this and used in their project.</li>
+<li><img src="{{ site.url }}/assets/unstable.svg" />&nbsp;<b>un-stable version name -</b> the development version of the package, contains the latest un-tested version.</li>
+<li><img src="{{ site.url }}/assets/license.svg" />&nbsp;<b>license  -</b> the license which governs this repository codes</li>
 </ul>
 <p>Except for the Travis CI badge, you can grab the rest of those in <a href="https://poser.pugx.org/" target="_blank">https://poser.pugx.org/</a> . For Travis results though, you need to enable the build process in travis-ci.org site for the repo, then grab the badge in the results page there. You can read more about Travis CI on <a href="http://www.sitepoint.com/php-continuous-integration-travis-ci/" target="_blank">here</a> and <a href="http://docs.travis-ci.com/user/build-configuration/" target="_blank">here</a>.</p>
 <h4>Description</h4>

@@ -46,12 +46,12 @@ google_ad_height = 250;<br />
 <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"><br />
 </script></p>
 <p>Let's start with a the pattern which is more popular on Web Developers - MVC</p>
-<p><a href="http://www.darwinbiler.com/wp-content/uploads/2013/04/mvc.png"><img class="aligncenter size-full wp-image-931" alt="mvc" src="{{ site.baseurl }}/assets/mvc.png" width="334" height="217" /></a></p>
+<p><a href="http://www.darwinbiler.com/wp-content/uploads/2013/04/mvc.png"><img class="aligncenter size-full wp-image-931" alt="mvc" src="{{ site.url }}/assets/mvc.png" width="334" height="217" /></a></p>
 <p>If you are using CodeIgniter or some sort of PHP framework. You'll find that it is all using MVC. That is because MVC fits perfectly to the behavior of HTTP which powers the Internet. In HTTP, you have an endpoint (a url)  where you can invoke different operations (GET,POST,PUT etc.) and the url could either respond with something like a web page or non-normal-human readable data (like JSON or XML).</p>
 <p>A single Controller can handle different methods and uses Models to retrieve data from the storage and format that data using any view. Thus, in MVC, Controller is the main entry point and is the rockstar of the application.</p>
 <p>Look at the diagram above on how everything is funneled via controller. Then the controller decides what models and views to employ before responding to the user.</p>
 <p>Now going to other side which is MVP.<br />
-<a href="http://www.darwinbiler.com/wp-content/uploads/2013/04/mvp.png"><img src="{{ site.baseurl }}/assets/mvp.png" alt="mvp" width="304" height="270" class="aligncenter size-full wp-image-933" /></a></p>
+<a href="http://www.darwinbiler.com/wp-content/uploads/2013/04/mvp.png"><img src="{{ site.url }}/assets/mvp.png" alt="mvp" width="304" height="270" class="aligncenter size-full wp-image-933" /></a></p>
 <p>In MVP, the View is the frontier of the gameplay. View accepts all things from the user, then an object called Presenter provides the behavior on each event raised by the View. So let's say a user clicked a button, then there is a onClick method of the Presenter for that. This event handler method then chooses the Model to get the data from, for it to update the view depending on the requirements of the view. </p>
 <p>So let's say the View has a "Generate Report" button, the Presenter's btnGenerateReport_onClick method might get invoked which in turn instantiates the Report Model to get the required report data. After the data is acquired, the Presenter will fill the view with this data so that the user will be able to view the data.</p>
 <p>If you'll notice, MVP perfectly fits for desktop applications wherein the "Forms" are created first before writing the classes that will handle the actions required by application.</p>

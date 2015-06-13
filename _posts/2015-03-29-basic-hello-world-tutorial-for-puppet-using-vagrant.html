@@ -45,7 +45,7 @@ vagrant init hashicorp/precise32
 </pre>
 <p>If the precise32 box was not present yet in your computer, this command will download it (that could take a long time so grab a coffee first ). Once the box was fully loaded, you are ready to write your first Puppet codes!</p>
 <p>At this point, it should be like this:</p>
-<p><img class="aligncenter size-full wp-image-1443" src="{{ site.baseurl }}/assets/Screen-Shot-2015-03-29-at-9.33.24-PM.png" alt="Screen Shot 2015-03-29 at 9.33.24 PM" width="697" height="478" /></p>
+<p><img class="aligncenter size-full wp-image-1443" src="{{ site.url }}/assets/Screen-Shot-2015-03-29-at-9.33.24-PM.png" alt="Screen Shot 2015-03-29 at 9.33.24 PM" width="697" height="478" /></p>
 <p>There might be more output messages than the one displayed above. But there should not be red messages. IF there are, check the vagrant documentation as it is outside the scope of this tutorial.</p>
 <p>Now login to the Virtual Machine you just had created by executing</p>
 <pre lang="bash">
@@ -74,7 +74,7 @@ The filename extension it is using is .pp like how we set .php for our PHP files
 puppet apply hellopuppet.pp
 </pre>
 <p>It should output something like this:<br />
-<img src="{{ site.baseurl }}/assets/Screen-Shot-2015-03-29-at-10.05.34-PM.png" alt="Screen Shot 2015-03-29 at 10.05.34 PM" width="739" height="436" class="aligncenter size-full wp-image-1444" /></p>
+<img src="{{ site.url }}/assets/Screen-Shot-2015-03-29-at-10.05.34-PM.png" alt="Screen Shot 2015-03-29 at 10.05.34 PM" width="739" height="436" class="aligncenter size-full wp-image-1444" /></p>
 <p>What the script did is it checked the /vagrant folder if there is a helloworld.txt file present. It figured out there is none so it had created one and put the contents "Hello World!".</p>
 <p>Uhmm, what is special in here.. I can do that as well in PHP..</p>
 <p>Well, though our sample is just for writing a simple hello world file, Puppet is for some bigger purpose, like:</p>

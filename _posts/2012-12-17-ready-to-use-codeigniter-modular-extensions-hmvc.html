@@ -51,7 +51,7 @@ google_ad_height = 250;<br />
 </script></p>
 <p>With all the controllers sharing the same set of models/libraries/models, it is also very hard to fix errors (specially logic errors) since a fix on one controller could conflict with another controller.</p>
 <p>With HMVC, it will break down your CI application into independent, portable, easy to debug parts which enables developers to isolate different parts of the applications.</p>
-<p><a href="http://www.darwinbiler.com/wp-content/uploads/2012/12/hmvc11.png"><img src="{{ site.baseurl }}/assets/hmvc11.png" alt="hmvc1" width="434" height="412" class="aligncenter size-full wp-image-920" /></a></p>
+<p><a href="http://www.darwinbiler.com/wp-content/uploads/2012/12/hmvc11.png"><img src="{{ site.url }}/assets/hmvc11.png" alt="hmvc1" width="434" height="412" class="aligncenter size-full wp-image-920" /></a></p>
 <p>On the image above, you will see that the application is composed of 6 modules. These modules are like mini-applications tied together in a single application since each has its own set of Controllers/Models/View/Helpers.</p>
 <p>Module 4 has no models, helpers or even view files of its own and just calls the Module 1 and 2 for its needs.<br />
 Module 5 and 6 has some of the files, but some functionality is also present in Module 2 and 3 (accessing the database for example). Instead of re-implementing the functionality, he just can call the other modules for it's needs w/o needing to know the internal details of the other modules.</p>

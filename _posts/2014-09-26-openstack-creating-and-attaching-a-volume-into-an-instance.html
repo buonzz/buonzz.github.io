@@ -32,10 +32,10 @@ author:
 <p>Gone are those days, because unlike attaching a physical hard disk, OpenStack allows you to create a virtual storage device (volumes) that you can attach in to your virtual machines (Instance).</p>
 <p>Now let's get started on creating the first Volume.</p>
 <p>In the OpenStack dashboard, click the Volumes menu under Project.<br />
-<a href="http://www.darwinbiler.com/wp-content/uploads/2014/09/15.png"><img class="aligncenter size-full wp-image-1369" src="{{ site.baseurl }}/assets/15.png" alt="1" width="226" height="315" /></a></p>
+<a href="http://www.darwinbiler.com/wp-content/uploads/2014/09/15.png"><img class="aligncenter size-full wp-image-1369" src="{{ site.url }}/assets/15.png" alt="1" width="226" height="315" /></a></p>
 <p>Click the "Create Volume" button on the top right side.<br />
 the dialog opens and asks for the volume information you want to create. Let's say we wanted to create a volume to store the files that are going to serve by Nginx.</p>
-<p><a href="http://www.darwinbiler.com/wp-content/uploads/2014/09/31.png"><img class="aligncenter size-full wp-image-1370" src="{{ site.baseurl }}/assets/31.png" alt="3" width="689" height="550" /></a></p>
+<p><a href="http://www.darwinbiler.com/wp-content/uploads/2014/09/31.png"><img class="aligncenter size-full wp-image-1370" src="{{ site.url }}/assets/31.png" alt="3" width="689" height="550" /></a></p>
 <p>Note: The type and Availability Zone parameters may vary depending on your Cloud Provider.</p>
 <p>Once you had filled up the information, click the "Create Volume" button.<br />
 It should be now listed in the Volumes table.</p>
@@ -43,12 +43,12 @@ It should be now listed in the Volumes table.</p>
 <p>Now that you had a Volume created, how do you actually use this to a VM instance to create files?</p>
 <p>First, you need to have a working Instance and you should be able to connect to it via SSH. If you haven't configured a VM instance yet, please read my article about <a title="How to SSH to the VM instance in OpenStack" href="http://www.darwinbiler.com/how-to-ssh-to-the-vm-instance-in-openstack/" target="_blank">How to SSH to the VM instance in OpenStack</a>.</p>
 <p>To attach the Volume into an instance, click the More dropdown button in the Actions column of your Volume:<br />
-<a href="http://www.darwinbiler.com/wp-content/uploads/2014/09/4.png"><img class="aligncenter size-full wp-image-1372" src="{{ site.baseurl }}/assets/4.png" alt="4" width="200" height="201" /></a></p>
+<a href="http://www.darwinbiler.com/wp-content/uploads/2014/09/4.png"><img class="aligncenter size-full wp-image-1372" src="{{ site.url }}/assets/4.png" alt="4" width="200" height="201" /></a></p>
 <p>Click "Edit Attachments", you will see a dialog like this<br />
-<a href="http://www.darwinbiler.com/wp-content/uploads/2014/09/51.png"><img class="aligncenter size-full wp-image-1373" src="{{ site.baseurl }}/assets/51.png" alt="5" width="688" height="446" /></a></p>
+<a href="http://www.darwinbiler.com/wp-content/uploads/2014/09/51.png"><img class="aligncenter size-full wp-image-1373" src="{{ site.url }}/assets/51.png" alt="5" width="688" height="446" /></a></p>
 <p>In my example, I have a Debian instance called "webserver1", so I just selected it and hit the "Attach Volume" button.</p>
 <p>You will see now in the "Attached To" column that the volume is attached into "webserver1" instance, in a device called "/dev/vdc1"<br />
-<a href="http://www.darwinbiler.com/wp-content/uploads/2014/09/61.png"><img class="aligncenter size-full wp-image-1375" src="{{ site.baseurl }}/assets/61.png" alt="6" width="159" height="105" /></a></p>
+<a href="http://www.darwinbiler.com/wp-content/uploads/2014/09/61.png"><img class="aligncenter size-full wp-image-1375" src="{{ site.url }}/assets/61.png" alt="6" width="159" height="105" /></a></p>
 <p>Now let's login to webserver1 instance as root.</p>
 <p>To verify if the volume was attached properly, execute:</p>
 <pre lang="bash">fdisk -l
