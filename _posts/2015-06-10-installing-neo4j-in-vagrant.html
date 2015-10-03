@@ -55,6 +55,20 @@ sudo nano /etc/neo4j/neo4j-server.properties
 org.neo4j.server.webserver.address=0.0.0.0
 dbms.security.auth_enabled=false
 </pre>
+
+Then, open the port for 7474
+
+<pre lang="bash">
+sudo iptables -I INPUT -p tcp --dport 7474 -j ACCEPT
+sudo iptables-save
+</pre>
+
+Restart the Neo4j Service
+
+<pre lang="bash">
+sudo service neo4j-service restart
+</pre>
+
 <p>Now, open the neo4j browser in http://192.168.33.60:7474<br />
 you should be able to see something like this<br />
 <img src="{{ site.url }}/assets/Screen-Shot-2015-06-10-at-4.55.47-PM.png" alt="Screen Shot 2015-06-10 at 4.55.47 PM" width="1199" height="672" class="aligncenter size-full wp-image-1451" /></p>
