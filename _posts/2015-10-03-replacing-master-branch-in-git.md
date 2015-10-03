@@ -12,25 +12,25 @@ In a project managed by Git, there might be times that you need to completely tr
 
 lets say you have a "v2" branch. you can replace the master branch with the following steps
 
-1.  Checkout to the v2 branch
+Checkout to the v2 branch
 
 {% highlight bash %}
 git checkout v2
 {% endhighlight %}
 
-2.  merge it with the master branch with "ours" strategy.
+merge it with the master branch with "ours" strategy.
 
 {% highlight bash %}
 git merge -s ours master
 {% endhighlight %}
 
-3.  Checkout to the master branch
+Checkout to the master branch
 
 {% highlight bash %}
 git checkout master
 {% endhighlight %}
 
-4.  merge the v2 branch to master
+merge the v2 branch to master
 
 {% highlight bash %}
 git merge v2
