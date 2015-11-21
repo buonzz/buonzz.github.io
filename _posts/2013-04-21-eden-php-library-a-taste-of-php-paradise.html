@@ -1,0 +1,102 @@
+---
+layout: post
+title: Eden PHP Library - a taste of php paradise
+permalink: eden-php-library-a-taste-of-php-paradise
+date: 2013-04-21 03:23:00.000000000 +08:00
+categories:
+- coding
+- Copy Paste
+- featured
+- howto
+- php
+- social networking
+tags:
+- eden php library
+- facebook php library
+- social network php library
+- twitter api php library
+- what is eden php
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+  _wpas_mess: Eden PHP Library - a taste of php paradise http://wp.me/p2kRRS-ey
+  _wpas_skip_1611607: '1'
+  _wpas_skip_2452381: '1'
+  _thumbnail_id: '910'
+  _wpas_done_all: '1'
+  _wpas_skip_2203490: '1'
+  _wpas_skip_2452385: '1'
+  _wpas_skip_2452386: '1'
+  dsq_thread_id: '2962032497'
+author:
+  login: Darwin
+  email: buonzz@gmail.com
+  display_name: Darwin
+  first_name: Darwin
+  last_name: Biler
+---
+<p>Commonly, the first impression when you hear a new PHP library or framework, you'll think it is just another monster to learn and master. But instead of re-inventing the wheels, Eden brings something new in the table -- it complements whatever you got without a steep learning curve.</p>
+<p>Of all the PHP frameworks that you see out there, they commonly boasts the speed, templating system, ease of use,memcache, file traversal, ORM etc.  But one more ingredient is missing -- cloud api.</p>
+<p>Anyone who tried implementing a php script against Facebook Graph API could say it is not easy and requires some steep learning curve to master, same goes with Gmail, Google Maps, Twitter, Foursquare, DropBox, PayPal etc. the list just goes on and on.</p>
+<p>Implementing and studying all these API is a nightmare for a PHP developer, although you can see some special libraries for each framework for a particular functionality, what happens if you are using multiple frameworks? This is quite common in a large team with lots of clients.  Some project use CodeIgniter, FuelPHP, Zend etc. Writing or finding a right library for each framework is a very tedious task and sometimes almost impossible.</p>
+<p><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><br />
+<!-- inline to posts1 --><br />
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-0845730634111642" data-ad-slot="1064812702"></ins><br />
+<script><br />
+(adsbygoogle = window.adsbygoogle || []).push({});<br />
+</script></p>
+<p>Can't we have just one PHP library that is compatible to ALL php frameworks and at the same time compatible to all cloud-based services such as Facebook, Google and Twitter?</p>
+<p>The answer is YES!</p>
+<p>Introducing <a title="Eden PHP" href="http://www.eden-php.com/" target="_blank">Eden</a> from Openovate Labs.<br />
+Eden is a PHP library that can be simply included in virtually ANY framework and will instantly give you the power to connect your web application to the cloud.</p>
+<p><a href="http://www.darwinbiler.com/wp-content/uploads/2013/04/eden.png"><img class="aligncenter size-full wp-image-904" alt="eden" src="{{ site.url }}/assets/eden.png" width="793" height="317" /></a></p>
+<p>&nbsp;<br />
+As you can see in the image above, instead of writing the codes for each framework, they instead use the Eden library as a common interface to connect to the cloud services like Dropbox, Google Drive, Google Maps etc. This technique saves you a lot of work and you can instead focus on developing the logic on each application.</p>
+<p>As always, theory is not good without a working example, so let me show you a simple "Hello World" script that will do some basic things:</p>
+<p>1. When the user clicked a "Facebook Login" button in your site, open the Facebook Oauth dialog and get the appropriate permission.<br />
+2. Get the token returned by Facebook and store it in a session variable<br />
+3. Post a "Hello World" message in the user's wall.</p>
+<p>The requirement seems so simple, but if you try reading the API and authentication steps need to perform that three operations, it is enormously hard and requires hours of research of Graph API, Oauth etc.</p>
+<p>Now, let me show you how that can be done in Eden with just few lines of codes.</p>
+<pre lang="php">
+include('eden.php');
+//start session
+session_start();
+//get auth
+$auth = eden('facebook')->auth('[FACEBOOK_KEY]', '[FACEBOOK_SECRET]', 'http://yourwebsite.com/auth');
+ 
+//if no code and no session
+if(!isset($_GET['code']) && !isset($_SESSION['fb_token'])) {
+    //redirect to login
+    $login = $auth->getLoginUrl();
+     
+    header('Location: '.$login);
+    exit;
+}
+ 
+//Code is returned back from facebook
+if(isset($_GET['code'])) {
+    //save it to session
+    $access = $auth->getAccess($_GET['code']);
+    $_SESSION['fb_token'] = $access['access_token'];
+}
+
+$graph = eden('facebook')->graph($_SESSION['fb_token']);
+$post = $graph->post('Hello World');
+$post->create();
+</pre>
+<p>To use Eden, you just need to include the "eden.php" file and everything is ready to use. </p>
+<p>eden('facebook') code selects the "facebook library" which is intuitively like how jQuery selects objects that it needs to deal with. Hey I'm seeing a pattern here!</p>
+<p>By having that in mind, you might say accessing Twitter API is as easy as </p>
+<pre lang="php">
+eden('twitter');
+</pre>
+<p>Pretty easy huh!</p>
+<p>The auth method then invokes the login dialog and returns the token to the url you passed in the third parameter. Let us assume that is the same page where this sample code is. </p>
+<p>To get the incoming "postback" by FB authentication, we checks the $_GET['code'] if it is set. We then uses this to get an "access token" which we can then use to instantiate the graph object. </p>
+<p>Since we will be needing the access token each time we will use the graph object, we will store it in a $_SESSION variable -- this is how we will know if the user is logged-in on FB or not.</p>
+<p>We then use the graph object to create post and other things related to Facebook web service.</p>
+<p>I think I got your attention now and I encourage you to read more on the <a href="http://www.eden-php.com/documentation/social/facebook" target="_blank">official documentation</a> to know more of the details about the sample code.</p>
+<p>Note that I just emphasized only the "cloud-related" feature of the said wonderful library, but it doesn't ends there. There are tons of features that you could find in the framework than you could imagine. Check it out and let me know what you think :-)</p>

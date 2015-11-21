@@ -1,0 +1,48 @@
+---
+layout: post
+title: The following themes are installed but incomplete
+permalink: the-following-themes-are-installed-but-incomplete
+date: 2013-04-17 22:39:58.000000000 +08:00
+categories:
+- coding
+- howto
+- php
+tags:
+- child theme not working
+- installed but incomplete
+- newlines missing
+- style.css not working
+- theme not workig
+- Themes must have a stylesheet and a template
+- wordpress not detecting the theme
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+  _wpas_done_all: '1'
+  _wpas_mess: The following themes are installed but incomplete
+  _wpas_skip_1611607: '1'
+  _wpas_skip_2452381: '1'
+  _wpas_skip_2203490: '1'
+  _wpas_skip_2452385: '1'
+  _wpas_skip_2452386: '1'
+  dsq_thread_id: '2957621760'
+author:
+  login: Darwin
+  email: buonzz@gmail.com
+  display_name: Darwin
+  first_name: Darwin
+  last_name: Biler
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>When you are developing Themes for WordPress, at one time you might experience this weird issue. When you uploaded the theme, it wont load as expected when you go to Appearance &gt; Themes  page and just spits out this message:</p>
+<p>[caption id="attachment_898" align="alignnone" width="300"]<a href="http://www.darwinbiler.com/wp-content/uploads/2013/04/broken-theme.png"><img class="size-medium wp-image-898" title="The following themes are installed but incomplete" alt="broken-theme" src="{{ site.url }}/assets/broken-theme-300x96.png" width="300" height="96" /></a> The following themes are installed but incomplete. Themes must have a stylesheet and a template.[/caption]</p>
+<p>The first check you should do is on the style.css. Make sure it complies with the guidelines in <a href="http://codex.wordpress.org/Child_Themes" target="_blank">here</a></p>
+<p>If you are sure that the style.css is correct, the other thing you might need to look into is the newlines in the style.css is properly set.</p>
+<p>Sometimes, when you are uploading a file via Filezilla, it strips off newlines characters in the file, making the whole style.css contents just one line - if that happens, WordPress wont be able to read property the contents of you style.css marking it as incomplete in admin.</p>
+<p>This could be fixed in Filezilla by:<br />
+Edit &gt; Settings</p>
+<p>On the Transfers node, click the File Types node.<br />
+Then on the right pane, set the Default transfer type to Binary.</p>

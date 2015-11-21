@@ -1,0 +1,50 @@
+---
+layout: post
+title: How to share your local Homestead box in Internet
+permalink: how-to-share-your-local-homestead-box-in-internet
+date: 2015-01-19 01:05:46.000000000 +08:00
+categories:
+- bash
+- cloud computing
+- coding
+- howto
+- laravel
+- linux
+tags:
+- homestead share
+- publish local site
+- share vagrant homestead
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+  _thumbnail_id: '1431'
+  _oembed_4852718fa77aaab9bc68e5fc98efb1ac: '{{unknown}}'
+  dsq_thread_id: '3432274562'
+author:
+  login: Darwin
+  email: buonzz@gmail.com
+  display_name: Darwin
+  first_name: Darwin
+  last_name: Biler
+---
+<p>Homestead is the standard development box for Laravel developers. But it would be great if for example you can paste a url to your colleagues so that they see what you are seeing in your local box?</p>
+<p>Here is a simple trick. Vagrant has a feature called <a href="https://docs.vagrantup.com/v2/share/index.html" target="_blank">Vagrant Share</a> . It basically allows you to generate a publicly available url of your local vagrant box, so that they can access your web app.</p>
+<p>First thing you need to do is to create an account in VagrantCloud (if you don't have one yet).  You can sign up in <a href="https://atlas.hashicorp.com/account/new" target="_blank">here</a>.</p>
+<p>After you had signed-up and verified your account to be working. You need to login to your local vagrant. To do this, just execute</p>
+<pre lang="bash">
+vagrant login
+</pre>
+<p>It will ask for your username/password that you just had created earlier.<br />
+After that, you need to locate where is the Vagrantfile of Homestead. In  *nix machines, this can be found in</p>
+<pre lang="bash">~/.composer/vendor/laravel/homestead
+</pre>
+<p>So, just go into that folder and execute "vagrant share".</p>
+<p>This is how it looked like when I did it in my end.</p>
+<p><a href="http://www.darwinbiler.com/wp-content/uploads/2015/01/Screen-Shot-2015-01-19-at-12.57.43-AM.png"><img class="aligncenter size-full wp-image-1431" src="{{ site.url }}/assets/Screen-Shot-2015-01-19-at-12.57.43-AM.png" alt="Screen Shot 2015-01-19 at 12.57.43 AM" width="657" height="232" /></a></p>
+<p>&nbsp;</p>
+<p>In my case, my Homestead box was assigned with this url:</p>
+<p>http://sultry-ground-2423.vagrantshare.com</p>
+<p>That means, anyone in the Internet which can have this url will be able to access my Homestead box and see the locally hosted apps I'm developing as long as I'm not hitting "Ctrl+C" in my end.</p>
+<p>Note that those urls changes each time you execute vagrant share. So its only actually useful for quick demo or tests that you want to show to someone else.</p>

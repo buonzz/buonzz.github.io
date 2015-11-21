@@ -1,0 +1,66 @@
+---
+layout: post
+title: Disallowed Key Characters in CodeIgniter
+date: 2013-04-07 10:29:35.000000000 +08:00
+categories:
+- coding
+- howto
+- php
+- security
+tags:
+- codeigniter not loading
+- codeigniter not working Disallowed Key Characters.
+- Disallowed Key Characters.
+- permitted_uri_chars
+- permitted_uri_chars not working
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+  _thumbnail_id: '894'
+  _wpas_done_all: '1'
+  dsq_thread_id: '2955529815'
+author:
+  login: Darwin
+  email: buonzz@gmail.com
+  display_name: Darwin
+  first_name: Darwin
+  last_name: Biler
+permalink: disallowed-key-characters-in-codeigniter
+---
+<p>If you are a PHP developer doing some projects using the CodeIgniter Framework, chances are you had encountered this error message in a blank page.</p>
+<p>"Disallowed Key Characters."</p>
+<p>When you go to the official documentation of CodeIgniter itself, it will say that you might had passed an illegal character in the URL. So what are these characters?</p>
+<p>There is a little twist with that question. CodeIgniter uses Regular Expression to determine which characters should be considered invalid. The application/config/config.php says it is:</p>
+<pre lang="php">
+$config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';
+</pre>
+<p>But when you look at the actual "code" that does checks the allowed characters, you will see it like this:<br />
+_clean_input_keys function of  system/core/Input.php</p>
+<pre lang="php">
+if ( ! preg_match("/^[a-z0-9:_\/-]+$/i", $str))
+{
+   exit('Disallowed Key Characters.');
+}
+</pre>
+<p>This is commonly the pitfall newbie users of CodeIgniter is falling into, since they expect that the <b>permitted_uri_chars</b> is the parameter that needs to be adjusted when they encountered that error. Which obviously wont work, since the Input class is completely reading different regex expression.</p>
+<p>A quick way to solve the problem is by editing the system/core/Input.php itself (or you can override it in your custom library).</p>
+<p>Now that you know where to change the list of allowed characters, you can now whitelist the blocked character so that it wont be flagged as invalid. But then, there are occasions wherein you don't know what is the character being flagged as invalid (for example in a very long url).</p>
+<p>What you can do to determine what is the character being flagged as invalid is by modifying the Input.php like this. On the _clean_input_keys function, change it so that:</p>
+<pre lang="php">
+if ( ! preg_match("/^[a-z0-9:_\/-]+$/i", $str))
+{
+   exit('Disallowed Key Characters.'. $str);
+}
+</pre>
+<p>By appending the $str variable in the error message, you now have an idea what to whitelist in the regex.</p>
+<p>for example, it might be the equal sign "="</p>
+<p>if that is the case, then you can now modify the regex to include the equal sign</p>
+<pre lang="php">
+if ( ! preg_match("/^[a-z0-9:_\/-=]+$/i", $str))
+{
+   exit('Disallowed Key Characters.'. $str);
+}
+</pre>
+<p>The character might vary depending on the output of the error message, so you need to apply it in your own case.</p>

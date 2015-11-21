@@ -1,0 +1,137 @@
+---
+layout: post
+title: Creating a basic CRUD on Laravel 4
+permalink: creating-a-basic-crud-on-laravel-4
+date: 2013-10-29 14:47:32.000000000 +08:00
+categories:
+- coding
+- howto
+- php
+tags:
+- getting started with laravel
+- laravel 4 generator
+- laravel for dummies
+- laravel scaffolding
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+  _wpas_mess: Creating a basic CRUD for Laravel 4
+  _wpas_skip_1611607: '1'
+  _wpas_skip_2452381: '1'
+  _wpas_skip_2203490: '1'
+  _wpas_skip_2452385: '1'
+  _thumbnail_id: '1139'
+  _wpas_done_all: '1'
+  dsq_thread_id: '2955572674'
+author:
+  login: Darwin
+  email: buonzz@gmail.com
+  display_name: Darwin
+  first_name: Darwin
+  last_name: Biler
+---
+<p>If you don't want to get fed up by too much things that you need to know just to see how to do <strong>C</strong>reate, <strong>R</strong>ead, <strong>U</strong>pdate and<strong> D</strong>elete database stuffs in Laravel, then this tutorial is for you. Admit it, Laravel is a complex beast, this approach might not be the best way to introduce Laravel, but if you are like me who believes  in <a href="http://en.wikipedia.org/wiki/KISS_principle" target="_blank">KISS principle</a>, you can tame this beast once you get the basics.</p>
+<blockquote><p><strong>Disclaimer:</strong> Though this will get you straight to the point, I still recommend reading stuffs on the official Laravel <a href="http://laravel.com/docs" target="_blank">documentation</a> to better understand how things works. This tutorial is only for the sake of providing a less complex approach on learning Laravel</p></blockquote>
+<p>At the end of this tutorial, you should be able to create a basic application wherein you can add, edit, delete and  list Tweets. The tweet is just as simple as a table with 2 fields : author and body. Here are the screencaps of what we are going to make</p>
+<p><strong>Create</strong></p>
+<p>This is a form wherein you can enter the new Tweets. Its just a dead simple form with two fields. Author - is the owner of the tweet, Body is the contents of the tweet.</p>
+<p><a href="http://www.darwinbiler.com/wp-content/uploads/2013/10/create_tweet.png"><img class="size-full wp-image-1118 alignleft" alt="create_tweet" src="{{ site.url }}/assets/create_tweet.png" width="390" height="478" /></a><strong></strong></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>Read</strong></p>
+<p>This is just a basic form wherein you can see all the Tweets. There are edit and delete buttons and a link to create new tweet.</p>
+<p><a href="http://www.darwinbiler.com/wp-content/uploads/2013/10/all_tweet.png"><img class="size-full wp-image-1117 alignleft" alt="all_tweet" src="{{ site.url }}/assets/all_tweet.png" width="649" height="188" /></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>Update</strong></p>
+<p>This is the page where the app goes when you hit the Edit button on the Tweet listing.</p>
+<p><a href="http://www.darwinbiler.com/wp-content/uploads/2013/10/edit_tweet.png"><img class="size-full wp-image-1120 alignleft" alt="edit_tweet" src="{{ site.url }}/assets/edit_tweet.png" width="365" height="470" /></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>Delete</strong></p>
+<p>This is the delete button, when you click that, that tweet will be deleted and the page will reload.</p>
+<p><a href="http://www.darwinbiler.com/wp-content/uploads/2013/10/delete_tweet.png"><img class="size-full wp-image-1119 alignleft" alt="delete_tweet" src="{{ site.url }}/assets/delete_tweet.png" width="421" height="194" /></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>Simple huh?, now are you aready?</p>
+<p>Ok, before we start,  let me ask you first if you have already know how to install/download Laravel, since installing Laravel is another topic, you can go in this <a title="How to install Laravel on WAMP for beginners" href="http://www.darwinbiler.com/how-to-install-laravel-on-wamp-for-beginners/" target="_blank">page</a> first then go back here and we will kick some ass.</p>
+<p>... a few moments later</p>
+<p>Ok, here, so you are back and you think you have Laravel in your end waiting to be developed.</p>
+<p>In the root folder of you project, you will see a composer.json file</p>
+<p><a href="http://www.darwinbiler.com/wp-content/uploads/2013/10/project.png"><img class="size-full wp-image-1128 alignleft" alt="project" src="{{ site.url }}/assets/project.png" width="200" height="320" /></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<pre lang="javascript">"require": {
+		"laravel/framework": "4.0.*",
+		"way/generators": "dev-master"
+	}</pre>
+<p>add the "way/generators": "dev-master" in the require element and save the file as indicated above.<br />
+Then on the root folder of your project, run this command in the console:</p>
+<pre lang="bash">composer update</pre>
+<p>What we just did is, in our Laravel project, we had added a new package hosted in packagist.org name "generators". This is a package created by "way" (his full name is Jeffrey Way). We are adding this package because we want to use it to generate the parts of our application so that we don't have to manually create those one by one. You don't have to know what package is in order to follow this tutorial, what is important for now is you understand that we had added the generators page, because it will help us generate "things" for us.</p>
+<p>After the generators package is downloaded, you have to enable it in your config file. To do this, go to app/config/app.php and open it up.<br />
+<a href="http://www.darwinbiler.com/wp-content/uploads/2013/10/instal.png"><img class="aligncenter size-full wp-image-1133" alt="instal" src="{{ site.url }}/assets/instal.png" width="516" height="145" /></a></p>
+<p>&nbsp;</p>
+<p>install it by adding (see screenshot above)</p>
+<pre><code>'Way\Generators\GeneratorsServiceProvider'</code></pre>
+<p>Now that you have the library installed, the next step is for you to make sure you have your database configured.  You have to edit this in app\config\database.php file. You can use any database you like and make sure  the account you are using has CREATE, UPDATE, EDIT, DELETE permission.</p>
+<p>Now in the fun part, go back to the command line and execute this command in the root of your project:</p>
+<pre lang="bash">php artisan generate:scaffold tweet --fields="author:string,body:text"</pre>
+<p>If things went well you will see stuffs like:<br />
+<a href="http://www.darwinbiler.com/wp-content/uploads/2013/10/console.png"><img class="aligncenter size-full wp-image-1135" alt="console" src="{{ site.url }}/assets/console.png" width="676" height="246" /></a></p>
+<p>What the hell is going on? why artisan generate:scaffold command writes many files?<br />
+Well, it creates many stuffs so that you don't have to create those yourself. Basically it creates the Model, Views and Controllers for your application, it also create a migration script that will create the necessary table to store the data, it registers the routes and setup validation etc., simply put, it simply creates a whole bunch of stuff for you.</p>
+<p>now, execute this command in your console:</p>
+<pre lang="bash">php artisan serve</pre>
+<p>It will output something like<br />
+<code>Laravel development server started on http://localhost:8000</code><br />
+now open your browser and go to that url indicated and add "tweets" on it: http://localhost:8000/tweets<br />
+(note: the port number could vary)</p>
+<p>Surprise! your CRUD application is already done!</p>
+<p>You should be able to see the screenshots I posted earlier. You can add/edit/delete tweets w/o even writing a single line of PHP, HTML and CSS code. You did not even create any database table, yet you have a fully functional application!</p>
+<p>That looks very simple huh, now that you know the "shortcut" of creating a Laravel application. I suggest you read the Laravel documentation and do further reading while looking at the files of this application, that way, you can understand how things works.</p>

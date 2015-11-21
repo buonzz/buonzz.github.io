@@ -1,0 +1,51 @@
+---
+layout: post
+title: Recording GitHub Repo push as NewRelic Deployment
+permalink: recording-github-repo-push-as-newrelic-deployment
+date: 2015-03-22 21:31:45.000000000 +08:00
+categories:
+- git
+- howto
+- newrelic
+tags:
+- newrelic apm tips
+- newrelic deployments
+- realtime profiling
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+  _thumbnail_id: '1437'
+  dsq_thread_id: '3616903917'
+author:
+  login: Darwin
+  email: buonzz@gmail.com
+  display_name: Darwin
+  first_name: Darwin
+  last_name: Biler
+---
+<p>NewRelic Deployments feature allows you to determine if the a certain change in the codes of your application negatively/positively impacts the actual performance of your web apps.</p>
+<p>For example, when you go to the APM dashboard of NewRelic Admin. It shows a line like the one below that clearly plots the time when a change was been deployed. <a href="http://www.darwinbiler.com/wp-content/uploads/2015/03/Screen-Shot-2015-03-22-at-9.21.38-PM.png"><img src="{{ site.url }}/assets/Screen-Shot-2015-03-22-at-9.21.38-PM.png" alt="Screen Shot 2015-03-22 at 9.21.38 PM" width="603" height="406" class="aligncenter size-full wp-image-1437" /></a></p>
+<p>You can then easily see in the charts if there is a sudden change in the pattern of memory/CPU/disk usage of the web application -- real time!</p>
+<p>In the deployment page, you can also perform comparison of all deployments, so you can figure out the relative performance of the app, before and after the code change was implemented.<br />
+<a href="http://www.darwinbiler.com/wp-content/uploads/2015/03/Screen-Shot-2015-03-22-at-9.20.41-PM.png"><img src="{{ site.url }}/assets/Screen-Shot-2015-03-22-at-9.20.41-PM.png" alt="Screen Shot 2015-03-22 at 9.20.41 PM" width="846" height="347" class="aligncenter size-full wp-image-1438" /></a></p>
+<p>If you are using GitHub to manage your source codes. You can put a webhook in the repository settings, so that each time a developer pushes a change into the repository, it will submit a deployment in the NewRelic. </p>
+<p>First, you need to download the script that will be receiving the Github Hook.</p>
+<p>via Composer</p>
+<p><code lang="bash"><br />
+composer create-project buonzz/github-newrelic-deploy hooks<br />
+cd hooks<br />
+</code></p>
+<p>or direct download in <a href="https://github.com/buonzz-systems/github-newrelic-deploy/releases/latest">here</a></p>
+<p>edit the config.sample.php  and rename it to config.php.<br />
+Then to adjust your configuration settings.</p>
+<p>$apikey - should be the REST Api key for NewRelic, it is required so that NewRelic api could accept the post from your script. <a href="https://docs.newrelic.com/docs/apm/apis/requirements/api-key#viewing">Here</a> is the instruction on how you can get this value in NewRelic Admin.</p>
+<p>$app_ids - is an array which associates your GitHub urls to your NewRelic APM AppID.<br />
+You can get this by logging into NewRelic. Go to APM. Then click the application. The last number in the url when you are currently viewing the application is the AppID.<br />
+example: https://rpm.newrelic.com/accounts/<account id>/applications/<appid></p>
+<p>Once you had added it to the config those information. You can then upload the whole folder to a publicly accessible web server. After you had uploaded it. make sure the logs folder is writable by web server (execute chmod -R 777 logs).</p>
+<p>Once all is set, go to the settings of your Github Repository.<br />
+In the Webhook and Services settings. Add the url to the script you had uploaded earlier under the Webhooks settings.</p>
+<p>Once done, each time someone pushes their commits into that repository, a deployment will be sent to NewRelic.<br />
+</appid></account></p>

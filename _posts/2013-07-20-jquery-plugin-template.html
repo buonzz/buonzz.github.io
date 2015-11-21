@@ -1,0 +1,86 @@
+---
+layout: post
+title: jQuery Plugin Template
+permalink: jquery-plugin-template
+date: 2013-07-20 20:30:30.000000000 +08:00
+categories:
+- coding
+- Copy Paste
+- howto
+- javascript
+- jquery
+- template
+tags:
+- create jquery plugin
+- jquery plugin boilerplate
+- jquery plugin sample
+- plugin sample
+- plugin tutorial for jquery
+- writing jquery plugin
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+  _wpas_done_all: '1'
+  _wpas_mess: jQuery Plugin Template
+  _wpas_skip_1611607: '1'
+  _wpas_skip_2452381: '1'
+  _wpas_skip_2203490: '1'
+  _wpas_skip_2452385: '1'
+  _thumbnail_id: '1039'
+  dsq_thread_id: '3075801028'
+author:
+  login: Darwin
+  email: buonzz@gmail.com
+  display_name: Darwin
+  first_name: Darwin
+  last_name: Biler
+---
+<p>Need to write a jQuery Plugin very quick? copy paste the code below!</p>
+<pre lang="javascript" line="1">
+;(function ( $, window, document, undefined ) {
+    var pluginName = "myplugin", // change your plugin name in here
+        //add default values
+		defaults = {
+            color: "#000" 
+        };
+    function Plugin( element, options ) {
+        this.element = element;
+        this.options = $.extend( {}, defaults, options );
+
+        this._defaults = defaults;
+        this._name = pluginName;
+
+        this.init();
+    }
+
+    Plugin.prototype = {
+
+        init: function() {
+			// add initialization codes
+			$(this.element).css({color:this.options.color});
+        },
+
+		//add other functions
+        yourOtherFunction: function(el, options) {         
+        }
+    };
+
+    $.fn[pluginName] = function ( options ) {
+        return this.each(function () {
+            if (!$.data(this, "plugin_" + pluginName)) {
+                $.data(this, "plugin_" + pluginName, new Plugin( this, options ));
+            }
+        });
+    };
+
+})( jQuery, window, document );
+</pre>
+<h3>Usage</h3>
+<p>On line 2, you need to put your own plugin name.<br />
+Line 4-6 defines the default options in case the plugin is initialized without any options.<br />
+Line 19-22, you can do whatever initialization stuff you need here. The element and option can be accessed by this.element and this.options respectively.<br />
+Line 24-26, is just a sample function, you can create as many as this.</p>
+<p>You can also download the demo in <a href="https://docs.google.com/file/d/0Bw2qIQzYbkDkckVndjhSVGJ6dUU/edit?usp=sharing" target="_blank">here</a></p>
+<p>This page is meant to be used for quick access, this doesn't really explain in detail what and how jQuery plugin works. You can go <a href="http://jqueryboilerplate.com/" target="_blank">here</a> and <a href="http://learn.jquery.com/plugins/basic-plugin-creation/" target="_blank">here</a> to learn more about jQuery Plugins.</p>

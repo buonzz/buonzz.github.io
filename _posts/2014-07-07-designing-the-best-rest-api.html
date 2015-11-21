@@ -1,0 +1,89 @@
+---
+layout: post
+title: Designing the best REST API
+permalink: designing-the-best-rest-api
+date: 2014-07-07 09:12:31.000000000 +08:00
+categories:
+- howto
+tags:
+- rest api
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+  _oembed_f0ac19bfd231ec16a07cf03c5ef4410c: '{{unknown}}'
+  _oembed_bfd7c762bed353c38920cdf799a27f80: '{{unknown}}'
+  _oembed_aadaeb9dd9bd265396989f5e4e29077c: '{{unknown}}'
+  _oembed_34c2a0b818abd47d02beb3b48d6f0705: '{{unknown}}'
+  _oembed_4ce17ae0553327b7cdf81a20017d9b45: '{{unknown}}'
+  _oembed_19213614b2cb28b9dc4046f6f70b97c3: '{{unknown}}'
+  dsq_thread_id: '2968824591'
+author:
+  login: Darwin
+  email: buonzz@gmail.com
+  display_name: Darwin
+  first_name: Darwin
+  last_name: Biler
+---
+<p>Note: This chapter assumes that you know what RESTful API is and will just focus on actual part of designing it. You can read about REST in <a href="http://en.wikipedia.org/wiki/Representational_state_transfer" target="_blank">wiki</a> though, if you need some context to catch up.</p>
+<p>The first thing you need to know about REST API is, it comes with different level of maturity. Means there is no over-arching standard for REST for everyone to comply with. In fact, many people and organization designs REST API differently. Generally, the higher the level of maturity of a certain REST API, its more scalable, extensible and easier to work with.</p>
+<p>According to Leonard Richardson (an expert on RESTful API design, the developer of the popular Python library "Beautiful Soup"). There are 3 different Maturity Levels that you can employ:</p>
+<p><strong>Level 0</strong></p>
+<p>In your controllers, do you have methods like</p>
+<ul>
+<li>http://domain.com/processallaccounts</li>
+<li>http://domain.com/get_data_from_biller</li>
+<li>http://domain.com/create_new_account</li>
+<li>http://domain.com/customer_list_postback.php</li>
+</ul>
+<p>Then you are POSTing and GETting some sort of data like JSON, XML etc via cURL or any sort of codes from your web/desktop applications?</p>
+<p>If yes, or you are using any of these kind of thought process in your API, yes you are level 0 (equivalent of cave men) in terms of being technologically-advanced in REST API designs.</p>
+<p><strong>Level 1</strong><br />
+Are you using the concept of "Resource" in your API? If you are familiar with "Entities", its similar to that. Its basically divides your api into "objects" that an api user can manipulate, instead of "methods" that a user can invoke. For example, lets say you have an API that aims to transfer a fund to another account:</p>
+<p>In level 0, this is how it will look like<br />
+http://domain.com/process_account.php?sender_accountid=123&receiver_account_id=456&amount=5</p>
+<p>In Level 1 API, this is how it will look like</p>
+<p>Sender<br />
+http://domain.com/account/123?deduct_amount=5</p>
+<p>Receiver<br />
+http://domain.com/account/456?add_amount=5</p>
+<p>As you can see, in able to manipulate an "account", that object is uniquely represented by a url for that "resource", which is<br />
+http://domain.com/account/<br />
+everything that you want to do with that resource needs to happen in that url.<br />
+Ideally, for each object in your application that can be manipulated through api, has its own unique resource url to interact into.</p>
+<p><strong>Level 2</strong><br />
+Are you using HTTP Verbs to determine the operation that needs to be carried out in your api? like</p>
+<ul>
+<li>GET - to fetch data</li>
+<li>POST - to create new data</li>
+<li>PUT - to create new data or update an existing data</li>
+<li>DELETE - to delete an existing data</li>
+</ul>
+<p>Then you are Level 0, since you leverages the HTTP Verbs in your API, thus creating a context that is natively known by HTTP protocol itself. Like for example instead of building this kind of API:</p>
+<p>Delete an acccount, you have this url  in level 0<br />
+http://domain.com/account/?id=123&amp;operation=delete</p>
+<p>In level 2, that should be like:</p>
+<p>http://domain.com/account/123</p>
+<p>Then, to indicate the operation, you will be using</p>
+<pre style="color: #303633;">DELETE /account/123 HTTP/1.1
+</pre>
+<p>&nbsp;</p>
+<p><strong>Level 3</strong></p>
+<p>This level is a little hard to explain (this is the highest level of API maturity!), but let me get things started by summing up what we've got so far, so first, you have your resources, a unique url to manipulate every object in your API, then you are using HTTP Verbs to indicate what you want to do with those objects.</p>
+<p>But let me ask you, what if you have hundreds of objects to manipulate? or each object, there are thousands of things that you do to it? To better understand this, lets get into a situation that you are very familiar with -- internet surfing.</p>
+<p>When you are visiting any website, you don't know in advance the exact links that will presented to you right? like if someone give you a URL, like www.example.com, you have no idea what things to be found there, like where is the menu, how can I search, where is the contact form etc. Those things are being figured out "on the spot".</p>
+<p>Means, websites allows us to "discover" things ourselves w/o any prior knowledge of what things can be found in their website. You figure out where is the menu, or sidebar or search bar on the spot, when you hit the website itself. </p>
+<p>That very same concept is what Level 3 is about. This has actually some have catchy acronym -- HATEOAS (Hypertext As The Engine Of Application State). At the basic level, it allows the API end-user to discover things by themselves:</p>
+<ul>
+<li>What are the resources on this API?</li>
+<li>What do to with each of these resources?</li>
+</ul>
+<p>Like for example, you have this resource</p>
+<p>http://domain.com/account/123</p>
+<p>without HATOEAS, this will probably just give you some sort of JSON response like<br />
+<script src="https://gist.github.com/buonzz/36ce4c05f6347ba0e700.js"></script></p>
+<p>But with HATOEAS<br />
+<script src="https://gist.github.com/buonzz/39eb1fa7e2e0a4e45744.js"></script></p>
+<p>I purposedly added several things in here to point out some concept. But one thing noticeble in here is, the contents of the JSON response using HATEOAS is kinda like how its been like if you are browsing a web page -- there are links in the menu to view the transactions of the account, there are links to the location etc. Basically, everything that you need to know "what to do next" is contained in that very same JSON response. Thus, the previous data "drives" you on how you will interact with the data.</p>
+<p>In the next post, we'll continue with Collections and best practices in designing a REST api.</p>

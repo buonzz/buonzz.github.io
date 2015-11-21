@@ -1,0 +1,44 @@
+---
+layout: post
+title: 'default: Warning: Connection timeout. Retrying...'
+permalink: default-warning-connection-timeout-retrying
+date: 2014-08-07 09:43:51.000000000 +08:00
+categories:
+- cloud computing
+- laravel
+tags:
+- homestead not working
+- laravel homestead timing out
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+  _thumbnail_id: '1295'
+  _oembed_e11541f685801b90b5ce45bc3d5d7bd8: '{{unknown}}'
+  dsq_thread_id: '2956045462'
+author:
+  login: Darwin
+  email: buonzz@gmail.com
+  display_name: Darwin
+  first_name: Darwin
+  last_name: Biler
+---
+<p>So, you are trying to install Laravel Homestead and when you hit the vagrant up command, you see this bunch of Connection Timeout thing.</p>
+<p><a href="http://www.darwinbiler.com/wp-content/uploads/2014/08/1.png"><img class="aligncenter size-full wp-image-1295" src="{{ site.url }}/assets/1.png" alt="1" width="677" height="345" /></a></p>
+<p>This is because the homestead box is using 64bit OS</p>
+<p>https://github.com/laravel/settler/blob/master/Vagrantfile</p>
+<pre lang="shell">Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+	# Configure The Box
+	config.vm.box = "ubuntu/trusty64"
+	config.vm.hostname = "homestead"
+
+</pre>
+<p>The issue with that is, if your computer is not enabled for the <a href="http://en.wikipedia.org/wiki/X86_virtualization#Intel_virtualization_.28VT-x.29" target="_blank">VT-x</a> setting in BIOS, you will have this particular issue.</p>
+<p>Solutions:</p>
+<p>1. Restart your computer and check the settings if there is an option to enable VT-x</p>
+<p>2. Use the 32-bit version of the Homestead, which is</p>
+<pre lang="shell">git clone https://github.com/buonzz/homestead32.git Homestead
+</pre>
+<p>follow the normal setup as stated in the <a href="http://laravel.com/docs/homestead" target="_blank">Laravel Doc</a>, hit the vagrant up and you should be fine</p>
+<p>Let me know if you happen to find any other solutions! :-)</p>

@@ -1,0 +1,36 @@
+---
+layout: post
+title: Basic Server Side Scripting in MongoDB
+permalink: basic-server-side-scripting-in-mongodb
+date: 2014-08-12 08:54:38.000000000 +08:00
+categories:
+- mongodb
+tags:
+- basic mongodb command
+- execute batch commands in mongo
+- hello world mongodb
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+  dsq_thread_id: '2955465086'
+author:
+  login: Darwin
+  email: buonzz@gmail.com
+  display_name: Darwin
+  first_name: Darwin
+  last_name: Biler
+---
+<p>There might be times that you need to execute MongoDB commands via command line. One of the obvious reason for this is latency -- unlike hitting the MongoDB server across the network, executing the commands via shell is way very fast, specially if you are retrieving/processing huge amount of data.</p>
+<p>Fortunately, MongoDB supports Server Side scripting, using JavaScript as programming language. It is as easy as creating a .js file in your server. In this tutorial, lets create a create_record.js file that will do the following tasks:</p>
+<ul>
+<li>Connect to local MongoDB server</li>
+<li>Create a database with name db1</li>
+<li>Create a collection named "greetings"</li>
+<li>Create a new record with the property "message" and value of "Hello World"</li>
+<li>Print a status message</li>
+</ul>
+<p><script src="https://gist.github.com/buonzz/de6ddcef66367270e847.js"></script>TO execute the file:<script src="https://gist.github.com/buonzz/2a8ab5b7ef75ec37537a.js"></script></p>
+<p>This will connect to localhost, in port 27017. Selecting the database "db1", then executing the create_record.js file.</p>
+<p>That is how simple how to execute a JavaScript file in the server-side!</p>

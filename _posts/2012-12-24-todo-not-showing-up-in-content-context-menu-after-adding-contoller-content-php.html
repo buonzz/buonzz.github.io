@@ -1,0 +1,77 @@
+---
+layout: post
+title: Todo not showing up in 'Content' context menu after adding contoller content.php
+permalink: todo-not-showing-up-in-content-context-menu-after-adding-contoller-content-php
+date: 2012-12-24 07:57:49.000000000 +08:00
+categories:
+- coding
+- Copy Paste
+- php
+tags:
+- ci bonfire not working
+- cibonfire todo tutorial problem
+- todo custom module not showing up
+- todo module not showing in content menu
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+  review_rating: ''
+  _wpas_done_all: '1'
+  _wpas_skip_1611607: '1'
+  _wpas_skip_2203490: '1'
+  _wpas_skip_2452381: '1'
+  _wpas_skip_2452385: '1'
+  _wpas_skip_2452386: '1'
+  _thumbnail_id: '851'
+  dsq_thread_id: '2960806630'
+author:
+  login: Darwin
+  email: buonzz@gmail.com
+  display_name: Darwin
+  first_name: Darwin
+  last_name: Biler
+---
+<blockquote>This post is for PHP Developers that was trying to do the "ToDo" module <a href="http://cibonfire.com/docs/files3/todo-txt.html" target="_blank">tutorial</a> in CI Bonfire.</p></blockquote>
+<p>There seems a fundamental problem in the supposedly "basic" tutorial of CI Bonfire. Maybe due to the fast transition of changes in the current version of the said CI flavor. But either way, let me teach you how to solve this problem.<br />
+<!--more--><br />
+First, in the Migration of your module, you have to edit that file and add this array in the migration class:</p>
+<pre lang="php"> private $permission_array = array(
+        'MODULE.Content.Manage' =&gt; 'Manage ...',
+        'MODULE.Content.Add' =&gt; 'Add ...',
+        'MODULE.Content.Delete' =&gt; 'Delete ...',
+	'MODULE.Content.View' =&gt; 'To view the .... Content menu.'
+    );</pre>
+<p>Note that you should replace the MODULE with the actual module name. Also the value of each key should be adjusted to whatever caption you would like.</p>
+<p>Next. Add this in the <strong>up</strong> method of your migration class.</p>
+<pre lang="php">$prefix = $this-&gt;db-&gt;dbprefix;
+foreach ($this-&gt;permission_array as $name =&gt; $description)
+{
+   $this-&gt;db-&gt;query("INSERT INTO {$prefix}permissions(name, description) VALUES('".$name."', '".$description."')");
+   // give current role (or administrators if fresh install) full right to manage permissions
+   $this-&gt;db-&gt;query("INSERT INTO {$prefix}role_permissions VALUES(1,".$this-&gt;db-&gt;insert_id().")");
+}</pre>
+<p>This will insert those permissions in the permissions table, so that Bonfire will be aware of those permissions.<br />
+It will also insert those permission to the Admin role, so that the admin roles will gonna have those permissions.</p>
+<p>Add this in your migration file's <strong>down</strong> method so that the permissions will be revoked when the module is uninstalled.</p>
+<pre lang="php">$prefix = $this-&gt;db-&gt;dbprefix;
+foreach ($this-&gt;permission_array as $name =&gt; $description)
+{
+	$query = $this-&gt;db-&gt;query("SELECT permission_id FROM {$prefix}permissions WHERE name = '".$name."'");
+	foreach ($query-&gt;result_array() as $row)
+	{
+		$permission_id = $row['permission_id'];
+		$this-&gt;db-&gt;query("DELETE FROM {$prefix}role_permissions WHERE permission_id='$permission_id';");
+	}
+	//delete the role
+	$this-&gt;db-&gt;query("DELETE FROM {$prefix}permissions WHERE (name = '".$name."')");
+}</pre>
+<p>Then on the Content controller, make sure you add this line to the method to enforce the permission:</p>
+<pre lang="php">$this-&gt;auth-&gt;restrict('MODULE.Content.Manage');</pre>
+<p>After saving the changes, go to admin,<br />
+Developer &gt; Database Tools &gt; Migrations<br />
+Modules tab<br />
+run the uninstall of your module<br />
+then re-install it again.</p>
+<p>You should be fine now.</p>

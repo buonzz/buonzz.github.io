@@ -1,0 +1,62 @@
+---
+layout: post
+title: Getting Started with AutoWebShot
+permalink: getting-started-with-autowebshot
+date: 2013-12-09 06:08:28.000000000 +08:00
+categories:
+- big data
+- cloud computing
+- coding
+- featured
+- javascript
+- php
+tags:
+- automatic website screenshot
+- generate screenshots
+- phantomjs on the cloud
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+  _thumbnail_id: '1158'
+  _wpas_done_all: '1'
+  _wpas_skip_1611607: '1'
+  _wpas_skip_2452381: '1'
+  _wpas_skip_2203490: '1'
+  _wpas_skip_2452385: '1'
+  dsq_thread_id: '2957358314'
+author:
+  login: Darwin
+  email: buonzz@gmail.com
+  display_name: Darwin
+  first_name: Darwin
+  last_name: Biler
+---
+<p><a href="http://autowebshot.cloudapp.net/" target="_blank">AutoWebShot</a> is a free service to capture screenshots of any website.  There are many situations wherein this could be useful to you, some of the use cases were:</p>
+<ul>
+<li>Generate a screenshot of a particular page of your website via script when someone changed the source codes.</li>
+<li>You need to have a screenshot of many pages/websites, that manually getting the screenshot is not possible.</li>
+<li>Get the screenshot of your website at regular interval, thus give you the ability to see the "history" of the layout of your website.</li>
+<li>You want to embed a "live" preview thumbnail of your site to your admin panel.</li>
+</ul>
+<p>There are many way this API could be useful. Feel free to write your own application that leverages the service according to your own need. Being that said let me clarify as well what this service is not:</p>
+<ul>
+<li>It is not a Testing framework - although you can use it to see if the pages is not messed up after changing some codes in your website, AutoWebShot is not meant to be used as Acceptance Testing framework, for those cases, I recommend you use CasperJS or similar for a full blown Testing Framework.</li>
+<li>It is not like browsershots.com or your fancy browser extensions to capture screenshots -- those are something meant to be used by humans, while this service is an API, which meant to be used programmatically by writing scripts.</li>
+</ul>
+<h2>Using the API</h2>
+<p>The api is exposed via this url:</p>
+<pre lang="bash">http://autowebshot.cloudapp.net/api/</pre>
+<p>In able to use the service, you need to get an API key first. This is required so that we can track each screenshot associated for each user. Getting the API key is free and only requires a valid email and password. In case you doesn't have an API key, signup in <a href="http://autowebshot.cloudapp.net/signup/" target="_blank">here</a> first to continue.</p>
+<p>After acquiring an API key, all you need to do is pass the API key and the domain name (without the http:// part) to the API, like this:</p>
+<pre lang="bash">http://autowebshot.cloudapp.net/api/index.php/screenshot/create?key=YOUR_API_KEY&amp;domain_name=www.yourdomain.com</pre>
+<p>It should return a JSON response upon success:</p>
+<pre lang="javascript">{"requested_url":"http:\/\/www.darwinbiler.com\/","status":"success","message":"image created","image_url":"http:\/\/autowebshot.cloudapp.net\/screenshots\/30351e7fbb97263ab20e06b96bd47b5d-2013-12-09-06-48.png"}</pre>
+<p>The JSON response is an object with three properties:</p>
+<ul>
+<li>requested_url - this is the full URL to the page we generated screenshot from.</li>
+<li>image_url - this is the actual rendered image. Since the URL is inside a JSON object, you will see backslashes ( \ ) for each forward slashes in the url, this is because forward slash has special meaning in JSON and it needs to be escaped.</li>
+<li>status - the status of the request, either can be "success" or "error"</li>
+<li>message - either on success or error, the api will provide you a descriptive text indicating what happened on the request, this is very useful on debugging api calls that failed.</li>
+</ul>
