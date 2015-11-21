@@ -6,7 +6,7 @@ tags:
 - laravel and neo4j
 - neo4j basics
 permalink: replacing-master-branch-in-git
-header-img: "img/post-bg-04.jpg"
+header-img: "img/16126940706_0e45f64602_k.jpg"
 subtitle: "In a project managed by Git, there might be times that you need to completely trash the master branch and completely replace with another branch"
 ---
 
