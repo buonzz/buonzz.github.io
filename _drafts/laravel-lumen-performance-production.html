@@ -1,0 +1,105 @@
+---
+title: Laravel Lumen's performance under production use 
+permalink: laravel-lumen-performance-production
+header-img: "img/15968544719_fc3a048ce0_k.jpg"
+subtitle: "Ever wondered how Lumen will perform under real-production use? Let me share some of my experience about deploying and optimizing it in a production environment which takes 50,000 hits per minute."
+layout: post
+---
+
+<p>Yes, you read that right.</p>
+
+<ul>
+	<li>50k rpm (requests per minute) on average</li>
+	<li>or 3 million visits per hour</li>
+	<li>or 72 million visits per day</li>
+</ul>
+
+<blockquote>Disclaimer: since the web application is protected by NDA. I cannot give the url of website and the company. So I was just limited of technology-related stuffs that Lumen's performance is involved.</blockquote>
+
+<p>To give you an idea what kind of site is receiving so much traffic like that, the site is basically some sort of like Google Adsense, a custom made one. It serves ads and analyze the surfers behaviour to deliver and target ads in a very optimized way.</p>
+
+<h3>The Server Stack</h3>
+
+<p>here is the server stack that powers the application</p>
+<p>
+<img src="{{ site_url }}/img/ads-stack.png"/>
+</p>
+
+<ul>
+	<li>HAProxy receives all the incoming requests, performing round-robin to available web servers in the backend.</li>
+	<li>3 Web Servers are simple Nginx+php-fpm nodes. These are the ones which actually executes the Lumen application. Runs in a Debian-based OS ( we have a customized Linux kernel ).</li>
+	<li>then of course 1 Queue server, our queue driver is Redis, which runs in a seperate server. Our web servers doesn't runs the <i>php artisan queue:work</i> as there is a dedicated server that runs it.</li>
+	<li>a dedicated Memcached server -- yeah, we have a relatively large dataset.</li>
+	<li>2 MySQL databases.</li>
+</ul>
+
+<h3>Hardware Specs (all bare-metal)</h3>
+<p>All of the server has relatively similar spec, except for Memcached which has 64.00 GB RAM</p>
+<ul>
+	<li>Mobo: Supermicro X9DR3-F Dual Hexa-core Xeon E5-2630 v2 2.6 GHz</li>
+	<li>RAM: 32.00 GB RAM</li>
+	<li>Storage: 2x SSD 128 GB</li>
+</ul>
+
+<h3>Optimizations</h3>
+<ul>
+	<li>heavily indexed MySQL tables</li>
+	<li>trial and error with OpCache settings</li>
+	<li>lower AOF persistence of Redis</li>
+	<li>heavy use of Memcached</li>
+	<li>Queue listeners has its own dedicated box</li>
+	<li>all IO bound operations are "pushed" into a queue server</li>
+	<li>mysqlnd-ms for automatic split of rw operations to master-slave</li>
+</ul>
+<h3>Moment of truth</h3>
+
+<blockquote>Note that the following charts are NOT results from benchmarks or some sort of profilers. They are real-production traffic usage. In this case, we are using a commercial product called NewRelic APM to capture these information from production servers. This also not includes the requests to static assets, as we have a CDN that serves those.</blockquote>
+
+
+<p>Apdex and Throughput</p>
+<p>
+In case you are not familiar with what is Apdex is, you can find a detailed explanation <a href="http://www.darwinbiler.com/how-do-you-define-a-slow-web-application/">here</a>. For now, lets just we say you  have number on a uniform scale of 0-to-1 wherein
+<ul>
+<li>0 = no users satisfied</li>
+<li>1 = all users satisfied</li>
+</ul>
+<br/>
+we could clearly say by looking at the value of app server, which is 1.0 [0.5]that we are hitting 1.0 score
+<img src="{{ site_url }}/img/apdex.png" width="450"/>
+<br/>
+that means, that under throughput of 50k-60k rpm (requests/minute)
+100% of the requests was served within 0.5 seconds.
+</p>
+
+<p>
+Further drilling down in the result
+<br/>
+<img src="{{ site_url}}/img/php-breakdown.png"/>
+<br/>
+You can clearly see here that Lumen runs at about <b>20-25 milliseconds</b>
+</p>
+
+<p>
+Scalability Analysis
+<img src="{{ site_url}}/img/scalability-lumen.png"/>
+<br/>
+the line chart looks promising, its almost a straight line. In a non-scalable system, line usually tends to be curved upward at the end, or has some really high slope. That simply means even if you continue to hurdle more requests, response time is not exponentially increasing, thus not affecting the end-users experience.
+</p>
+
+<h3>Gotchas</h3>
+
+<p>Of course, we did not came up with these figures without any sort of roadblocks, it is first time we deploy Lumen in production use. Here are the some of the problems we had encountered along the way:</p>
+
+<dl>
+ <dt>HHVM keeps crashing!</dt>
+ <dd>we initially tried HHVM, instead of PHP-FPM. It is exteremely fast!
+ <img src="{{ site_url}}/img/HHVM.png"/>
+ looking at the chart above, its capable of running Lumen within 6 milliseconds! (25 ms vs 6 ms is a huge difference ). BUT ... it returns segfault randomly which makes the web server return intermittent Internal Server Errors. and it doesn't support most of the NewRelic  APM features, making it hard to see what is going on with your application.
+  </dd>
+  <dt>Cannot split the host setting for Session vs Cache</dt>
+  <dd>If you look at our stack, we uses a dedicated Memcached server. It is quite ok to use it for normal Cache, but for Sessions, we just wanted to use the local Memcached instances of the web servers. Either I'm so stupid not to figure out how to do that, or there is no way how to set that.
+  </dd>
+</dl>
+
+<h3>TLDR;</h3>
+<p>You can make Lumen execute as fast as 6 ms using HHVM in a 4 bare-metal servers (3 web servers, 1 queue listener), then 25 ms under PHP-FPM. If you are using custom extensions like NewRelic, HHVM might hamper your ability to see the stats of APM and could give you random segmentation fault errors. Standard PHP-FPM will give you more stability and support for wider set of extensions in exchange of slower execution time. Overall, I think I'm pretty satisfied with what Lumen's performance in a production environment.</p>
