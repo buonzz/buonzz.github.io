@@ -1,0 +1,77 @@
+---
+title: Understanding Laravel Elixir
+date: 2015-11-30 01:36:00 +08:00
+permalink: understanding-laravel-elixir
+header-img: "img/21182965596_7020848dac_k.jpg"
+subtitle: "Confused of what the heck is Elixir is for in Laravel 5? That is understandable, because Elixir is more of NodeJS thing rather than PHP."
+layout: post
+tags:
+- what the heck is Elixir
+- NodeJS and Laravel
+---
+
+<blockquote>Disclaimer: This post assumes the reader is pure backend PHP developer and has no background knowledge of NodeJS and related technologies. Feel free to skip sections that you think you are already familiar with.</blockquote>
+
+<p>As a backend PHP developer,this tons of new terms that comes along with Elixir might confuse you. Though they are not required for you to build your Laravel application, it helps you to understand how to collaborate with the front-end developers who will happen to be working with you in a project.</p>
+
+<h3>Why use Elixir in the first place?</h3>
+<p>understanding the tool is much easier to grasp if you know what it is for:</p>
+<ul>
+	<li>You want to manage properly your JavaScript and CSS files</li>
+	<li>You want to "concatenate" multiple js/css into one file to reduce HTTP calls</li>
+	<li>You want to "minify" multiple js/css into one file to reduce size of JS/CSS</li>
+	<li>You want to use latest features of JavaScript ( EcmaScript 6 ) while still backward compatible with browsers using JavaScript 5</li>
+	<li>You want to use ES6 Modules in your JavaScript codes</li>
+</ul>
+
+<p>Before going further, lets define few terms in here</p>
+
+<dl>
+	<dt>asset</dt>
+	<dd>is a collective term for JavaScript, CSS and Images that your web application uses.</dd>
+	<dt>minify</dt>
+	<dd>to minify an asset means to reduce the file size of the css/js by compressing it in smaller size. Often by removing the whitespaces,comments and other characters that is not needed in live site</dd>
+	<dt>uglify</dt>
+	<dd>is the reverse of minification process, because when you remove all the whitespaces (like newlines, tabs and spaces) reading the codes is really terrible since they are all in the same line.</dd>
+	<dt>ES6</dt>
+	<dd>it stands for ECMAScript 6, the ECMA part stands for European Computer Manufacturers Association. It is because when Mozilla wanted to standardize JavaScript (developed by Netscape, which is now Mozilla) nobody wanted to help Mozilla except ECMA. The "6" part means its a new version of it ( yes the browser you are using right now is EcmaScript 5 released on 2009)</dd>
+	<dt>NodeJS</dt>
+	<dd>is a technology that allows you to use JavaScript on server-side (yes, your job as PHP backend developer will be replaced soon by NodeJS developers)</dd>
+	<dt>NodeJS Module</dt>
+	<dd>is way of NodeJS to encapsulate related code into a single unit of code. When creating a module, this can be interpreted as moving all related functions into a file</dd>
+	<dt>npm</dt>
+	<dd>is is the package manager of NodeJS, it is the counter-part of composer in PHP world.</dd>
+	<dt>ES6 Modules</dt>
+	<dd>current version of JavaScript doesn't supports the concept of modules natively, so they had to use CommonJS and Asynchronous Module Definition (AMD) in able to use modules. But now that latest version of JavaScript (ES6) will officially support modules, this hyped the legion of hipsters a bit.</dd>
+	<dt>Browserify</dt>
+	<dd>allows you to use Modules in your JavaScript codes</dd>
+	<dt>Gulp</dt>
+	<dd>is NodeJS-based tool to manage and automate the process of optimizing, minifying and other tasks in managing your assets. It is meant to replaced Grunt promising an "easier" way to do things.</dd>
+	<dt>transpiler</dt>
+	<dd>is a tool that  takes the source code of a program written in one programming language as its input and produces the equivalent source code in another programming language. In this context, often used to allow developers to write cool syntax in JavaScript and transpile it into an equivalent (sometimes more optimized) JavaScript that browsers can understand.</dd>
+	<dt>CoffeeScript</dt>
+	<dd>some Ruby fanboys wanted to be able to write ruby-like code in JavaScript, so they built this -- a language that can be written with syntactic sugar of Ruby and later on can be transpiled into native JavaScript</dd>
+	<dt>BabelJS</dt>
+	<dd>some hipsters is very impatient of the new features of ES6 that they even built a transpiler just to allow them to write ES6 codes that will be converted back to JS5. This is that tool.</dd>
+	<dt>SASS/LESS</dt>
+	<dd>are CSS pre-processors that allows you to write CSS in a dynamic way, things like variables, mixins etc which is not usually available in normal CSS</dd>
+</dl>
+
+<p>Now, the thing with JavaScript developers is they tend to build tools on top of another tools, then another tool on top of another tool ... This produced tons of new tools just for very simple task -- managing your asset files.</p>
+
+<p>At the beginning, there is NodeJS. In able to install Elixir, it needs to install Gulp. So you need npm to install it.</p>
+<p>But, Gulp is very tedious to work with, tons of codes to write just for basic things. And since it is meant to be used in NodeJS applications, the Laravel Team made a utility named Elixir to make Gulp tasks "aware" of Laravel Framework</p>
+<h3>JavaScript</h3>
+<p>If you want to use CofeeScript, then Elixir makes it very easy for you</p>
+<p>If you want to use ES6, then Elixir makes it very easy for you by utilizing BabelJS</p>
+<p>If you want to use Modules, then Elixir makes it very easy for you by utilizing Browserify</p>
+<p>all without having to dabble around all the Gulp tasks yourself</p>
+
+<h3>CSS</h3>
+<p>If you want to use SASS, then Elixir makes it very easy for you</p>
+<p>If you want to use LESS, then Elixir makes it very easy for you</p>
+<p>all without having to dabble around all the Gulp tasks yourself</p>
+
+<p>The good news though is, all of this is readily available inside Homestead. So it is not like you will have to install NodeJS yourself. Just follow the documentation on how to use the actual tool, as I merely explained each terms and use-cases of those in here so as to help you more confident whenever you encounter those terms in Laracasts videos and forums.</p>
+
+<p>The thing is, it is not required to use it in every Laravel project, it is only necessary if the project has a lot of codes involving the front-end codes and it needs to be super-optimized. You should not add another layer of complexity to your development workflow unless it is really necessary.</p>
