@@ -15,25 +15,23 @@ tags:
 
 <p>PHP 7 was just released. But this doesn't means all hosting provider will quickly jump into putting PHP 7 in all of your legacy sites.
 Imagine the horror if suddenly you have to refactor your 10-year old legacy site while you are in the middle of developing another project.</p>
-<p>If you are currently developing some PHP site though, what you can do right now though is to be aware how to write a PHP 7 compliant codes. So that you wont have to refactor it later when the time comes that your organization is ready for PHP 7. Here is some tips on how to make a PHP 7 compatible codes:</p> 
+<p>If you are currently developing some PHP site though, what you can do right now though is to be aware of how to write a PHP 7 compliant codes. So that you wont have to refactor it later when the time comes that your organization is ready for PHP 7. Here is some tips on how to make a PHP 7 compatible codes:</p> 
 
 
 <h3>Don't use Alternative PHP Tags</h3>
 <p>Things like</p>
 
-<code>
+{% highlight php %}
 <script language="php"> 
 // Code here
 </script>
-</code>
+{% endhighlight %}
 
 and 
-
-<code>
+{% highlight php %}
 <%  %>
 <%=$varToEcho; %>
-</code>
-
+{% endhighlight %}
 
 <h3>Don't use POSIX-Compatible Regular Expressions</h3>
 <p>The entire ext/ereg is removed. Avoid using these functions in your new projects</p>
