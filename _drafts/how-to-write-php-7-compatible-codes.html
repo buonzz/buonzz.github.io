@@ -66,4 +66,13 @@ and
 </code>
 <p>Prior to PHP 7, PHP will first resolve $array[key] to a string and then access the property named by that string on the $object. It will evaluate differently in PHP7. This kind of logic bugs might be the hardest one to find in your codes thus needs to be extra careful when copy-pasting existing codes.</p>
 
+
+<h3>Don't use PHP 4 Constructors</h3>
+<p>PHP 4 contructors are constructors that has same name as the class on which it is defined. That means the following should be avoided:</p>
+<code>
+class Foo{
+	public function foo(){}
+}
+</code>
+
 <p>There are lot of new features that comes with PHP 7 and I wont re-iterate those in here. This is more of "survival kit" post so your code is guaranteed to run when the time comes that you need to run it in PHP 7. Those are the "must" when you writing PHP code right now and from this point forward and its up to you if you want to leverage the other new features of PHP 7.</p>
