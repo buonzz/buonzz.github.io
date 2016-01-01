@@ -15,7 +15,7 @@ tags:
 
 <p>PHP 7 was just released. But this doesn't means all hosting provider will quickly jump into putting PHP 7 in all of your legacy sites.
 Imagine the horror if suddenly you have to refactor your 10-year old legacy site while you are in the middle of developing another project.</p>
-<p>If you are currently developing some PHP site though, what you can do right now though is to be aware of how to write a PHP 7 compliant codes. So that you wont have to refactor it later when the time comes that your organization is ready for PHP 7. Here is some tips on how to make a PHP 7 compatible codes:</p> 
+<p>If you are currently developing some PHP site though, what you can do right now is to be aware of how to write PHP 7 compliant codes. So that you wont have to refactor it later when the time comes that your organization is ready for PHP 7. Here is some tips on how to make a PHP 7 compatible codes:</p> 
 
 
 <h3>Don't use Alternative PHP Tags</h3>
@@ -69,10 +69,11 @@ and
 
 <h3>Don't use PHP 4 Constructors</h3>
 <p>PHP 4 contructors are constructors that has same name as the class on which it is defined. That means the following should be avoided:</p>
+<pre>
 <code>
 class Foo{
 	public function foo(){}
 }
 </code>
-
+</pre>
 <p>There are lot of new features that comes with PHP 7 and I wont re-iterate those in here. This is more of "survival kit" post so your code is guaranteed to run when the time comes that you need to run it in PHP 7. Those are the "must" when you writing PHP code right now and from this point forward and its up to you if you want to leverage the other new features of PHP 7.</p>
