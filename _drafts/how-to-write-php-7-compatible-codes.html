@@ -54,7 +54,16 @@ and
 	<li>mysql_fetch_assoc</li>
 </ul>
 
+<h3>Don't mix variable-variables and the global keyword</h3>
+<p>below code will produce a parse error:</p>
+<code>global $$foo->bar;</code>
 
-<p>There are lot of new features that comes with PHP 7 and I wont re-iterate those in here. This is more of "survival kit" post so your code is guaranteed to run when the time comes that you need to run it in PHP 7.</p>
+<h3>All variables is now being evaluated from left-to-right</h3>
+<p>Yes, prior to PHP 7 it is not like that. It is inconsistent specially for variable-variables and variable-properties.</p>
 
-<p>Those are the "must" when you writing PHP code right now and from this point forward and its up to you if you want to leverage the other new features of PHP 7.</p>
+<code>
+	$object->$array[key];
+</code>
+<p>Prior to PHP 7, PHP will first resolve $array[key] to a string and then access the property named by that string on the $object. It will evaluate differently in PHP7. This kind of logic bugs might be the hardest one to find in your codes thus needs to be extra careful when copy-pasting existing codes.</p>
+
+<p>There are lot of new features that comes with PHP 7 and I wont re-iterate those in here. This is more of "survival kit" post so your code is guaranteed to run when the time comes that you need to run it in PHP 7. Those are the "must" when you writing PHP code right now and from this point forward and its up to you if you want to leverage the other new features of PHP 7.</p>
