@@ -1,0 +1,47 @@
+---
+layout: post
+title: Why you should have a NAS Storage as a Developer
+date: 2015-06-15 15:23:00.000000000 +08:00
+permalink: why-you-should-have-a-nas-storage-as-a-developer
+categories:
+- setup
+- hardware
+tags:
+- DLINK-NAS
+- DNS-320L
+---
+
+NAS (Network Attached Storage) device is like ordinary computer, except it is dedicated for doing specific thing - host and serve your files. This device lets you insert hard disk on it, and access the contents of that hard disks over the network. There are many reasons why would you need to do this, specially if you are a web developer:
+
+
+<h3>You don't want to lose files/data</h3>
+
+<p>shit happens - hard disk on your computer can crash, accidentally reformatted or deleted when you are tweaking some Linux commands. Sure, you can back up everything on Cloud. But if you have terabytes of stuff to upload into, you will not like your billing statement next month. Some project files as well is protected by NDA agreement and it is terrible idea to upload such files in free services like Dropbox and Google Drive.</p>
+
+<p>with NAS Storage, you can configure it so that you have RAID 1 configuration. That means, whenever you are storing files to your NAS Server, it stores the file into multiple physical hard drive. If one of the hard-drives fails, it still has a full replica of it in another hard drive.</p>
+
+<h3>24/7 files availability</h3>
+
+<p>There might be times that you need to access your files at home remotely via FTP or remote desktop sharing. But the problem is, you can't have your PC turn-on 24 hours a day, 7 days a week. That means you have rely on someone else physically on your house to push the power button of your computer when you need to access it.</p>
+<p>Even so, PCs are not meant to be running 24/7 - it eats a lot of electricity bill. Not to mention you are wearing down your hardware much faster.</p>
+
+<p>NAS Storage can be turned-on for long hours, they are meant to be like that. It has its own cooling system and it doesn't eats a lot of electricity like ordinary PC. You can also schedule when it will shutdown itself when lets say your torrent file is finished downloading.</p>
+
+<h3>Central location of your project files</h3>
+<p>I have 2 laptops, 2 desktop computers and 3 mobile devices. Imagine having to sync all my files among those. I personally use Dropbox for smaller documents, but if lets say ISO files of Ubuntu/CentOS images, it is not a good idea to upload it to Dropbox just to share it to another device</p> <p>Since NAS device itself has its own LAN IP address, I could simply FTP to it or map a network drive via SMB protocol to access my files anywhere among those devices. And since its accessing the files over LAN, I an work even when Internet is offline</p>
+
+<h3>There are lot of "cool" things you can do with it</h3>
+
+<p>
+	<ul>
+		<li>Make it as a "streaming server" for your personal videos/photos. If you have an Android TV, you can browse your family pictures and photos from within your TV by just accessing your NAS Server over LAN</li>
+		<li>Host your personal website from your home by configuring DDNS</li>
+		<li>Share files with your colleagues</li>
+		<li>Dedicated torrent seeder/downloader</li>
+	</ul>
+</p>
+
+<p>I just purchased mine at SM Mall of Asia. I'm very surprised that many of the well-known stores in here has very limited or no NAS devices available ( Octagon, MicroValley etc). Probably because its a slow-moving product and is pricey. I had purchased mine for P4500, it is a D-Link DNS-320L 2 bay storage device. The other option I initially look upon is Seagate Share Center. But I did not like the fact that the drives is built-in and not detatchable.</p>
+
+
+<p>I also purchased two Western Digital hard drives (500GB each) and put them on to my DNS-320L. Giving me almost a terabyte worth of capacity. The advantage of this setup is, I can easily buy larger drives, like 2x2 terabyte 3.5 disk, now I have 4 terabytes of capacity! Compare that to like if you bought a Seagate device which has fixed size storage.</p>
