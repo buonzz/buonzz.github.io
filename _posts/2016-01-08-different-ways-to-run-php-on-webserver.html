@@ -1,0 +1,74 @@
+---
+layout: post
+title: What are the different ways to run PHP on Web Server? 
+date: 2016-01-08 09:00:00.000000000 +08:00
+permalink: different-ways-to-run-php-on-webserver
+header-img: "img/21182965596_7020848dac_k.jpg"
+subtitle: "Web Servers themselves cannot understand and parse PHP files, they external programs to do it for them. There are many ways how you can do this, both with its pros and cons."
+categories:
+- php
+- devops
+---
+
+
+<table>
+	<tr>
+		<th>Web Server</th>
+		<th>PHP Handler</th>
+		<th>Memory</th>
+		<th>CPU</th>
+		<th>Security</th>
+		<th>Speed</th>
+		<th>Run as Owner</th>
+	</tr>
+	<tr>
+		<td rowspan="3">Apache Only</td>
+		<td><b>mod_php</b></td>
+		<td> Low </td>
+		<td> Low </td>
+		<td> Low </td>
+		<td> Fast </td>
+		<td> No </td>
+	</tr>
+	<tr>
+		<td><b>CGI</b></td>
+		<td> Low </td>
+		<td> High </td>
+		<td> Low </td>
+		<td> Slow </td>
+		<td> No </td>
+	</tr>
+	<tr>
+		<td><b>SuPHP</b></td>
+		<td> Low </td>
+		<td> High </td>
+		<td> High </td>
+		<td> Slow </td>
+		<td> Yes </td>
+	</tr>
+	<tr>
+		<td rowspan="3">Nginx / Apache</td>
+		<td><b>FastCGI</b></td>
+		<td> High </td>
+		<td> Low </td>
+		<td> High </td>
+		<td> Fast </td>
+		<td> Yes </td>
+	</tr>
+	<tr>
+		<td><b>PHP-FPM</b></td>
+		<td> High </td>
+		<td> High </td>
+		<td> High </td>
+		<td> Fast </td>
+		<td> Yes </td>
+	</tr>
+	<tr>
+		<td><b>HHVM</b></td>
+		<td> Very High </td>
+		<td> Very High </td>
+		<td> High </td>
+		<td> Very Fast </td>
+		<td> Yes </td>
+	</tr>
+</table>
