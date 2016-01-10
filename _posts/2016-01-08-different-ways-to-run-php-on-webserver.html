@@ -10,7 +10,7 @@ categories:
 - devops
 ---
 
-<p>For developers, there is not much difference whatever PHP handler is executing their application in the web server. It simply works!. But for System Administrator view, there are wide array of options to choose from. Depending on the nature of the site, you migth pick one over the other. Here is my opinionated view of what I think is the different strength and weakness of each PHP handlers:</p>
+<p>For developers, there is not much difference whatever PHP handler is executing their application in the web server. It simply works!. But for System Administrator view, there are wide array of options to choose from. Depending on the nature of the site, you might pick one over the other. Here is my opinionated view of what I think is the different strength and weakness of each PHP handlers:</p>
 
 <table>
 	<tr>
@@ -73,3 +73,123 @@ categories:
 		<td> Yes </td>
 	</tr>
 </table>
+
+<p>Before we even go further, lets mention this very important issue that haunts down every developers on earth:</p>
+
+<blockquote>
+	<b>The file permission hell:</b> Have you ever been into situation wherein you cannot access your files via FTP/SSH because its somewhat "owned" by the web server itself. For example, files uploaded through the website. This is because Web servers usually runs on another user other than yours. For example, usually Apache user is "www-data", while your FTP account might be "bob". Two different users accessing same set of files causes a lot of headaches when you are using for example CMS like WordPress, which writes files into the server.
+</blockquote>
+
+<p>On the following section, I'll try to elaborate the table above by mentioning special points like Pros, Cons and Bottomlines.</p>
+
+<h2>mod_php</h2>
+
+<h4>Pros</h4>
+<ul>
+	<li>Comes with Apache server by default</li>
+	<li>Runs very fast since it runs in the same process as Apache itself</li>
+	<li>Low CPU and Memory requirement because of above</li>
+</ul>
+
+<h4>Cons</h4>
+<ul>
+	<li>Runs as the same user that your Apache user ( usually www-data)</li>
+	<li>File permission issues with CMS and FTP accounts</li>
+</ul>
+
+<h4>Bottomline</h4>
+<p>mod_php is ideal for situations where resources is very limited and security is not much of concern. For example running a web server for LAN connection in a very old computer with limited memory.</p>
+
+
+
+<h2>CGI</h2>
+
+<h4>Pros</h4>
+<ul>
+	<li>Has the ability to see the PHP as another user (through suexec)</li>
+</ul>
+
+<h4>Cons</h4>
+<ul>
+	<li>Not nearly as fast as mod_php</li>
+	<li>Requires more CPU time</li>
+</ul>
+
+<h4>Bottomline</h4>
+<p>While it is able to solve the file permission issues associated with mod_php, it does that though by sacrificing some speed.</p>
+
+
+<h2>suPHP</h2>
+
+<h4>Pros</h4>
+<ul>
+	<li>Has the ability to run the PHP scripts as another user</li>
+</ul>
+
+<h4>Cons</h4>
+<ul>
+	<li>requires more CPU and memory</li>
+	<li>Cannot use Opcode caching since it needs to process each file everytime</li>
+</ul>
+
+<h4>Bottomline</h4>
+<p>since the PHP  scripts is being run as a different user. Any vulnerability in the site can be restricted to only the files of your website thereby providing substantial security benefits particularly on servers that run multiple websites. This is great for multi-tenant hosting wherein you need to isolate each customers from each other.</p>
+
+
+<h2>FastCGI</h2>
+
+<h4>Pros</h4>
+<ul>
+	<li>offers the benefits of suPHP</li>
+	<li>allows use of Opcache</li>
+	<li>Fast because of caching strategy</li>
+</ul>
+
+<h4>Cons</h4>
+<ul>
+	<li>large memory usage</li>
+</ul>
+
+<h4>Bottomline</h4>
+<p>FastCGI speed comes with large memory usage. This might be significant when speed is important given that you had the money to feed it with memory.</p>
+
+
+<h2>PHP-FPM</h2>
+
+<h4>Pros</h4>
+<ul>
+	<li>Ability to "gracefully" stop and start PHP workers without losing any queries</li>
+	<li>Dynamic number of processes, depending on the load </li>
+	<li>Starting the workers with different uid/gid/chroot/environment and different php.ini options</li>
+</ul>
+
+<h4>Cons</h4>
+<ul>
+	<li>requires high CPU power and memory (thus more cost)</li>
+</ul>
+
+<h4>Bottomline</h4>
+<p>PHP-FPM might be ideal if you have a VPS or a dedicated server. In the shared hosting though, you can quickly ran out your quota, due to the large
+ memory and cpu consumption it would take compared to just plain apache+mod_php.</p>
+
+
+ <h2>HHVM</h2>
+
+<h4>Pros</h4>
+<ul>
+	<li>JIT compilation, making PHP behave like Java wherein it is compiled to bytecodes</li>
+	<li>Extremely fast</li>
+	<li>Comes with specialized debugger, tools and syntax</li>
+</ul>
+
+<h4>Cons</h4>
+<ul>
+	<li>requires high CPU power and memory (thus more cost)</li>
+	<li>being a new technology, has limited support for extensions and tools</li>
+</ul>
+
+<h4>Bottomline</h4>
+<p>HHVM is good for very high volume traffic wherein every millisecond matters. But unless you have some really good experience with rolling your own server, finding hosting provider that has enough experience with this technology might be a tough one.</p>
+
+
+<p>There it is, its crazy to think that behind the seemingly simple LAMP stack, there is tons of fuzzy things going on at the back. Depending on many factors, you might choose to shuffle any combination of this, given the use-case and situation you are currently in.</p>
