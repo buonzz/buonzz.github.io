@@ -48,3 +48,46 @@ Compare that to other on which you need to install wamp, xampp, mysql, php exten
 The commands are very intuitive and really easy to remember. Nothing is been easier than that if you compare the workflow to other frameworks.
 </p>
 
+<h3>Setting up the database is really easy</h3>
+
+<p>In normal circumstances, you need to install MongoDB first in some virtual machine  or directly to your laptop. But the good thing about MeteorJS is, the moment you create a new projet, it comes with a MongoDB database with it. You can access it by</p>
+
+<code>
+	meteor mongo
+</code>
+
+
+<h3>Instant HTTP JSON API</h3>
+<p>
+In normal applications SPA (single page applications), you have to do the following:
+
+<ol>
+	<li>Create the migration files to create the database tables</li>
+	<li>Develop the classes that manipulates those tables via some ORM</li>
+	<li>Develop the RESTful JSON API that will retrieve the data from database and serve the data as JSON</li>
+	<li>Create the JavaScript codes that will fetch the JSON data via REST API via AJAX</li>
+</ol>
+
+
+In MeteorJS however, you d/on't need to do all those steps!
+<br/>
+<ul>
+	<li>Tables/fields being created on the fly the first time you referenced it in the code. So the database is the one that is actually adapting to your code changes, not vice-versa. Made possible by NoSQL technology.</li>
+	<li>There is no need for ORM, since the JSON objects is being stored as is in the MongoDB. Thus no need the process of conversion of relational data to Object Oriented data.</li>
+	<li>MeteorJS handles the fetching of data from server to client, called DDP ( Distributed Data Protocol ). DDP has a JSON-based syntax and sends messages similar to the REST protocol. Additions, deletions, and changes are all sent across the wire and handled by the receiving service/client/device. Since DDP uses WebSockets rather than HTTP, the data can be pushed whenever changes occur.</li>
+	<li>You don't have to manually write codes that calls AJAX request nor DDP. Since MeteorJS maintains a mini-database in the browser. You only insert/update/delete this mini-database as if you were changing a local database. MeteorJS handles the synchronization of that mini-database to the actual database in the server using DDP.</li>
+</ul>
+
+</p>
+
+<h3>Isomorphic application</h3>
+<p>It simply means you use the same code for front-end and backend. That is compared to for example Ruby on Rails, on which you need to learn at least 3 things to build the most simple application -- Ruby, JavaScript and SQL.</p>
+<p>In MeteorJS you just use JavaScript for all things, front-end, 
+<ul>
+	<li>DOM manipulations is coded via JavaScript</li>
+	<li>Backend Codes is being run by NodeJS which is written by JavaScript</li>
+	<li>MongoDB uses JavaScript to insert/edit/delete/update its data.</li>
+</ul>
+</p>
+
+<p>The advantage of that will be very evident on </p>
