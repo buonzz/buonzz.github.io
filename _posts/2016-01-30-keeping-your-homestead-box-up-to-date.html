@@ -1,0 +1,82 @@
+---
+layout: post
+title: Keeping your Homestead box Up-to-Date 
+date: 2016-01-30 09:00:00.000000000 +08:00
+permalink: keeping-your-homestead-box-up-to-date
+header-img: "img/21182965596_7020848dac_k.jpg"
+subtitle: "As a Laravel developer, it is important that you always update your Laravel Homestead box to the latest release. This post is a simple guide on how."
+categories:
+- php
+- devops
+- laravel
+- vagrant
+---
+
+<p>Five days ago, a new version of Homestead (version 0.4.1) was released in <a href="https://atlas.hashicorp.com/laravel/boxes/homestead/versions/0.4.1" target="_blank">VagrantCloud</a>. When you vagrant up your machine, you might see messages like this:</p>
+
+{% highlight bash %}
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Checking if box 'laravel/homestead' is up to date...
+==> default: A newer version of the box 'laravel/homestead' is available! You currently
+==> default: have version '0.4.0'. The latest is version '0.4.1'. Run
+==> default: `vagrant box update` to update.
+{% endhighlight %}
+
+<p>It is important that you keep the Homestead basebox installed in your local machine up to date, since this often contains latest versions of PHP, NodeJS and other toolset that you needed to take advantage of the newest Laravel features.</p>
+
+<h3>Downloading the latest version of Homestead</h3>
+<p>To update the version, assuming you had cloned the homestead repository on ~/Homestead folder. It is a very straight forward process:</p>
+{% highlight bash %}
+cd ~/Homestead
+vagrant box update
+{% endhighlight %}
+
+<p>This will download the latest version of homestead</p>
+
+{% highlight bash %}
+==> default: Checking for updates to 'laravel/homestead'
+    default: Latest installed version: 0.4.0
+    default: Version constraints: >= 0
+    default: Provider: virtualbox
+==> default: Updating 'laravel/homestead' with provider 'virtualbox' from version
+==> default: '0.4.0' to '0.4.1'...
+==> default: Loading metadata for box 'https://atlas.hashicorp.com/laravel/homestead'
+==> default: Adding box 'laravel/homestead' (v0.4.1) for provider: virtualbox
+    default: Downloading: https://atlas.hashicorp.com/laravel/boxes/homestead/versions/0.4.1/providers/virtualbox.box
+==> default: Successfully added box 'laravel/homestead' (v0.4.1) for 'virtualbox'!
+{% endhighlight %}
+
+<p>Once the download completed, you will be able to see the latest version by issuing <i>vagrant box list</i> command:</p>
+
+{% highlight bash %}
+vagrant box list
+laravel/homestead (virtualbox, 0.4.0)
+laravel/homestead (virtualbox, 0.4.1)
+{% endhighlight %}
+
+<h3>Updating your Homestead Machine</h3>
+
+<p>Note that after you had downloaded the latest version of Homestead, it doesn't automatically updates the virtual machine you are currently using. You have to destroy the currently running VM and re-provision it:</p>
+
+<blockquote>WARNING: all the databases and data inside your Homestead machine will all be gone, so make sure to export it before proceeding!</blockquote>
+
+{% highlight bash %}
+vagrant destroy
+{% endhighlight %}
+
+
+<p>To rebuild your machine, you can issue vagrant up.</p>
+
+{% highlight bash %}
+vagrant up
+{% endhighlight %}
+
+<h3>Purging old versions</h3>
+
+<p>You might want to delete the older base boxes as it may fill your disk space. To do so:</p>
+
+{% highlight bash %}
+vagrant box remove laravel/homestead --box-version=0.4.0
+{% endhighlight %}
+
+<p>And that's it, you are done!</p>
