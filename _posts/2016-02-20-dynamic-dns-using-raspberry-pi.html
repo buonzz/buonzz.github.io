@@ -1,0 +1,72 @@
+---
+layout: post
+title: Dynamic DNS using Raspberry PI 
+date: 2016-02-20 09:00:00.000000000 +08:00
+permalink: dynamic-dns-using-raspberry-pi
+header-img: "img/21182965596_7020848dac_k.jpg"
+subtitle: "Dynamic DNS allows you to automatically update the IP resolved to a specific hostname. But the problem is the update client will only run if your computer is turned on (which you can't for 24 hours). But a Raspberry PI can be 24/7 running, which can be used for  updating your DNS entry as it changes."
+categories:
+- ddns
+- customdomain
+---
+
+
+<p>When I need to step outside my house, sometimes I need to access some files in my computer and NAS server. The problem is, as we all know, the normal Internet lines issued for residential packages has dynamic IP.That means the IP address of your router is constantly changing unpredictably.</p>
+
+<p>For that reason, I cannot simply access my files at home, being I don't know what is the most current IP address of my router. The solution to this is to have a DDNS (Dynamic DNS).</p>
+
+<p>Vitalwerks Internet Solutions offers a free service called <a href="https://www.noip.com" target="_blank">NoIP</a>. This allows you to have a yourname.ddns.net which can be binded to the current IP address of your router.</p>
+
+<p>In order for NoIP to update your DDNS entry, some device at your home needs to submit the current IP address of your router. Today, we are going to use the <a href="https://www.noip.com/support/knowledgebase/installing-the-linux-dynamic-update-client-on-ubuntu/" target="_blank">Linux</a> client installed in a Raspberry PI box.</p>
+
+<p>Mine was a  Raspberry Pi 2 Model B  with 1GB RAM Board. I had installed <a href="https://www.raspbian.org/" target="_blank">Raspbian</a> on it and had it is connected to my router via RJ-45 cable. I had the device running 24/7 and is the ideal device for performing DDNS update.</p>
+
+<p>To start with, login to your Raspberry PI box and download the DDNS client</p>
+{% highlight bash %}
+cd /usr/local/src/
+sudo wget http://www.no-ip.com/client/linux/noip-duc-linux.tar.gz
+sudo tar xf noip-duc-linux.tar.gz
+cd noip-2.1.9-1/
+sudo make install
+{% endhighlight %}
+
+<p>The above will install the <b>noip2</b> executable in /usr/local/bin/</p>
+<p>Then you need to create the configuration file. Note that the config file is not plain text file. and the values there is encrypted.</p>
+
+{% highlight bash %}
+sudo /usr/local/bin/noip2 -C
+{% endhighlight %}
+
+<p>This will create a file under /usr/local/etc/no-ip2.conf</p>
+
+<p>Now start the client by:</p>
+
+{% highlight bash %}
+sudo /usr/local/bin/noip2
+{% endhighlight %}
+
+<p>It will now start updating your DDNS entries to your current IP. To check the progress and any issue, check the logs by</p>
+
+{% highlight bash %}
+tail /var/log/syslog
+{% endhighlight %}
+
+<p>It will show up something like this</p>
+
+{% highlight bash %}
+Feb 20 12:36:21 raspberrypi noip2[18282]: v2.1.9 daemon started with NAT enabled
+Feb 20 12:36:26 raspberrypi noip2[18282]: xxxx.ddns.net set to x.x.x.x
+...
+{% endhighlight %}
+
+<p>Note that I had replaced the info above with x, but in reality, those will be the actualy ddns host and IP of your router.</p>
+
+<p>And now you are done! the client will update the ddns entry each time your IP changes. This opens a lot of possiblities</p>
+
+<ul>
+	<li>Access your home network using the DDNS url</li>
+	<li>apply a CNAME record so you can point a domain you own to a custom domain, for example mynetwork.darwinbiler.com instead of the generic mynetwork.ddns.net</li>
+	<li>Host a website in your home</li>
+</ul>
+
+<p>There is a lot of other possibilites in there and its only limited by your imagination!</p>
