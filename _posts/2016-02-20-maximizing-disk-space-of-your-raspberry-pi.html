@@ -1,0 +1,36 @@
+---
+layout: post
+title: Maximizing disk space of your Raspberry PI 
+date: 2016-02-20 09:30:00.000000000 +08:00
+permalink: maximising-disk-space-of-your-raspberry-pi
+header-img: "img/21182965596_7020848dac_k.jpg"
+subtitle: "Being we only have MicroSD card as its primary storage, we don't have that much privilige to waste too much space in your Raspberry Pi, this post will explain on how you can have as much disk space as possible in your device."
+---
+
+<p>This post assumes that you are using <a href="https://www.raspberrypi.org/downloads/raspbian/" target="_blank">Raspbian Jessie</a>.</p>
+
+<h3>Stretch the filesystem to the complete capacity of your MicroSD card</h3>
+
+<p>If you executed <b>df -h</b> you'll notice that the root filesystem is just around 2GB or so. This is done to make it fit to 2GB SD cards. Most likely though, you have 4GB or even 8GB MicroSD card, so you might want the OS to make use of that entire space. To do so, execute:</p>
+
+{% highlight bash %}
+sudo raspi-config
+{% endhighlight %}
+
+<p><img src="/img/expand-fs-rpi.png"/></p>
+
+<p>Select <b>expand_rootfs</b> to make use of the entire space of your SD card. This will require a reboot. After rebooting, try <b>df -h</b> again and you'll see you have way better larger disk space available for your device.</p>
+
+<h3>Remove the GUI</h3>
+
+<p>If you are like me, I don't really use my Raspberry PI with a monitor, I rather use my laptop and connect to my RPI via SSH. For that reason, I don't need any of those GUI-related packages so I rather just purge them. To do so:</p>
+
+{% highlight bash %}
+sudo apt-get --purge remove x11-*
+sudo apt-get --purge autoremove
+{% endhighlight %}
+
+<p>This will uninstall all x11 components and all their dependencies. In my case, I saved around ~1.5GB worth of disk space.</p>
+
+<h3>Use NFS mount as much as possible</h3>
+<p>In my case, I have a NAS storage server, called <a href="http://www.dlink.com/uk/en/support/product/dns-320l-sharecenter-2-bay-cloud-storage-enclosure" target="_blank">DLINK DNS-320L ShareCenter</a>. I strongly suggest you also do. From your NAS storage, create a NFS mount and mount it somewhere in your RPI filesystem. I use it for some really large files (file uploads for example), instead of writing them all to my SD card. This will keep your SD card dedicated for OS files and you can have your data files intact in your NAS storage.</p>
