@@ -1,0 +1,170 @@
+---
+layout: post
+title: Creating Composer Package Library 
+date: 2016-02-28 10:30:00.000000000 +08:00
+permalink: creating-composer-package-library/
+header-img: "img/21182965596_7020848dac_k.jpg"
+subtitle: "In this post, we will learn how to create a PHP library that can be easily integrated to any PHP application via Composer."
+---
+
+<p>One of the main rants about old PHP applications is PHP developers tends to copy-paste snippets of codes from the web all over the place, w/o any sort of structure, testing process and dependency management. This makes every PHP applications become a Big Ball of Mud, accumulating more and more muds as it rolls by on another monkey coder that tries to implement changes as possible by cutting-corners and applying quick patches.</p>
+
+
+<blockquote>Don't be part of that problem. Encapsulate your codes in a reusable library!</blockquote>
+
+<p>This post aims to make your life, as a library author, as easy as possible, by guiding you on how to implement a new library with the least possible steps.</p>
+
+
+<h3>Create the project folder structure</h3>
+
+<p>Execute the following in your console (you need to have Composer installed first of course). The <b>mylibrary</b> in the command is the name of your library, so replace it with the actual name.</p>
+
+{% highlight bash %}
+composer create-project buonzz/composer-library-template mylibrary
+{% endhighlight %}
+
+<p>what is happening?</p>
+
+<p>Not much, it just creates a new library under mylibrary folder. Let us take a look at the generated files.</p>
+
+<ul>
+	<li><b>src</b> is where your codes will live in, each class will need to reside in its own file inside this folder.</li>
+	<li><b>tests</b> each class that you write in src folder needs to be tested before it was even "included" into somewhere else. So basically we have tests classes there to test other classes.</li>
+	<li><b>.gitignore</b> there are certain files that we don't want to publish in Git, so we just add them to this fle for them to "get ignored by git"</li>
+	<li><b>LICENSE</b> terms of how much freedom other programmers is allowed to use this library.</li>
+	<li><b>README.md</b> it is a mini documentation of the library, this is usually the "home page" of your repo if you published it in GitHub and Packagist.</li>
+	<li><b>composer.json</b> is where the information about your library is stored, like package name, author and dependencies.</li>
+	<li><b>phpunit.xml</b> It is a configuration file of PHPUnit, so that tests classes will be able to test the classes you've written.</li>
+</ul>
+
+<p>This is the most basic strucure that you can start with.</p>
+
+<h3>Customize the generated files</h3>
+
+<p>You will see a sample class generated under <b>src/YourClass.php</b>. You will need to rename this with the actual classname. Remember that you should not put multiple classes in the same PHP file. So the classname you pick for this file should match the filename as well. If you need to write another class, create a new file.</p>
+
+<h4>Namespacing</h4>
+<p>It is a good practice that you namespace each of your classes, so your class wont clash to another classname when they are used by an application. Usually, the good namespace is your GitHub username. For example, in my case my GH username is Buonzz, so it makes sense that I have namespace like <b>Buonzz\MyLibrary</b></p>
+<p>In general, each class you make should live under <b>VendorName\PackageName</b> syntax. This should be the first line of every class in your library.</p>
+
+{% highlight php%}
+<?php 
+namespace Buonzz\Template;
+{% endhighlight%}
+
+<p>In the above example, the VendorName is Buonzz, and the package name is Template. You need to pick one of your own and make sure this is consistently placed in every PHP files in this library.</p>
+
+<p>You need to also edit the <b>composer.json</b> file, to reflect these changes.</p>
+
+{% highlight json %}
+"name": "vendorname/packagename"
+{% endhighlight %}
+
+<p>Then</p>
+
+<pre>
+{% highlight json %}
+ "psr-4": {
+            "VendorName\\PackageName\\": "src/"
+        }
+{% endhighlight %}
+</pre>
+
+<p>The above will be the information used by packagist.org, to indentify the name of your package, and the second snippet allows autoloader to know exactly what namespace to find your classes.</p>
+
+<h4>Adjust the branding</h4>
+<p>Next, you need to add a small description of what this library is for, along with keywords to easily find this package in packagist.org. You also specify the author information with your name. This is all can be adjusted in composer.json as well</p>
+
+{% highlight json %}
+    "description": "this is my very own php package.",
+    "keywords": ["my package", "composer", "package"],
+    "license": "DBAD",
+    "authors": [
+        {
+            "name": "Your Name",
+            "email": "your email"
+        }
+    ]
+{% endhighlight %}
+
+<p>After this, validate your composer.json file, to make sure you did not make any typo error when you made the adjustments by executing</p>
+
+{% highlight bash %}
+composer validate
+{% endhighlight %}
+
+<p>After this, you need to customize the README.md file included, it is basically a short documentation on what is the purpose, what is the requirements and how to use this library. You can find a more detailed documentation of how to make a README file in <a href="http://www.darwinbiler.com/designing-and-making-the-readme-file-for-your-github-repository/" target="_blank">here</a>.</p>
+
+<h4>Write the Test Class</h4>
+
+<p>There is a provider test class under tests folder. This is called "YourClassTest.php". The code provided is simply checking the corresponding class if there is any syntax error. Remember that each Class in src folder should have a test class associated with it. The test class name should be the same as the class it is testing plus "Test" string. So if you have a <b>src/Utils.php</b> class, you also need to have <b>test/UtilsTest.php</b></p>
+
+<p>We are using a library called PHPUnit, to facilitate this testing process. To install PHPUnit, you need to install it first</p>
+
+{% highlight bash %}
+composer install
+{% endhighlight %}
+
+<p>This will install phpunit in <b>vendor/bin/phpunit</b></p>
+
+<p>Now, edit the test class with your own namespace by replacing the <b>Buonzz\Template</b> namespaces with your own. After that, run the PHPUnit by executing it in console</p>
+
+{% highlight bash %}
+vendor/bin/phpunit
+{% endhighlight %}
+
+<p>It should return success, and you can continue this cycle of development until you had written all your classes and its corresponding test-classes. Unit-testing of its own is a very complex topic, so if you want to explore more about the idea, you can check the following links</p>
+
+<ul>
+	<li><a href="https://en.wikipedia.org/wiki/Test-driven_development">TDD</a></li>
+	<li><a href="https://phpunit.de/getting-started.html">PHPUnit</a></li>
+</ul>
+
+<blockquote>You should design your library so that it can be tested on its own w/o hitting external dependencies ( databasses, API, classes/functions inside another CMS or library) as much as possible</blockquote>
+
+<h3>Publish Your work</h3>
+
+<blockquote>Before publishing your package, make sure to change the "type" field in composer.json file to "library". This is so that packagist.org will recognize your package as library.</blockquote>
+
+<p>Once you are done writing your classes and you had tested it fully. Time to publish your work!. You need to have an account to the following sites before you can publish your work:</p>
+
+<ul>
+	<li>GitHub.com</li>
+	<li>Packagist.org</li>
+</ul>
+
+<p>Go on and signup an account if you don't have one yet. Once done create a new repo in your github account. The repo should be the same name as your library. After that, push the library to that repo by</p>
+
+{% highlight bash %}
+git init
+git remote add origin git@github.com:yourusername/yourlibraryname.git
+git add --all
+git commit -m "initial files"
+git tag -a v1.0.0 -m "initial release"
+git push -u origin master
+{% endhighlight %}
+
+<p>After that, click the <b>Settings</b> tab of the repo. On the left sidebar, click <b>Webhooks &amp; Services</b>. On the <b>Services</b> tab, click the <b>Add Service</b> Choose <b>Packagist</b></p>
+<p>You need to enter your username on packagist for this along with the token.</p>
+
+<p>To get the token, go to your <a href="https://packagist.org/profile/">profile page</a> and click the <b>Show Token</b> button to copy the token. Paste this token to GitHub.</p>
+
+<p>Now you are ready to submit your package to packagist!</p>
+
+<p>Go to <a href="https://packagist.org/packages/submit">https://packagist.org/packages/submit</a> and paste the url of your Github repo. It might take a while, while packagist validate your package name and library. Once done, your package is now available in packagist!</p>
+
+<p>To use your library, simply</p>
+
+{% highlight bash %}
+composer init
+composer require yourusername/yourpackagename
+{% endhighlight %}
+
+<p>Then create an index.php file that will load the autoloader</p>
+
+
+{% highlight bash %}
+require 'vendor/autoload.php';
+{% endhighlight %}
+
+<p>All the classes inside your library is now ready to use!</p>
