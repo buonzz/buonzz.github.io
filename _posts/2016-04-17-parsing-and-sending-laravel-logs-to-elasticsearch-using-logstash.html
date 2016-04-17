@@ -3,6 +3,158 @@ layout: post
 title: Parsing and Sending Laravel Logs to ElasticSearch using Logstash 
 date: 2016-04-17 15:04:00.000000000 +08:00
 permalink: parsing-and-sending-laravel-logs-to-elasticsearch-using-logstash/
-header-img: "img/21182965596_7020848dac_k.jpg"
-subtitle: "."
+header-img: "img/16126940706_0e45f64602_k.jpg"
+subtitle: "When your laravel.log file size is way too big for you to analyze, it might help to load it to ElasticSearch and analyze it there. This article will go over the basics of how you can do that using LogStash."
 ---
+
+<p>Laravel's error and logging features allows us to log application-specific events that might be proved useful in analyzing behaviour of our application. But problem arise when lets say you have 1 GB size of log file, or 10-15 different laravel application each one producing enormous amount of log data, suddenly answering questions like following is a very difficult task:
+
+<ul>
+	<li>How many error that is related to PDOException had occurred last weekend?</li>
+	<li>Compare the amount of Log::warning generated compared to last month</li>
+	<li>Sort the list of laravel applications by number of Log::critical recorded in descending order between March 1 to March 15, 2016</li>
+</ul>  
+</p>
+
+<p>Answering to this kind of inquiries might be impossible w/o any sort of tools at hand. Some people actually tries to explicitly record this events in the business logic of Laravel app itself, but that practice is really bad since that weighs down the performance of the application.</p>
+
+<p>Logstash allows us to process those gigantic log files and break them down into manageable parts. It can also monitor the log files for any new entry and automatically process it. The processed data can then be forwarded to ElasticSearch.</p>
+
+<p>ElasticSearch is a Java-based search engine with analytics capabilities, it allows you to store enormously huge amount of data, then analyze it in a way that is more than anyone could imagine. It also has a built-in REST API, on which you can query the data that you had stored on it, or use Kibana that can allow you to visually build queries instead of hitting the REST API directly.
+To summarize:
+
+<ul>
+	<li>LogStash - for parsing and pre-processing of raw log files</li>
+	<li>ElasticSearch - for storing, analysis and API of data</li>
+	<li>Kibana - serves as the User-interface of ElasticSearch so you can visually see the output of ElasticSearch results in different format (tabular, Pie Charts, Historgram etc).
+</ul>
+</p>
+
+<p>The combination of this three great products is what usually called as ELK Stack</p>
+
+<p>Once you had forwarded your Laravel log files into ELK stack, searching, analysis and any other form of inquiries is very easy to answer no matter how huge the error log files you have.</p>
+
+<h2>Setting up the ELK stack in your local machine</h2>
+
+<p>The easiest way to have an ELK stack running in your machine is to setup a vagrant box that has those 3 softwares pre-installed. That way, you don't have to worry about the details of setting those up. Follow these instructions to install it in your machine:</p>
+
+<ul>
+	<li>Install <a href="http://virtualbox.org/" target="_blank">VirtualBox</a></li>
+	<li>Install <a href="https://www.vagrantup.com/" target="_blank">Vagrant</a></li>
+	<li>Install <a href="https://git-scm.com/" target="_blank">Git</a></li>
+</ul>
+
+<p>Once you have those installed, clone the <a href="https://github.com/comperiosearch/vagrant-elk-box" target="_blank">vagrant-elk-box</a>
+
+{% highlight bash %}
+git clone https://github.com/comperiosearch/vagrant-elk-box.git
+cd vagrant-elk-box
+vagrant up
+{% endhighlight %}
+</p>
+
+<p>It might take a while for it to complete, since it will download first the basebox and install everything for you. After it had completed, you should have the following available in your local machine:</p>
+
+<ul>
+  <li>ElasticSearch <a href="http://localhost:9200/" target="_blank">http://localhost:9200/</a></li>
+  <li>Kibana <a href="http://localhost:5601/" target="_blank">http://localhost:5601/</a></li>
+  <li>Logstash - is a command line tool you can use when you login to the VM via ssh</li>
+</ul>
+
+
+<h2>Processing an Example laravel.log file</h2>
+
+<p>In able to illustrate the process, I created a sample project with sample laravel.log file in GitHub. You first need to clone this inside the vagrant-elk-box folder.</p>
+
+{% highlight bash %}
+git clone https://github.com/buonzz/logstash-laravel-logs
+{% endhighlight %}
+
+<p>Take a look at the contents of logstash-laravel-logs/logs/laravel.log<br/>This is basically a kind of file that you will usually see inside storage/logs/ folder of a Laravel 5.2 application. This log file basically simulates different kind of log output you will find in a typical Laravel log file:
+
+<ul>
+	<li>Log::emergency</li>
+	<li>Log::alert</li>
+	<li>Log::critical</li>
+	<li>Log::error</li>
+	<li>Log::warning</li>
+	<li>Log::notice</li>
+	<li>Log::info</li>
+	<li>Log::debug</li>
+</ul>
+</p>
+
+
+<p>Usually, you would like to pre-process the logs generated by those into following:
+<ul>
+	<li>Group and Filter logs by environment (local, production, testing etc)</li>
+	<li>Group and Filter logs by type (error, emergency, alert, critical,warning, notice, info, debug)</li>
+	<li>Group by date, month, year. So you can query all logs given a particular date-range</li>
+	<li>Search by particular keyword. For example, If you want to view all logs that mentions the keyword "QueryException", you should be able to retrieve it.</li>
+</ul>
+</p>
+
+<h2>Parse log files using LogStash</h2>
+<p>Now, make sure you are inside the vagrant-elk-box folder. Login to the VM by executing</p>
+
+{% highlight bash %}
+vagrant ssh
+{% endhighlight %}
+
+<p>Once inside the VM, the logstash command is available to you in this path: /opt/logstash/bin/logstash</p>
+
+<p>The sample project that we had cloned earlier is available inside the VM in this path: /vagrant/logstash-laravel-logs</p>
+
+<p>So, what we are going to do is process the /vagrant/logstash-laravel-logs/logs/laravel.log and load it to ElasticSearch running in http://localhost:9200/</p>
+
+<p>In able for logstash to do anything, it needs a configuration file where it can determine the following things:
+<ul>
+	<li>Input - what is the source of data to be processed?</li>
+	<li>Filter - How to parse the input data?</li>
+	<li>Output - Where to put the processed data?</li>
+</ul>
+</p>
+
+<p>If you look at the sample configuration file in <a href="https://github.com/buonzz/logstash-laravel-logs/blob/master/logstash.conf" target="_blank">/vagrant/logstash-laravel-logs/logstash.conf</a>, you will see that we had specified the following:
+<ul>
+	<li>Input - we specified that we would like for logstash to take the source data from stdin (i.e.  we will specify the laravel.log location in command line, more on this later). We also specified a codec called multiline, because we would like to account for log entries that spans multiple lines (stack trace generated by <a href="https://github.com/buonzz/logstash-laravel-logs/blob/master/logs/laravel.log#L2" target="_blank">Laravel errors</a>)</li>
+	<li>Filter - we used grok plugin, to match a certain pattern to look for certain keywords and parse it.</li>
+	<li>Output - we specified that we would like to store it in ElasticSearch, running on 127.0.0.1, with index name (database name) laravel_logs.</li>
+</ul>
+</p>
+
+<p>I wont go over that much of the syntax of the logstash configuration file as it requires its own dedicated tutorial. But what is important in here is we understand how we are actually informing logstash that we are giving it a log file that is generated by a Laravel application</p>
+
+<p>Now lets process some log files!<br/>While logged inside the vagrant-elk-box vm, execute the following:</p>
+
+{% highlight bash %}
+cd /vagrant/logstash-laravel-logs
+/opt/logstash/bin/logstash agent -f logstash.conf  < logs/laravel.log
+{% endhighlight %}
+
+<blockquote>Note: normally, you will not specify the log file via command line as we did above, but as a parameter in the input section of the conf file. We only did it this way, since we only want to process the file for one-time only, then exit. If we instead used a file via conf file, it will continously "watch" the file for any new entry appended to it until you explicitly kill it.</blockquote>
+
+<p>After the script is done executing, you will see a "Logstash shutdown completed". Our log data is now available in ElasticSearch!</p>
+
+
+<p>Now head on and open a browser in your machine and open <a href="http://localhost:9200/laravel_logs/_search?pretty" target="_blank">http://localhost:9200/laravel_logs/_search?pretty</a> in your browser</p>
+
+<p>Congratulations! you just had successfully processed laravel.log file via LogStash and loaded into ElasticSearch. Here is a sample output that you should be seeing</p>
+
+<script src="https://gist.github.com/buonzz/8a42426583d36192c4eef5dfa4578128.js"></script>
+
+<p>Few things to note above are
+<ul>
+	<li>Each log file corresponds to each hits.hits[ Object ] entry in the output</li>
+	<li>the _index is the index (database) name we specified earlier</li>
+	<li>the _id is the auto-generated id by ElasticSearch</li>
+	<li>_source is where our log data went into</li>
+	<li>_source.message is the original unparsed single entry in the log file (notice how multiline exception is recognized as a single entry, even though they span multiple lines in laravel.log)</li>
+	<li>_source.timestamp is the date/time value in the log file entry, this will allow us to filter log files by date or date ranges in the future</li>
+	<li>_source.env is the laravel environment as parsed in the log entry (can be production, local, testing etc). This will allow us to filter logs by environment name</li>
+	<li>_source.severity is the severity level in the log entry. This will allow us to view only specific group of log type (emergency, alert, critical, error, warning, notice, info and debug)</li>
+</ul>
+</p>
+
+<p> On the future articles, I will illustrate the power of ElasticSearch and how do you actually make use of this data to build stunning dashboards and view errors that is happening in multiple laravel apps across many servers and many more -- that is, building Kibana dashboards to actually visualize these data into a more comprehensive format.</p>
+
