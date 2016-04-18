@@ -3,7 +3,7 @@ layout: post
 title: Parsing and Sending Laravel Logs to ElasticSearch using Logstash 
 date: 2016-04-17 15:04:00.000000000 +08:00
 permalink: parsing-and-sending-laravel-logs-to-elasticsearch-using-logstash/
-header-img: "img/16126940706_0e45f64602_k.jpg"
+header-img: "img/16152348572_af4ea313ac_k.jpg"
 subtitle: "When your laravel.log file size is way too big for you to analyze, it might help to load it to ElasticSearch and analyze it there. This article will go over the basics of how you can do that using LogStash."
 ---
 
@@ -18,19 +18,21 @@ subtitle: "When your laravel.log file size is way too big for you to analyze, it
 
 <p>Answering to this kind of inquiries might be impossible w/o any sort of tools at hand. Some people actually tries to explicitly record this events in the business logic of Laravel app itself, but that practice is really bad since that weighs down the performance of the application.</p>
 
+<p>It is more ideal for you to accumulate those data in a simple log file and forward it to a background processing server that can then further process the information into a useful form. This way, your application entirely focuses in what it is supposedly doing -- serve http request in the most fastest and efficient manner.</p>
+
 <p>Logstash allows us to process those gigantic log files and break them down into manageable parts. It can also monitor the log files for any new entry and automatically process it. The processed data can then be forwarded to ElasticSearch.</p>
 
 <p>ElasticSearch is a Java-based search engine with analytics capabilities, it allows you to store enormously huge amount of data, then analyze it in a way that is more than anyone could imagine. It also has a built-in REST API, on which you can query the data that you had stored on it, or use Kibana that can allow you to visually build queries instead of hitting the REST API directly.
 To summarize:
 
 <ul>
-	<li>LogStash - for parsing and pre-processing of raw log files</li>
-	<li>ElasticSearch - for storing, analysis and API of data</li>
-	<li>Kibana - serves as the User-interface of ElasticSearch so you can visually see the output of ElasticSearch results in different format (tabular, Pie Charts, Historgram etc).
+	<li><b>E</b>lasticSearch - for storing, analysis and API of data</li>
+	<li><b>L</b>ogStash - for parsing and pre-processing of raw log files</li>	
+	<li><b>K</b>ibana - serves as the user-interface of ElasticSearch so you can visually see the output of ElasticSearch results in different format (tabular, Pie Charts, Historgram etc).
 </ul>
 </p>
 
-<p>The combination of this three great products is what usually called as ELK Stack</p>
+<p>The combination of this three great products is what usually called as ELK Stack.</p>
 
 <p>Once you had forwarded your Laravel log files into ELK stack, searching, analysis and any other form of inquiries is very easy to answer no matter how huge the error log files you have.</p>
 
@@ -60,7 +62,7 @@ vagrant up
   <li>Kibana <a href="http://localhost:5601/" target="_blank">http://localhost:5601/</a></li>
   <li>Logstash - is a command line tool you can use when you login to the VM via ssh</li>
 </ul>
-
+<blockquote>In production, you should not process logs in your local machine! ELK stack is usually installed in some seperate cluster of servers not facing your end-users (i.e. not in web servers).</blockquote>
 
 <h2>Processing an Example laravel.log file</h2>
 
