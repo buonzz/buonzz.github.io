@@ -1,0 +1,122 @@
+---
+layout: post
+title: Inverted Index versus Forward Index
+date: 2016-05-01 15:04:00.000000000 +08:00
+permalink: inverted-index-vs-forward-index/
+header-img: "img/16152348572_af4ea313ac_k.jpg"
+subtitle: "You might be curious why it was called inverted and how the normal index looks like. This article will try to answer that question."
+---
+
+<p>What makes search engine so fast in giving the results despite the enormous amount of data it needs to search is because of inverted index. To better understand how it works and why it is much better, let us take a look at the "normal" or "forward" index</p>
+
+
+<h2>How Forward Index works?</h2>
+
+<p>Let's say you have a website and would like to have so that is each page can be easily search via keywords that is present in each page. Doing a forward Index involves the following steps:</p>
+
+<ol>
+<li>Go to the first page and gather all the keywords</li>
+<li>Append the keywords in the index entry for that particular document</li>
+<li>Go to the next page and repeat step 1 until all pages is indexed</li>
+</ol>
+
+<p>When all the pages is indexed, you will end up with a list of all pages with associated keywords on it. So whenever you need to find all pages that matches a certain keyword, you'll just search the index itself and you will come up with the list of pages associated with it.</p>
+
+<table>
+	<tr>
+		<th>Page</th>
+		<th>Keywords</th>
+	</tr>
+	<tr>
+		<td>http://www.example.com/page1</td>
+		<td> hello, world, hey, wait</td>
+	</tr>
+	<tr>
+		<td>http://www.example.com/page2</td>
+		<td> greetings, world, tube, come-on</td>
+	</tr>
+	<tr>
+		<td>http://www.example.com/page3</td>
+		<td> mr, darwin, cpu, world</td>
+	</tr>
+</table>
+
+
+<p>Pretty simple eh! but as people who actualy built a search engine (Google/Yahoo/Bing)figured out, that is not how simple things are. This process comes with these problems:</p>
+
+<ul>
+	<li>The index can grew pretty large! since the indexing process records a lot of duplicate keywords in the index. For example the keyword "world" is stored multiple times</li>
+	<li>Though indexing is fast, since it only appends things in the index as it move "forwards", querying this huge index is inefficient since it has to look at every contents of index just to retrieve all pages that is related to it.</li>
+</ul>
+
+<p>This problem is the very same reason why there is a need for Inverted Index</p>
+
+<h2>How Inverted Index works?</h2>
+
+<ol>
+<li>Go to the first page and gather all the keywords</li>
+<li>For each keyword, check if the keyword is already present in the index</li>
+<li>If its present already, add the reference of that page to that index</li>
+<li>if not present, create a new entry for that keyword</li>
+<li>add additional info such as mow many times it appears in the document, location within the document and etc.</li>
+<li>Go to the next page and repeat step 1 until all pages is indexed</li>
+<li>Sort the keywords</li>
+</ol>
+
+<p>If you notice, it prevents duplicate keywords from being stored. It is being checked first if the keyword is already present and also records some information. This makes the indexing a bit slower, since for each keyword, it has to process and recheck the previous indexes. But on the other side, this makes querying VERY fast.  Since the search engine only need to look up a single record, then all pages is there already!. This is how the result of inverted index looks like:</p>
+
+<table>
+	<tr>
+		<th>Keywords</th>
+		<th>Pages</th>
+	</tr>
+	<tr>
+		<td>come-on</td>
+		<td>http://www.example.com/page2</td>
+	</tr>
+	<tr>
+		<td>cpu</td>
+		<td>http://www.example.com/page3</td>
+	</tr>
+	<tr>
+		<td>darwin</td>
+		<td>http://www.example.com/page3</td>
+	</tr>
+	<tr>
+		<td>greetings</td>
+		<td>http://www.example.com/page2</td>
+	</tr>
+	<tr>
+		<td>hello</td>
+		<td>http://www.example.com/page1</td>
+	</tr>
+	<tr>
+		<td>hey</td>
+		<td>http://www.example.com/page1</td>
+	</tr>
+	<tr>
+		<td>mr</td>
+		<td>http://www.example.com/page3</td>
+	</tr>
+	<tr>
+		<td>wait</td>
+		<td>http://www.example.com/page1</td>
+	</tr>
+	<tr>
+		<td>world</td>
+		<td>
+			http://www.example.com/page1<br/>
+			http://www.example.com/page2<br/>
+			http://www.example.com/page3
+			</td>
+	</tr>
+	<tr>
+		<td>tube</td>
+		<td>http://www.example.com/page2</td>
+	</tr>	
+</table>
+
+<p>If you observe above, when I need to know all pages that contains the word "world", it can quickly return all pages, and sine the keywords itself is also sorted, finding it among the keywords is extremely fast.</p>
+
+
+<p>And so that is what the difference of Forward vs Inverted indexes, it's all about providing a much more efficient querying process. Forward index is easier to do in indexing proces, but sucks in querying, while Inverted index is complicated during indexing time, but extremely fast in querying time.</p>
