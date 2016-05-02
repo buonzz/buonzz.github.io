@@ -1,0 +1,72 @@
+---
+layout: post
+title: Forwarding log files to Logstash server via SSH
+date: 2016-05-03 00:00:00.000000000 +08:00
+permalink: forwarding-log-files-to-logstash-server-via-ssh/
+header-img: "img/16152348572_af4ea313ac_k.jpg"
+subtitle: "There might be some instances that it is not possible to install Beats to the machine you are monitoring. This tutorial will allow you to ship the logs data to your Logstash server to process it there."
+---
+
+<p>So you have an ELK stack set up and now want to forward your nginx logs to your new shiny cluster. But for some reasons, you are not allowed to install Beats to the machines you are trying to monitor the web server logs (for example shared hosting)</p>
+
+<p>The good thing is, you have access to your log files via SSH.</p>
+
+<p>In that situation, this is what we can do:
+<ul>
+	<li>in Web Server, rsync the nginx log files to your logstash server</li>
+	<li>make a cron script that will run every minute that will re-run the rsync</li>
+</ul>
+</p>
+
+<h2>Setup rsync</h2>
+
+<p>First, you need to make sure the web server is able to access the logstash server via SSH. You might want to whitelist the web server IP to the logstash server SSH port. Additionally, add the ssh key of web server to the authorized_keys in the logstash server</p>
+
+On Web server
+{% highlight bash %}
+cat ~/.ssh/id_rsa.pub
+{% endhighlight %}
+
+Copy the output of the above command and login to Logstash Server
+{% highlight bash %}
+vi ~/.ssh/authorized_keys
+{% endhighlight %}
+
+Paste the ssh key of the web server in a new line, then save the file.
+
+Now, in web server, create a shell script called send_logs.sh with the following commands inside:
+
+{% highlight bash %}
+#!/bin/bash
+rsync -avzhe ssh /var/log/nginx/* youruser@your.logstashserver.com:/home/youruser/logs
+{% endhighlight %}
+
+Remember to replace the <b>youruser</b>, <b>your.logstashserver.com</b>  and <b>/home/youruser/logs</b> with actual values.
+Those are the logstash server ssh username, hostname of the logstash server and the target folder in the logstash server respectively.
+
+<p>Make sure your make the file executable and do a test run</p>
+{% highlight bash %}
+chmod +x send_logs.sh
+./send_logs.sh
+{% endhighlight %}
+
+<p>Check on the logstash server if the log files was actually sent there (in our example, it is on /home/youruser/logs folder)</p>
+
+<h2>Schedule when you want to forward the logs</h2>
+
+<p>Once you verified the rsync script is properly working without problem, create a cron entry that will execute this every minute (if course you can change the interval to whenever you like)</p>
+
+{% highlight bash %}
+crontab -e
+{% endhighlight %}
+
+then enter in a new line
+
+{% highlight bash %}
+* * * * * /home/youruser/send_logs.sh
+{% endhighlight %}
+
+Save the file and exit. It should be now forwarding the logs every minute!  
+The good thing about rsync is it just sends over the recent entries in the log files instead of re-sending everything every-time it will execute. It also uses compression during sending the data so it uses less bandwidth. Additionally, since you are sending stuffs via SSH it is being securely transmitted across the network.
+<br/>
+It goes without saying that this setup might incur a delay of 1 minute before you actually see the parsed data into ElasticSearch/Kibana because the log files is only being sent after every minute, but hey, you should be only doing this when it is really impossible for you to install data shippers and agents to the target servers.
