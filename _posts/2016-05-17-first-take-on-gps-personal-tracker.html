@@ -27,7 +27,7 @@ subtitle: "So I just had purchased this product called GPS Personal Tracker in L
 
 <p>
 <img style="float:left;margin:10px;" src="/img/gps/IMG_1066.JPG"/>
-The first impression you will have upon seeing the GPS tracket itself -- it is small. Which makes sense, since like for example if you want to do some covert operation and slip this tracker into someone else's bag, It is really easy since it is very light and not bulky.
+The first impression you will have upon seeing the GPS tracker itself -- it is small. Which makes sense, since like for example if you want to do some covert operation and slip this tracker into someone else's bag, It is really easy since it is very light and not bulky.
 </p>
 
 <p><img src="/img/gps/IMG_1074.JPG" style="float:right;margin:10px;"/>Mine came with 2 set of batteries, as well as two back covers (not sure why, is those parts always getting misplaced by previous customers?) It also have this manual which contains all the commands needed in able to interact with this device.</p>
@@ -36,12 +36,115 @@ The first impression you will have upon seeing the GPS tracket itself -- it is s
 MicroSD and SIM card is a bit difficult to install, since MicroSD is tucked right below the SIM card. So in case you need to get the MicroSD, you'll need to open the case, remove the battery, remove the SIM card and finally get the MicroSD (brilliant setup).
 </p>
 
-<p><img style="float:right;margin:10px;" src="/img/gps/IMG_1069.JPG" /> For the SIM card, I'm using Smart (http://smart.com.ph/) since it is the spare one that I've got. Ideally, You might need to have both numbers share the same Telco provider to prevent more expensive SMS rates. It worked pretty well in my case, I'm able to call the unit and receive locations to my phone.</p>
+<p><img style="float:right;margin:10px;" src="/img/gps/IMG_1069.JPG" /> For the SIM card, I'm using Smart (http://smart.com.ph/) since it is the spare one that I've got. Ideally, You might need to have both numbers share the same Telco provider to prevent expensive SMS rates. It worked pretty well in my case, I'm able to call the unit and receive locations to my phone.</p>
 
-<p></p>
+<p>One notable thing about the device is the curved handle-like thing over the top - it is actually the GSM/GPRS antenna. It comes with this little plastic cover that is both magnet and water proof. Probably for those cases that you need it to placed in wet areas.</p>
 
-* Sim Card and MicroSD card is not easily installable
-* green blinking text turns on right away as soon as you plug the battery
-* 2,499.00 (around $54) - not cheap.
-* feels like a small cellphone (without screen), identical like batteries, simcard and sd card placement
-* the handle like thing is its gps antenna
+<p>
+<img style="float:left;margin:10px;" src="/img/gps/IMG_1073.JPG" />
+The two buttons that you see in here is the "SOS" button and the on/off switch,though as soon as you slip in the battery, it will turn on automatically (green blinking LED), so I don't see the purpose of the on/off switch.
+Aside from that, everything else needs to be controlled via SMS commands. So it is very important that both your SIM card inside the device and the phone you are going to use to perform the initial setup has both credit.
+</p>
+
+<p>The USB connector for the accessing the data inside the device is the same cable the charger uses. It is has its own mini-casing for the charger, but you can also charge the battery itself while it is inserted still in the device. This is convinient when for example you have to charge the other battery while using the other one.<img style="float:right;margin:10px;" src="/img/gps/IMG_1164.JPG" /></p>
+
+
+<h3>Initial Setup</h3>
+
+<p>Since all commands is based on SMS, you need to have your phone ready to perform the initial setup. You might use around 30-50 credits in able to perform the initial setup of the device.</p>
+
+<p>Once you powered on the device, the green LED should blink a few times and then keep blinking in slower pace at later time (every 3 seconds).</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/1i1_uFSdGiQ" frameborder="0" allowfullscreen></iframe>
+
+<p>First, initialize the device by sending it</p>
+
+{% highlight bash %}
+begin123456
+{% endhighlight %}
+
+<p>the 123456 here is the default password, and the begin keyword simply means to initialize the settings of the device., it should reply to you with "begin ok"</p>
+
+<p>It is good idea to change the default password to something else, so lets do that</p>
+
+
+{% highlight bash %}
+password123456 XXXXXX
+{% endhighlight %}
+
+<p>the XXXXXX should be your new password (all numbers). You should keep this secret as possible by deleting the text message in your phone.</p>
+
+<p>The next thing to do is to set an <b>authorized phone number</b>. This is the <b>admin</b> number for the GPS, so make sure the first number you register is strictly being used by you. Some features might not work if you did not set the admin number, and it will also very insecure, since everyone who can call the SIM card of the GPS device will get the location of it (very bad if some stranger get a hold of your number).</p>
+
+<p>To set the authorized phone number, dial the SIM card of the GPS device, let it ring for a few seconds, then end the call. Repeat this up to 10 times. Your number will be added to the device after the 10th call, which you can confirm when it responded with an "Add master ok" text message.</p>
+
+<p>You are now set! whenever you want to locate the GPS device, just give it a call, it will hang up, then a few moments later, it will text you with a message containing it's location information. Along with the text message is a link to google maps so you can visually see in the map the exact location.</p>
+
+
+<h3>Viewing the Map location when there is no Internet</h3>
+<p>even though the text message sent by GPS tracker contains the URL to google maps, what if you have no Internet? This is easy, if you just installed <a href="http://maps.me/en/home">Maps.ME</a> or something similar offline maps, when you clicked the Google Maps link in Android, it will ask if you want to open this using that offline map. If you have no internet and you have the map downloaded in your end prior, you can just select the offline map app and you will se the location.</p>
+
+
+<h3>Registering your device to the portal</h3>
+
+<p>There is an online portal for this device called TrackerHome, it's url is on <a href="http://www.gpstrackerxy.com/" target="_blank">http://www.gpstrackerxy.com/</a>. I'm not sure as well what is up with the less obvious and generic domain name/app name, but looking at the layout of the site, it seems like built by some developer from 90's.</p>
+
+<p>With online portal, you can view the location of the GPS in a web browser in real-time. This though requires that the GPRS is enabled in your SIM card and it is able to connect to Internet.</p>
+
+<p>Go and select the Server 3 on the homepage, in the next page, click the Register button. It should display some pop-up with registration box on it (again, another old-school style). Username and password fields is pretty obvious, but the IMEI is not. To get the IMEI of your device, send this message to your GPS tracker</p>
+
+{% highlight bash %}
+imeiXXXXXX
+{% endhighlight %}
+
+<p>that is, the keyword imei followed by your six-digit password you have set earlier. It will respond to you with the IMEI code. Go on and complete the registration process.</p>
+
+<p>Once registered, go head into login page and login with your username/password. Go to <b>System Settings &gt; Terminal Management</b> Click "Add" in the top to add you device. Make sure you fill up the IMEI and other field so it's easier to see it later.</p>
+
+<p>Now, configure APN in your device. In my case, it is available on their <a href="https://help.smart.com.ph/article/prepaid-smart-mms-and-mobile-internet-apn-settings" target="_blank">website</a> This is unique for every GSM provider so you might need to google your own. For my provider, it is "smart1", so I did sent this to my device</p>
+
+{% highlight bash %}
+APNXXXXXX smart1
+{% endhighlight %}
+
+<p>It should respond with <b>APN ok</b>. <br/> Next is set the Server you had chosen in http://www.gpstrackerxy.com/ . If let's say you clicked Server 3, the IP should be 104.250.138.146 and port 9000. In able to set this to your GPS device, send the following:
+
+{% highlight bash %}
+adminipXXXXXX 104.250.138.146 9000
+{% endhighlight %}
+
+<p>It should respond with <b>adminip ok</b> After that, you need to enable GPRS, to do that, send</p>
+</p>
+
+{% highlight bash %}
+GPRSXXXXXX
+{% endhighlight %}
+
+<blockquote>Note that when in GPRS mode, calling the phone number will not respond to you with SMS. GPRS mode and SMS mode is mutually exclusive. Generally, you only want to swtich to GPRS mode if you want to view the real-time location via portal. You normally wont like to leave this on for long since it's incurring charge for using Internet!. To go back to SMS mode, just send <b>SMSXXXXXX</b></blockquote>
+
+
+<p>If all is working well, you should be able to see your device online in the portal and it should be able to display its current location in the map.<img src="/img/gps/tracker-home.png"/></p>
+
+<h4>Configuring it as a Data Logger</h4>
+
+<p>As mentioned earlier, instead of querying the device from time to time with its current location. Why not just have it logged its position every nth second and write those into MicroSD. Then later on, you view the route it had taken for whatever purpuse it may serve.</p>
+
+<p>To do this, send the following code to your device:</p>
+
+{% highlight bash %}
+save005s***nXXXXXX
+{% endhighlight%}
+
+<p>this will save the current coordinates to MicroSD every 5 seconds. You can customize this replacing 5 with any interval (in seconds) you would like. The 3 asterisks can be replaced with any number, which basically means how many times it should log (asterisks means it just keep logging with no limit)</p>
+
+<p>When you want to have the device stop logging, just send</p>
+
+{% highlight bash %}
+nosaveXXXXXX
+{% endhighlight %}
+
+<p>To view this route into a map, you need to get the USB cable and plug it into your cable device and into your computer. It will mount 2 volumes and the other volume should contain some text files with .txt extension, those are the log data. Usually, the filename is ddmmyy.txt format. Go into the portal and select <b>Reports &gt; Data Import</b> and select the .txt file. It will now load that map data into a google maps, wherein you can see the routes the GPS had taken</p>
+
+<h3>Play with other features!</h3>
+
+<p>There are many other features available on the device, read the manual provided and play with it as much as you can!</p>
