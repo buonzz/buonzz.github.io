@@ -46,10 +46,10 @@ To summarize:
 	<li>Install <a href="https://git-scm.com/" target="_blank">Git</a></li>
 </ul>
 
-<p>Once you have those installed, clone the <a href="https://github.com/comperiosearch/vagrant-elk-box" target="_blank">vagrant-elk-box</a>
+<p>Once you have those installed, clone the <a href="https://github.com/buonzz/vagrant-elk-box" target="_blank">vagrant-elk-box</a>
 
 {% highlight bash %}
-git clone https://github.com/comperiosearch/vagrant-elk-box.git
+git clone https://github.com/buonzz/vagrant-elk-box.git
 cd vagrant-elk-box
 vagrant up
 {% endhighlight %}
@@ -160,3 +160,4 @@ cd /vagrant/logstash-laravel-logs
 
 <p> On the future articles, I will illustrate the power of ElasticSearch and how do you actually make use of this data to build stunning dashboards and view errors that is happening in multiple laravel apps across many servers and many more -- that is, building Kibana dashboards to actually visualize these data into a more comprehensive format.</p>
 
+<blockquote><b>UPDATE:</b> For some reason, Puppet dependencies of the <a href="https://github.com/comperiosearch/vagrant-elk-box" target"_blank">vagrant-elk-box</a> stopped working. So I have to spin up a quick bash script to provision a simple one, which you can find in <a href="https://github.com/buonzz/vagrant-elk-box" target="_blank">here</a> It should be able to get you going on this tutorial. The links and snippets above is updated to use my own vagrant-elk-box.</blockquote>
