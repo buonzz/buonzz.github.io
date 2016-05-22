@@ -1,0 +1,72 @@
+---
+layout: post
+title: OAuth 2.0 Jargons Explained
+date: 2016-05-22 00:00:00.000000000 +08:00
+permalink: OAuth-2-jargons-explained/
+header-img: "img/16152770875_fec98f1fdf_k.jpg"
+subtitle: "Every document describing OAuth 2.0 all tends to jump into lots of jargon and intricate details without explaining what the fuss is all about, this jargon breaker will help to shed some light."
+---
+
+<h2>Why would you need OAuth 2.0 in the first place?</h2>
+
+<p>So lets say you have this login page in your application, you have a username and password field where users can input their credentials and login. Pretty simple eh? </p>
+
+<p>Though this setup is been working nice for many of us, it comes with many problems when a user account needs to be used with multiple sites. To better put this into context, imagine if you need to buy something online, each online shop needs to have some way to charge your credit card. </p>
+
+<p>If we follow the old way (the setup above) we need to input our credit card details to each and every site. Although this works in some way, this is very dangerous since your credit card information is scattered around every site, if one of those sites get hacked, then your credit card info is compromised.</p>
+
+<p>A better way to handle the situation is use a Payment Gateway (for example PayPal). You only need to provide your credit card information to PayPal, and you will use your PayPal to purchase things to other websites, this is way more secure than having to provide your credit card information to every website out there.</p>
+
+<p>This is the same logic behind OAuth 2.0, but in this case, it is the username/password that is meant to be not repeteadly shared into multiple sites. Like for example, when you need to let an application access your Facebook photos, you should not be inputting your Facebook's username/password to their website directly, but instead OAuth is being used to allow the other website to access your photos in Facebook.</p>
+
+<h2>The Jargons</h2>
+
+<p>Now knowing what OAuth is for, lets go crack some jargons you will encounter in dealing with any material explaining OAuth.</p>
+
+<h3>Access token</h3>
+<p>So, if we are not providing our user/pass to a 3rd party site, then how the 3rd party site can authenticate itself on your behalf to Facebook or any site that hosts the thing they need to access?<br/>This is done via <b>tokens</b>. This is a special string that allows 3rd party apps to access your stuffs in your behalf.</p>
+
+<h3>Grant Type</h3>
+<p>If tokens is all that is needed for a 3rd party application to access stuffs on your behalf, where this token came from? There are many ways to get those token, this different ways of acquiring tokens is what is called <b>Grant</b>.</p>
+
+<h3>Authorization Server</h3>
+<p>So in able to access stuffs, I need a token right? then there are multiple ways to retrieve this token thing (called grant types), The next question is, who gives this token?. That is the role of the Authorization server, its job is to handle the auhorization process. To better understand this, imagine you have you have a dedicated application just for handling the login page, and then the main site itself is an application by its own. The application that contains the login page is the Authorization server.</p>
+
+<h3>Resource Server</h3>
+<p>So if you split the application to two parts earlier: the login page and the site itself. The login page is called Authorization server, then what do you call the site itself? That is the Resource server. Resource, simply because it contains the stuffs that is being protected (photos, email etc).</p>
+
+<h3>Resource Owner</h3>
+<p>So if there is a resource server that serves the resources (photos, profile info, emails etc). Who is the owner of those resource? It is <b>You</b>.</p>
+
+<h3>Client</h3>
+<p>We keep mentioning "3rd party apps", but in the context of OAuth 2.0, those are referred to as "client". This can be not only websites, but could be an app in your phone, a desktop application (your browser for example ) or even some server that needs to access stuffs from your account.</p>
+
+<h3>Scope</h3>
+<p>We know that Client can access stuffs to Resource Server by supplying access token, but you certainly dont want to share everything to the Client. You only permit some part of it, like for example "view photos", "get email address" etc. This set of permissions is called Scope.</p>
+
+<h3>Authorization code</h3>
+<p>If using <i>Authorization Code Grant Type</i> to retrieve the access token, the 3rd party application needs to have an <b>authorization</b> from you, indicating you are giving consent that you are willing to give this site access to your account. This authorization code is used by 3rd party application to exchange for the access token. How authorization code is acquired by 3rd party application is by showing those popular "Login with Facebook" links in their sites and providing a callback url where Facebook can post the authorization code.</p>
+
+
+<h3>Recap, recap, recap!</h3>
+
+<p>I know things are getting confusing now, but let us fix that. To get a bigger picture, lets put an example scenario.</p>
+
+<blockquote><b>Bob</b> has some photos in <b>Facebook</b> that he wants to share with this <b>online service</b> that creates printed photo albums. For this <b>online service</b> to make the album, they need to have a <b>read-only access</b> to <b>Bob's account</b> and retrieve the <b>photos.</b> Facebook however has many ways of giving the online service to access the photos.</blockquote>
+
+<p>If we are going to translate the above statement into a lingo with lots of OAuth 2.0 jargons, it will look like this:</p>
+
+<blockquote><b>Resource Owner</b> has some  <b>Resource</b> in <b>Resource Server</b> that he wants to share with this <b>Client</b> that creates printed photo albums. For this <b>Client</b> to make the album, they need to have a read-only <b>scope</b> to <b>Resource Owner</b>s account and retrieve the <b>Resource</b>s.  <b>Authorization Server</b> however has many <b>grant types</b> of giving the <b>Client</b> to access the <b>Resource</b>.</blockquote>
+
+<p>Does it a bit more clearer? One key poiny to notice is that Facebook is both Resource Owner and Authorization Server in this scenario (they host both the login page and the pages that contains the actual photos). More often, this is the case. but it is good to know that those 2 things is different in OAuth 2.0's point of view.</p>
+
+<p>Oh, and there is more a few jargons we want to crack - the different types of Grants</p>
+
+<ul>
+	<li><b>Authorization code grant</b> - this is the typical "Login with Faceboook" links you see wherein if you click will pop-up the facebook site and redirects back to the site when you hit those "authorize" button. You use this when the Client cannot be trusted with your stuffs.</li>
+	<li><b>Implicit grant</b> - doesn't require authorization code returned, just passes the access token right away. Should be only used for "read-only operations"</li>
+	<li><b>Resource owner credentials grant</b> - it's the old school method, you input the username/password in the site directly and the Client will use it to login on your behalf (bad setup, don't use this)</li>
+	<li><b>Client credentials grant</b> - same as Resource owner credentials grant, except for the client itself has its own user/pass. Usually used for cron jobs and scripts that needs to access stuffs that is not necessarily need any user's account (for example backing up entire database somewhere else)</li>
+</ul>
+
+<p>And there you go, I might take a while to sink in to this, but trust me, make sure you understand this things before you head coding your OAuth 2.0 codes!</p>
