@@ -26,7 +26,7 @@ Although these tools might be readily available to your local workstation. In re
 
 <p>Sometimes, due to high amount of data that needs to be processed, you might need to scale out the processing into multiple machines. Most of the time, those machines has "something else" also installed. Like a RoR application, a Memcached daemon or at worst cases, a legacy application that has very old PHP version installed, which makes installation of Composer for example, not possible.</p>
 
-<p>Wouldnt it be great if there is a way to deploy your application into multiple servers and ensure all those tools and dependencies you need can be automatically installed in the target machines, while at the same time it wont conflict with the existing stuffs there?</p>
+<p>Wouldnt it be great if there is a way to deploy your application into multiple environments and ensure all those tools and dependencies you need can be automatically installed in the target machines, while at the same time ensuring it wont conflict with the existing stuffs there?</p>
 
 <h2>Introducing Docker</h2>
 
@@ -44,7 +44,7 @@ Although these tools might be readily available to your local workstation. In re
 
 {% highlight bash %}
 docker-compose up -d
-{%% endhighlight %}
+{% endhighlight %}
 
 <p>This will start fetching the base image <a href="https://hub.docker.com/r/buonzz/php-production-cli/" target="_blank">php-production-cli</a> which is basically a pre-built Docker Container that is specialized for running PHP command line applications.</p>
 
@@ -55,8 +55,8 @@ docker-compose up -d
 
 {% highlight bash %}
 docker-compose exec cli bash
-{%% endhighlight %}
+{% endhighlight %}
 
 <p>This will open a new terminal inside the container. The container has now everything you need to execute your php app! that is, ranging from Composer, Git, PHP extensions, vim, mysql clients etc.</p>
 
-<p>That means, regardless of you are in a server, local PC, Mac or Windows. This you only need two commands and voila, you have an instant environment for PHP application.</p>
+<p>That means, regardless of you are in a server, local PC, Mac or Windows. You'll only need two commands and voila, you have an instant environment for PHP application.</p>
