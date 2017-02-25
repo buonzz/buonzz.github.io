@@ -1,0 +1,62 @@
+---
+layout: post
+title: Using Docker for running PHP Command Line Applications
+date: 2017-02-25 00:00:00.000000000 +08:00
+permalink: using-docker-for-running-php-command-line-applications/
+header-img: "img/20586158743_46b96ef40b_k.jpg"
+subtitle: "A relatively complex command line application written in PHP might require Git, Composer and a few extensions to function properly. Do you know you can ship all those dependencies together to both local and production environment and ensure it is consistent across all platform?"
+---
+
+<h2>What are PHP Command Line applications?</h2>
+
+<p>As the name suggests, its an application that is being run in terminal or command prompt. Usually to perform some CPU intensive background task that executes way too long to run directly via browser.</p>
+
+<p>For example, applications built using the <a href="http://symfony.com/doc/current/components/console.html" target="_blank">Symfony Console</a> or <a href="https://laravel.com/docs/5.4/artisan" target="_blank">Laravel Artisan</a> frameworks.</p>
+
+<p>These kind of real-world applications requires more than the php executable itself, but comes with requirements such as:
+<ul>
+	<li>curl, json, mbstring, mcrypt, mysql and other php extensions</li>
+	<li><a href="http://getcomposer.org" target="_blank">Composer</a> to fetch the dependencies of the application</li>
+	<li>Git so that Composer can function properly</li>
+	<li>Basic editing tool such as vim</li>
+	<li>Basic mysql client</li>
+</ul>
+Although these tools might be readily available to your local workstation. In real world applications, you might need those basic toolset when deploying and troubleshooting the application in production servers. 
+</p>
+
+<p>Sometimes, due to high amount of data that needs to be processed, you might need to scale out the processing into multiple machines. Most of the time, those machines has "something else" also installed. Like a RoR application, a Memcached daemon or at worst cases, a legacy application that has very old PHP version installed, which makes installation of Composer for example, not possible.</p>
+
+<p>Wouldnt it be great if there is a way to deploy your application into multiple servers and ensure all those tools and dependencies you need can be automatically installed in the target machines, while at the same time it wont conflict with the existing stuffs there?</p>
+
+<h2>Introducing Docker</h2>
+
+<p>In simple terms, you can think of Docker as an extremely lightweight virtual machine. Though its not exactly like that in lower level, but that is the idea - be able to run isolated processes in the same server w/o conflicting to each other.</p>
+
+<p>You can get Docker in <a href="https://www.docker.com/products/overview" target="_blank">here</a> and make sure you have docker and docker-compose commmands installed.</p>
+
+<p>Once installed, you should create a <b>docker-compose.yml</b> file at the root of your project</p>
+<script src="https://gist.github.com/buonzz/ea7ca755cf25de6e8c97e4e897e40d28.js"></script>
+
+<p>and then, create another file called </p>
+<script src="https://gist.github.com/buonzz/4107c3622afd0100ff542eb7188b249f.js"></script>
+
+<p>You are now good to go! just hit up the following command to start fetching all the dependencies</p>
+
+{% highlight bash %}
+docker-compose up -d
+{%% endhighlight %}
+
+<p>This will start fetching the base image <a href="https://hub.docker.com/r/buonzz/php-production-cli/" target="_blank">php-production-cli</a> which is basically a pre-built Docker Container that is specialized for running PHP command line applications.</p>
+
+<p>This might take a while for the first time, but should be extremely fast the next time you do need to have another project which uses the same dependency.</p>
+
+
+<p>Once everything is finish downloading. You can now execute your PHP command line application by</p>
+
+{% highlight bash %}
+docker-compose exec cli bash
+{%% endhighlight %}
+
+<p>This will open a new terminal inside the container. The container has now everything you need to execute your php app! that is, ranging from Composer, Git, PHP extensions, vim, mysql clients etc.</p>
+
+<p>That means, regardless of you are in a server, local PC, Mac or Windows. This you only need two commands and voila, you have an instant environment for PHP application.</p>
