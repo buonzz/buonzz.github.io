@@ -1,0 +1,49 @@
+---
+layout: post
+title: Setting up WiFi that is using two Internet Service Provider simultanously (load-balanced)
+date: 2017-02-27 00:00:00.000000000 +08:00
+permalink: setting-up-wifi-that-is-using-two-internet-service-provider-simultanously-load-balanced/
+header-img: "img/20586158743_46b96ef40b_k.jpg"
+subtitle: "Traditionally, if you have a backup Internet connection, you can only use that after the primary connection failed. But what if, you can combine those two and use them simultanously?"
+---
+
+
+<h3>What you'll need</h3>
+
+<ul>
+	<li><a href="http://www.tp-link.com/us/products/details/cat-4910_TL-R470T+.html#overview" target="_blank">TL-R470T+ Load Balance Broadband Router</a></li>
+	<li>any <a href="http://www.lazada.com.ph/shop-routers/" target="_blank">Wifi Router</a></li>
+	<li>2 Internet Broadband Connection</li>
+</ul>
+
+
+<h3>Network Layout</h3>
+
+<p>In order to understand how this is going to work, you need to understand what each component does and how it will do the intended purpose.</p>
+
+<img src="/img/internet-failover.png"/>
+
+<p>Wifi users connects to the WiFi router as they usually do, then the WiFi router simply forwards these requests to TL-R470T+.</p>
+
+<p>Basically, the TL-R470T+ "splits" the traffic between the two Internet provider by doing the low level networking and abstracting things from the WiFi router and users. In their point of view it just use TL-R470T+ as a default gateway for Internet traffic.</p>
+
+<h3>Setting Up</h3>
+
+<p>Plug your 2 ISP connection to the WAN slots and connect your PC/laptop to LAN slot.  For now, you can run through a LAN cable directly to the device, so you can set it up.</p>
+
+<p>Plug the TL-R470T+ into power and boot it up.</p>
+<p>Once connected, connect to the device by opening http://192.168.0.1</p>
+<p>It will show you the login of device portal. Username is admin and the password is admin.</p>
+<p>From there, choose the "Quick Setup". Just follow the instructions in the Wizard and you should be good to go.</p>
+
+<p>Next step is to configure the Wifi router. It usually depends on the type of WiFi router you have. But one important thing to point out are. 
+
+<ul>
+	<li>Your Wifi router should point to the IP of TL-R470T+ as its default gateway</li>
+	<li>It should be connected to the LAN port of TL-R470T+</li>
+	<li>Enable DHCP server for your router (it will lease the connection to the WiFi clients)</li>
+	<li>Configure your security settings</li>
+</ul>
+</p>
+
+<p>Once you are setup. You should check the <a href="http://static.tp-link.com/resources/document/TL-R470T_V4_UG.pdf" target="_blank">PDF guide</a> for more advanced configuration. Like  Bandwidth Based Balance Routing, Application Optimized Routing, and Policy Routing to optimize bandwidth usage.</p>
