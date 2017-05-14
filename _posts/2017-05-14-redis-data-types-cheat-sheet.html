@@ -1,0 +1,67 @@
+---
+layout: post
+title: Redis Data Types Cheat Sheet
+date: 2017-05-14 00:00:00.000000000 +08:00
+permalink: redis-data-types-cheat-sheet/
+header-img: "img/20586158743_46b96ef40b_k.jpg"
+subtitle: "Want to quickly review what all these data types of Redis is for? Read on!"
+---
+
+
+<p>I assume you already know what/why/how to use Redis but more of trying to recall what are the data types of Redis is, then you've come to the right post.</p>
+
+<table>
+	<thead>
+		<th>Data Type</th>
+		<th>Command Prefix</th>
+		<th>Sorting</th>
+		<th>Unique</th>
+		<th>O(1) Operations</th>
+		<th>Good for</th>
+	</thead>
+
+	<tr>
+		<td>String</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>No</td>
+		<td> - </td>
+		<td>key-value store, counters</td>
+	</tr>
+
+	<tr>
+		<td>List</td>
+		<td>L</td>
+		<td>sorted by insertion order</td>
+		<td>No</td>
+		<td>add in head, remove in tail</td>
+		<td> - </td>
+	</tr>
+
+	<tr>
+		<td>Set</td>
+		<td>S</td>
+		<td>unordered</td>
+		<td>yes</td>
+		<td>add, remove, and test for existence</td>
+		<td> - </td>
+	</tr>
+
+	<tr>
+		<td>Hash</td>
+		<td>H</td>
+		<td> - </td>
+		<td> - </td>
+		<td> - </td>
+		<td> - </td>
+	</tr>
+
+	<tr>
+		<td>Sorted Sets</td>
+		<td>Z</td>
+		<td>sorted by score</td>
+		<td> - </td>
+		<td> - </td>
+		<td> - </td>
+	</tr>
+</table>
