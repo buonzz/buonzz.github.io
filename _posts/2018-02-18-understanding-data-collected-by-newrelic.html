@@ -1,0 +1,141 @@
+---
+layout: post
+title: Understanding Data Collected by New Relic
+date: 2018-02-18 20:00:00.000000000 +08:00
+permalink: understanding-data-collected-by-newrelic
+header-img: "img/20586158743_46b96ef40b_k.jpg"
+subtitle: "So you had installed NewRelic in your servers successfully, now what?"
+---
+
+<p>New Relic spoils us with its beautiful charts and intuitive user-interface but behind the scene is a complicated concept of data model that allows these awesome feature to be even possible.</p>
+<p><img src="/assets/newrelic-apm-overview.PNG"/></p>
+<p>For example, looking at the chart above taken from a PHP+MySQL Web application, one could easily infer that spikes in the graph signify something is "wrong" and it also tells us that a huge percentage of the application's response time is being spend in pulling some data from MySQL.</p>
+
+<p>But go on deeper and you'll be encountering a lot of keywords that you don't know what is the meaning in NewRelic's context. 
+
+<ul>
+	<li>What is a Transaction?</li>
+	<li>What are Transaction Traces?</li>
+	<li>Events Database? what the hell is that, and how it is related to this thing called metrics?</li>
+	<li>CPM, RPM, Apdex... what the hell any of this has to do with my web application?</li>
+</ul>
+
+If you have the same questions in mind, then this article is for you. This post assumes you have some background about application monitoring and knows the significance of it.</p>
+
+<h2>Events vs Metrics Timeslice</h2>
+
+<p>Every data you'll see in New Relic in general, can be either an "Event" or a "Metric Timeslice". To oversimplify it, we can roughly describe the two as:
+<ul>
+	<li><b>Event</b>- a record of "something" that had happened. For example when a web page is viewed or a backend script is executed, or a PHP script is executed. Along with these event are <b>Attributes</b> that further describe the event itself, for example the browser that was used when the web page is viewed, the country where it is viewed, and what particular date and time the event it had happened. You can then slice and dice the events further based on these <b>Attributes</b>. You can easily think of Attributes as <b>Fields</b> in the tables present in the Events database. The <b>tables</b> themselves can be of wide variety and is commonly called as <b>Event Type</b>, for example <b>Transaction</b> and <b>PageView</b> are the most common event you'll be dealing with.</li>
+	<li><b>Metric Timeslice</b>- is like a "snapshot" of certain value of interest during the particular period of time. For example, it is like asking "how much we had earned now" (metric timeslice) vs asking "give me a list of sales we have right now" (events). In this example, you are not really interested in all the details, but only asks for a simple value, a number associated with time (the time when you asked the question) vs actually asking the entire list of sales that was made including all the details.</li>
+</ul>
+</p>
+
+
+<h2>Each New Relic product records its own Events and Metrics Timeslice</h2>
+
+<p>The word "New Relic" itself is just a brand, under it are  their products which in turn records different kind of Events and Metrics Timeslice
+
+<uL>
+	<li><b>Application Performance Monitoring(APM)</b>- Transaction and TransactionError events</li>
+	<li><b>Browser</b>- PageView and PageAction event types</li>
+	<li><b>Infrastructure</b>- processes, events, storage, and network etc</li>
+	<li><b>Mobile</b>- Mobile event types</li>
+	<li><b>Synthetics</b>- SyntheticCheck, SyntheticRequest, and SyntheticPrivateMinion event types</li>
+</ul>
+Don't worry yet what are the meanings of those events, you dont need to understand all of them right away in order to be productive with New Relic. In this article though, since my example is a PHP web application, we are going to focus in data produced by APM and Browser New Relic Products. What is important for you to understand right now is to understand this data model: <br/>
+
+Your Account &gt; New Relic Product &gt; Event or Metric Data
+</p>
+
+<blockquote>Picture it like this in your mind: My Company is using New Relic products, which in turn collects data from my web servers, those data can be either an Event or a Metrics Timeslice.</blockquote>
+
+<h3>Let's zoom into PageView</h3>
+
+<p>PageView is the first data that is easiest to comprehend, as the name itself describes what its about: when a surfer visited a page, they had "viewed" the page. So, an event happened, in this case the web page is viewed. As we know from earlier section, the New Relic Product that is responsible for recording this is the <b>NewRelic Browser</b></p>
+
+<p>
+	Here is a list of commonly used Attributes(fields) in the PageView Event Type:
+	<ul>
+		<li><b>timestamp</b> - UNIX timestamp when the event had happened</li>
+		<li><b>domain</b> - the domain visited</li>
+		<li><b>pageUrl</b>- the url of the page viewed</li>
+		<li><b>session</b> - a unique identifier of that visit</li>
+		<li><b>userAgentName</b> - name of the browser used (Chrome, Firefox etc)</li>
+		<li><b>duration</b> - how long the page loaded</li>
+	</ul>
+
+	there are quite other more <b>Attributes</b> (it is easier to think of them as fields in a table)
+</p>
+
+<p>That being said, now we have this hierarchy: <br/>
+Account &gt; NR Browser (New Relic Product) &gt; PageView(Events Database)
+</p>
+
+<h3>Querying the raw data using NRQL</h3>
+
+<p>Now that you understand that there is such a PageView event type, and a few of its attributes. Let us see how you can perform some basic queries to that table directly. Go to the NewRelic Dashboard and head into the section called <b>Insights</b> (not all subscription might have this)<br/>
+<img src="/assets/newrelic-insights-screenshot.PNG"/></p>
+
+<p>The above basically allows you to select all fields from the PageView table - sounds familiar right? <br/> It is like an old-school SQL-syntax you already know, except for the fact that all the data collecting parts (INSERT/UPDATE is already being automatically inserted for you) and the only thing you need to worry about is querying and analysing the collected data itself.</p>
+
+<h3>Here is a few tricks you can do with NRQL</h3>
+
+<p>
+	filter by country code<br/>
+	<pre>SELECT * from PageView where countryCode='US'</pre>
+
+	show all page views from 1 day ago until 30 minutes ago<br/>
+	<pre>SELECT * from PageView SINCE 1 day ago UNTIL 30 minutes ago</pre>
+	whereas SINCE specifies the start and UNTIL specifies the end range of the time filter.<br/>
+	count pageviews for each domain
+	<pre>SELECT count(*) from PageView FACET domain</pre>
+</p>
+
+<p>
+	Things to keep in mind
+	<ul>
+		<li>The timezone being used by Insight query is whatever the timezone of the computer you are working on. If you are working with a buddy who is in a different timezone, if might be a good idea to specify the timezone via <b>WITH TIMEZONE</b> parameter</li>
+		<li>If you did specify UNTIL, it defaults to the value of NOW</li>
+		<li>If you want to explore other fields available, click the <b>Data Explorer</b> link in the sidebar, and browse all kinds of events/attributes available</li>
+	</ul>
+
+	Moreover, you can read the <a href="https://docs.newrelic.com/docs/insights/nrql-new-relic-query-language/nrql-resources/nrql-syntax-components-functions" target="_blank">official documentation</a> for the complete list of NRQL keywords/functions.
+</p>
+
+<h3>Transactions</h3>
+<p>While NewRelic Browser deals with Front-end events, such as PageView, there is a lot out there happening aside from what is being displayed in the browser. For example
+<ul>
+	<li>PHP code connecting to MySQL db server and executing query</li>
+	<li>posting/receiving data to a 3rd party service/api</li>
+	<li>a background script running, processing long running tasks, such as resizing media files or sending emails</li>
+</ul>
+These are things you might want to have a better understanding of, as they are the business processes that directly effects whatever will gonna be outputted in the user's browser sooner or later. <br/> That is what New Relic's APM (short for Application Performance Monitoring) is for.<br/>
+Just like how you can query NR Browser's events by querying the PageView event, APM stores its data in <b>Transaction</b><br/>
+
+You can inspect the fields related to this event in Data Explorer, execute a few queries to see what is there. And more often than not, you'll be able to get the hang of it like how you did in PageView event.
+</p>
+
+<blockquote>At New Relic, a transaction is defined as one logical unit of work in a software application. Specifically, it refers to the function calls and method calls that make up that unit of work. For New Relic APM, it will often refer to a web transaction, which represents activity in an application between the application receiving a web request and a response being sent</blockquote>
+
+<p>Within each Transaction, are <b>Segments</b> which are the actual calls to the database etc. Note that the Transaction.Name values might confuse you, as the values can be taken based on "backend" script that is executing that. For example, if your app is using as Laravel Framework, the transaction name might end up as <b>WebTransaction/Action/Home/index</b> whereas the Home is the Controller and the Index is the method of that controller.</p>
+
+<h3>Traces</h3>
+<p>Everytime some "anomaly" are found, such as very slow transactions, New Relic records all the available function calls, database calls, and external calls that was made via that transaction. This is so you can troubleshoot them and inspect why it is behaving that way. For example:
+<img src="/assets/lumen-transaction-trace.jpg"/>
+</p>
+
+<p>More often, that is the ONLY thing you are interested into, as it signify some unexpected issue happening within your infrastructure. Unfortunately, this can be only inspected via the APM UI (at the time of writing, Feb 2017) and one can not query this via NRQL.</p>
+
+<p>You can view such, by going to New Relic APM, on the side bar, click the Transactions. There would be a Transaction traces section in the footer (if there is none, great. means your app is working fine!)</p>
+
+<h3>Custom Attributes</h3>
+<p>Some of you might say, all these data collected by NewRelic is great, but what if I want to associate some custom data?. That is where the Custom attributes is for, since we know that attributes is just a fancy name for field in those events database, one can easily infer that adding additional field to a Transaction of PageView is simply adding custom attributes during the application execution. This can be done via frontend or backend code. See the <a href="https://docs.newrelic.com/docs/agents/manage-apm-agents/agent-data/collect-custom-attributes" target="_blank">official documentation</a> to know how to do this.</p>
+
+<p>Once you had collected a custom attribute, you can easily query those via NRQL, you can use it as WHERE clause in Insight, which allows you to easily filter the data related to a field specific to your application's use-case (username, invoice id etc)</p>
+
+<p>All in all, that is all the information you need to get started in doing some more serious stuff with your NewRelic account. The more you poke with it, the more you gonna have a full understanding of your NewRelic data</p>
+
+<h3>Where to go from here?</h3>
+
+<p>Visit <a href="https://docs.newrelic.com/docs/using-new-relic/welcome-new-relic/getting-started/glossary" target="_blank">Glossary</a> to have a better understanding of terms being used in New Relic. Once you have done that, explore the documentation about <a href="https://docs.newrelic.com/docs/apm/transactions/intro-transactions/transactions-new-relic-apm" target="_blank">Transaction</a> and <A href="https://docs.newrelic.com/docs/insights/nrql-new-relic-query-language/using-nrql/introduction-nrql" target="_blank">NRQL</a></p>
