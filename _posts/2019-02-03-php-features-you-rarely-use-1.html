@@ -1,0 +1,104 @@
+---
+layout: post
+title: PHP features that you rarely use - Part 1
+date: 2019-02-03 20:00:00.000000000 +08:00
+permalink: php-features-you-rarely-use-1
+header-img: "img/20586158743_46b96ef40b_k.jpg"
+subtitle: "Once you get past the basics of PHP, you might want to check these PHP language features!"
+---
+
+
+This article is written for seasoned PHP developers who been using PHP for everyday work and would be interested to see some feature they often oversee.
+
+
+<h2> Circumventing illegal variable names using Variable variables</h2>
+
+
+<pre>
+$name = '123'; /* 123 is your variable name, this would normally be invalid. */ 
+$$name = '456'; // the  $$ here says that this is a variable variable - a variable whose name is contained in another variable. 
+echo ${'123'}; // Finally, using curly braces you can output '456'
+</pre>
+
+<h2> The difference between isset() and empty() functions</h2>
+
+<ul>
+<li><b> isset()</b> will return true if a variable exists and has a value other than NULL</li>
+<li><b>empty()</b> will return true if the value passed to it is NULL, or any value that can be coerced to false, including an empty string, an empty array, integer zero, and string “0”</li>
+</ul>
+
+
+<h2>functions and constants will fallback to global namespace if its not present in current namespace</h2>
+
+<pre>
+namespace foo;
+strlen("foo"); // falls back to \strlen();
+</pre>
+
+but if you attempt to use a class or interface, it wont:
+
+<pre>
+namespace foo;
+$now = new DateTime(); // this will cause error, since it will try to use \foo\Datetime
+</pre>
+
+the above DateTime will only work if you prefix it with "\" (e.g \DateTime), indicating it is in the global scope (it will not automatically fallback)
+
+<h3>Using namespaced item dynamically</h3>
+
+You can strore the fully qualified namespace of a class inside a string, then use that to instantiate it.
+
+<pre>
+$class = "\Foo\Bar\MyString";
+$string = new $class("this is a param passed to constructor");
+</pre>
+
+<h3>All functions in PHP always return a value</h3>
+
+the following function will return the value of NULL, even if you did not specified any return statement.
+<pre>function donothing(){}</pre>
+
+<h3>Variadics</h3>
+
+this allow you to explicitly denote a function as accepting a variable length argument list
+
+<pre>
+function f($arg1, ...$args) {    
+	
+	$count = strlen ($arg1);    
+	
+	foreach ($args as $arg) {       
+ 		$count += strlen($arg);    
+	} 
+
+	return $count;
+}
+</pre>
+the 3 dots in the arguments says that the function can have more than 1 arguments
+
+
+<h3>Argument unpacking or “splat.”</h3>
+
+Argument unpacking works the opposite of the way variadics does, allowing you to unpack an array-like data structure into an argument list when calling a function or method.
+
+<pre>
+	$args = ["World", "Universe", "Hello World"];
+	echo str_replace(...$args); // Returns "Hello Universe"
+</pre>
+
+
+<h3>Using curly braces to interpolate variable names inside a string</h3>
+
+<pre>
+$me = 'Darwin';
+$names = array('Biler', 'Jones', 'Jackson');
+echo "There cannot be more than two {$me}s!"; // w/o the curly braces, the interpreter will look for $mes variable
+echo "Citation: {$names[1]}[1987]"; // w/o the curly braces, php interpreter will treat [1987] as an array index
+</pre>
+
+
+That should be the first batch!
+Soon - the part 2...
+
+
+
