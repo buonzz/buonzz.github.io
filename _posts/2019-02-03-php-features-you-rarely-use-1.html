@@ -4,7 +4,7 @@ title: PHP features that you rarely use - Part 1
 date: 2019-02-03 20:00:00.000000000 +08:00
 permalink: php-features-you-rarely-use-1
 header-img: "img/20586158743_46b96ef40b_k.jpg"
-subtitle: "Once you get past the basics of PHP, you might want to check these PHP language features!"
+subtitle: "Once you get past the basics of PHP, you might want to check these lesser known PHP language features!"
 ---
 
 
@@ -96,9 +96,61 @@ echo "There cannot be more than two {$me}s!"; // w/o the curly braces, the inter
 echo "Citation: {$names[1]}[1987]"; // w/o the curly braces, php interpreter will treat [1987] as an array index
 </pre>
 
+<h3>String Dereferencing</h3>
 
-That should be the first batch!
-Soon - the part 2...
+You can treat a string as an array, here we can use dereferencing to get the item in index 1.
+<pre>
+echo "abcdef"[1]; // Outputs 'b'	
+</pre>
 
+<h3>Dangling/Trailing Comma</h3>
+
+you can leave a comma after the last item in the array
+<pre>
+ $points = [
+     1,
+     5,
+     7,
+     9,
+ ];	
+</pre>
+
+or in function call
+
+<pre>
+unset(
+    $one,
+    $two,
+    $three,
+);	
+</pre>
+
+<h3>Grouped use declarations</h3>
+
+if you have Class1 and Class2 inside the \Foo\Bar namespace, you can declare them in one statement like:
+
+<pre>
+use Foo\Bar\{
+    Class1,
+    Class2,
+};
+</pre>
+
+
+<h3>Using list in foreach</h3>
+
+<pre>
+$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+$sql = "SELECT user_first, user_last, last_login FROM users";
+$result = $pdo->query($sql);
+foreach ($result as list($first, $last, $last_login)) {
+   echo "$last, $first - Last Login: $last_login" . PHP_EOL;
+}
+</pre>
+
+
+<p>I hope those snippets can be quite useful for you. That should be the first batch!</p>
+
+<p>Soon - the part 2...</p>
 
 
