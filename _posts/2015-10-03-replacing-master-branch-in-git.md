@@ -10,6 +10,16 @@ header-img: "img/16126940706_0e45f64602_k.jpg"
 subtitle: "In a project managed by Git, there might be times that you need to completely trash the master branch and completely replace with another branch"
 ---
 
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- inline to posts -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:250px;height:250px"
+     data-ad-client="ca-pub-0845730634111642"
+     data-ad-slot="8010460709"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
 In a project managed by Git, there might be times that you need to completely trash the master branch and completely replace with another branch. 
 
 lets say you have a "v2" branch. you can replace the master branch with the following steps
