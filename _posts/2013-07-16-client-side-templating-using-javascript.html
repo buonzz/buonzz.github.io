@@ -38,9 +38,11 @@ It simply takes an JSON data, and display each JSON object as a p tag.</p>
 		<script type="text/javascript" src="jquery-1.10.0.min.js"></script>
 		<script type="text/javascript" src="handlebars.js"></script>		
 		<script id="header" type="text/x-handlebars-template">
+		{% raw %}
 		{{#each customers}}
 			<p> {{ firstName }} {{ lastName }} </p>
 		{{/each}}
+		{% endraw %}
 		</script>
 		
 		<script type="text/javascript">

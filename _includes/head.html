@@ -7,6 +7,37 @@
     <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
 
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+    {% if page.subtitle %} <meta name="description" content="{{ page.subtitle }}"/>{% endif %}
+    <meta property="og:type" content="article" />
+    {% if page.title %} <meta property="og:title" content="{{ page.title}}" />{% endif %}
+    {% if page.subtitle %} <meta property="og:description" content="{{ page.subtitle}}" />{% endif %}
+    <meta property="og:url" content="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}" />
+    <meta property="og:site_name" content="Darwin Biler" />
+    {% if page.tags %}
+    <meta property="article:tag" content="{{ page.tags | join "," }}" />
+    {% endif %}
+    <meta property="article:section" content="Information Technology" />
+    {% if page.date %}<meta property="article:published_time" content="{{ page.date }}" />{% endif %}
+    {% if page.date %}<meta property="article:modified_time" content="{{ page.date }}" />{% endif %}
+    {% if page.date %}<meta property="og:updated_time" content="{{ page.date }}" />{% endif %}
+    {% if page.featured_image %}
+    <meta property="og:image" content="{{ page.featured_image}}" />
+    <meta property="og:image:secure_url" content="{{ page.featured_image}}" />
+    {% endif %}
+    <meta name="twitter:card" content="summary" />
+    {% if page.subtitle %} <meta name="twitter:description" content="{{ page.subtitle }}" />{% endif %}
+    {% if page.title %}<meta name="twitter:title" content="{{ page.title}}" />{% endif %}
+    {% if page.featured_image %}<meta name="twitter:image" content="{{ page.featured_image}}" />{% endif %}
+
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "WebSite",
+            "url": "https://www.darwinbiler.com",
+            "name": "Darwin Biler",
+            "description": "Web Development Blog"
+        }
+    </script>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="{{ "/css/bootstrap.min.css" | prepend: site.baseurl }}">
