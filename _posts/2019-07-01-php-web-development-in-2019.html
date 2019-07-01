@@ -1,0 +1,90 @@
+---
+layout: post
+title: PHP Web Development in 2019
+date: 2019-07-01 00:00:00.000000000 +08:00
+permalink: php-web-development-in-2019
+header-img: "img/20586158743_46b96ef40b_k.jpg"
+subtitle: "If you are stuck in old-school PHP, you better read this..."
+tags:
+    - best practices
+    - modern php developer
+    - old school php
+    - 90s kids 
+---
+
+This article is more of "how to think" like a modern PHP developer than "how to write" PHP. 
+If you are like me who learned PHP 10 years ago (2009), the landscape and ecosystem is entirely different than today.<br/>
+
+<p><img src="/assets/steve-buscemi-hello-fellow-kids.jpg"/></p>
+
+
+<h2>We dont call them "script" anymore, we call them "product" or "app"</h2>
+
+<p>Before, whenever some functionality is needed, it is pretty common for people to look for a corresponding "script" for that
+    <ul>
+        <li>Do you have youtube clone script?</li>
+        <li>Where could I buy a user management script?</li>
+        <li>I have a script to optimize my site but it is broken</li>
+    </ul>
+You'll often read those kind of sentences in old forums, emails and conversations. 
+
+Today, whenever a user needs some functionality, this is how they refer to it:<br/><br/>
+
+
+<ul>
+    <li>Is there an app that does this?</li>
+    <li>What startup is offering this kind of product?</li>
+    <li>How can we optimize this app?</li>
+</ul>
+
+If you are asking <i>What exactly means by app?</i>, you can check <b><a href="https://12factor.net/" rel="nofollow" target="_blank">The Twelve Factor</a></b> to know what exactly is needed for an app to be an app.
+</p>
+
+<h2>Writing in "Core PHP" is not cool anymore</h2>
+
+<p>First things first, a lot of people who calls themselve a "PHP Core Developer" is misusing the term "core"</p>
+<p>What they THINK Core PHP means: <i> Writing scripts without using framework or libraries and only using core functions.</i></p>
+<p>What does Core PHP REALLY means:<i> You are C or C++ programmer who is contributing to maintaining and optimization of  
+    <a href="https://github.com/php/php-src" target="_blank" rel="nofollow">PHP Interpreter source code</a></i></p>
+
+<p>Now, lets say we take the 1st context (writing in php without frameworks), the only situations you should be doing that are:
+    <ul>
+        <li>You have full mastery of ANY existing framework and you think you can write a better one</li>
+        <li>You could comply with <a href="https://12factor.net/" target="_blank" rel="nofollow">12 Factor App</a> without cutting corners and delaying your project timeline.</li>
+        <li>You need to fix a bug or add a simple feature on a legacy application</li>
+        <li>You are developing an SDK (libraries to interact with APIs) or Tools (Composer, PHPUnit)</li>
+    </ul>
+</p>
+
+<p>You should NOT be coding in "Core PHP" if:
+    <ul>
+        <li>You don't have understanding of how to build a good framework from scratch. Frameworks are unavoidable, it is either you use an existing one or unconsiously building one.</li>
+        <li>You dont know how to use any existing framework or library</li>
+        <li>You dont know what PSR is</li>
+    </ul>
+</p>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-0845730634111642"
+     data-ad-slot="4255061397"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<h2>We dont Copy-Paste PHP Classes anymore</h2>
+
+<p>If you are guy who often browse <a href="https://www.phpclasses.org" target="blank" rel="nofollow">phpclasses.org</a> whenever you need something, 
+    let me introduce you to <a href="https://packagist.org/"  target="blank" rel="nofollow">Packagist</a> and <a href="https://getcomposer.org/"  target="blank" rel="nofollow">Composer</a>
+    Please know how to use those couple of tools and you'll see what I mean.
+</p>
+
+<h2>We dont use Filezilla to use edit files in live/production anymore</h2>
+
+<p>This is a habit that is hard to break, specially if you are WordPress Developer. But hey, check the concepts of <a href="https://dzone.com/articles/what-is-continuous-integration-andontinuous-delive"  target="blank" rel="nofollow">Continous Integration and Delivery</a>. And if you are a WP developer, please check <a href="https://roots.io/"  target="blank" rel="nofollow">Roots.io</a>
+</p>
+
+<p>There you have it! Sorry if you are expecting some cool PHP syntax, but if that is what you are looking for, I have a <a href="/php-features-you-rarely-use-1">post</a> for that :)</p>
