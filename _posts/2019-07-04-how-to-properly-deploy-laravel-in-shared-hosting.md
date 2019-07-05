@@ -41,6 +41,9 @@ tags:
 </ul>
 
 <img src="/assets/laravel-cpanel-screenshot-1.png" style="width:250px;">
+<blockquote>
+If you dont see the Terminal Icon, that means your shared account doesn't have "Shell Access" turned on. You might need to ask your Hosting Provider turn it on for you. You'll need to execute migrations and fetch Composer dependencies.
+</blockquote>
 
 <p>
 It will launch the terminal. This is  where you will spend most of your work, so you better get familiar with it. 
@@ -96,5 +99,153 @@ You'll see a bunch of list like above, but what is important is you have the fol
 
 </p>
 
+<h2>Install Composer</h2>
 
-<>
+configure your shell environment to use composer
+
+{% highlight bash %}
+echo 'alias composer="php -d allow_url_fopen=On /home/username/composer.phar"' >> ~/.bashrc
+source ~/.bashrc
+{% endhighlight %}
+
+<blockquote>
+replace username with your own username
+</blockquote>
+
+download composer installer
+{% highlight bash %}
+cd ~
+curl -k -O https://getcomposer.org/installer
+{% endhighlight %}
+
+install it
+{% highlight bash %}
+php -d allow_url_fopen=On installer
+{% endhighlight %}
+
+verify you have it
+{% highlight bash %}
+composer -V
+Composer version 1.7.2 2018-08-16 16:57:12
+{% endhighlight %}
+
+<h2>Configure Git</h2>
+
+<blockquote>Most cPanel installations comes with Git pre-installed, if it is not, you might need to ask your hosting provider to have it installed.
+</blockquote>
+
+if you dont have an SSH key yet configured for this account, you need to generate one. Please check first by executing the following command
+{% highlight bash %}
+cat ~/.ssh/id_rsa.pub
+{% endhighlight %}
+
+if it says cat: /home/lbp/.ssh/id_rsa.pub: No such file or directory, that means you dont have an ssh key yet. You can generate one by doing the following:
+{% highlight bash %}
+ssh-keygen -t rsa -b 4096 -C "cpanel username"
+{% endhighlight %}
+
+once done, execute this again
+{% highlight bash %}
+cat ~/.ssh/id_rsa.pub
+{% endhighlight %}
+and copy the outputted text to your clipboard, youll gonna need to paste it in your Git repo.
+
+I assume your app is hosted in github, for example  https://github.com/username/repo-name/
+
+Go into Settings Tab -> Deploy Keys in the side bar  https://github.com/username/repo-name/settings/keys
+
+You'll see something like this
+
+<img src="/assets/laravel-cpanel-deploykeys.png"/>
+
+Click the "Add deploy key" button and paste the output of the command earlier  in the Key field(your ssh public key). Leave the "Allow write access" unchecked. 
+
+<h2>Setup the app</h2>
+
+Now, clone the repo to a folder named "app", it should be in /home/username/app
+
+{% highlight bash %}
+git clone git@github.com:username/repo.git app
+{% endhighlight %}
+
+go to the app folder and install the dependencies
+
+{% highlight bash %}
+composer install
+{% endhighlight %}
+
+while that is installing, create a new MySQL database in cPanel in DATABASES -> MySQL Databases section. take note of the database name, username and password.
+
+copy the .env.example file to .env
+
+{% highlight bash %}
+cp .env.example .env
+{% endhighlight %}
+
+edit the .env file and configure it with your setting
+
+{% highlight bash %}
+nano .env
+{% endhighlight %}
+
+few key settings that is important are
+
+{% highlight bash %}
+DB_HOST=localhost
+DB_CONNECTION=mysql
+DB_PORT=3306
+DB_DATABASE=yourdbname
+DB_USERNAME=youruser
+DB_PASSWORD=yourpass
+APP_ENV=production
+APP_DEBUG=false
+{% endhighlight %}
+
+generate the application key
+
+{% highlight bash %}
+php artisan key:generate
+{% endhighlight %}
+
+run the migrations
+
+{% highlight bash %}
+php artisan migrate
+{% endhighlight %}
+
+<blockquote>
+If you received an error of "Specified key was too long; maxkey length is 1000 bytes", you need to check this article for the <a href="https://laravel-news.com/laravel-5-4-key-too-long-error" target="blank" rel="nofollow">fix</a>. Apply the fix in the repo, then issue "git pull origin master" so that this copy will receive the fix . Then go to PhpMyAdmin, drop all the tables there and try running the migrate command again.
+</blockquote>
+
+
+finally, set the permission of the storage folder so that the web server can write to it
+
+{% highlight bash %}
+chmod -R 775 storage
+{% endhighlight %}
+
+<h2>Make the app accessible to public</h2>
+
+right now, the app is not accessible outside because we placed it under /home/user/app directory. The only folder that is accessible to public is /home/user/public_html
+but we dont want to place all of our framework files into public_html folder. So what we gonna do is simply make a <a href="https://en.wikipedia.org/wiki/Symbolic_link" target="_blank" rel="nofollow">Symbolic link</a> to our /home/user/app/public folder.
+
+to do this, backup first a copy of the public_html folder
+{% highlight bash %}
+mv  public_html public_html_old
+{% endhighlight %}
+
+create the symlink
+
+{% highlight bash %}
+ln -s /home/user/app/public /home/user/public_html
+{% endhighlight %}
+
+your folder structure should be similar to this
+{% highlight bash %}
+public_html -> /home/user/app/public
+public_html_old
+www -> public_html
+{% endhighlight %}
+
+now go ahead and visit your site, it should be working now!
+
