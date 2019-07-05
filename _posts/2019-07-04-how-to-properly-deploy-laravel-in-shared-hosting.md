@@ -139,7 +139,7 @@ if you dont have an SSH key yet configured for this account, you need to generat
 cat ~/.ssh/id_rsa.pub
 {% endhighlight %}
 
-if it says cat: /home/lbp/.ssh/id_rsa.pub: No such file or directory, that means you dont have an ssh key yet. You can generate one by doing the following:
+if it says cat: /home/user/.ssh/id_rsa.pub: No such file or directory, that means you dont have an ssh key yet. You can generate one by doing the following:
 {% highlight bash %}
 ssh-keygen -t rsa -b 4096 -C "cpanel username"
 {% endhighlight %}
@@ -248,4 +248,34 @@ www -> public_html
 {% endhighlight %}
 
 now go ahead and visit your site, it should be working now!
+
+
+<h5>Configure Cron Job</h5>
+
+We are not finished yet!  if you are app needs to run some background processes, you might need to configure the cron job, to do this go to Advanced -> Cron Job menu in cPanel admin.
+
+and add the following
+{% highlight bash %}
+cd /home/user/app/ && php artisan schedule:run >> /dev/null 2>&1
+{% endhighlight %}
+
+<img src="/assets/laravel-cpanel-cron.png">
+
+You are done!
+
+
+<h5>Workflow</h5>
+
+Now that you have your app setup, how do you push new changes to it? Simple:
+
+<ul>
+<li>make changes in your local environment</li>
+<li>push to remote repo</li>
+<li>git pull in the cPanel</li>
+</ul>
+
+Or you can setup some tool, to automatically issue git pull for you by setting up a webhook in your Github repo. This is so that everytime someone pushes in your master branch, it will automaticaly deploy in your cPanel without you even logging in to terminal!
+
+This is what actually Laravel Envoyer is doing, among other things such as managing releases and supporting hooks for each stage.
+
 
