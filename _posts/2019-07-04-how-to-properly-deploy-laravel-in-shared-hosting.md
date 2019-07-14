@@ -217,11 +217,17 @@ php artisan migrate
 If you received an error of "Specified key was too long; maxkey length is 1000 bytes", you need to check this article for the <a href="https://laravel-news.com/laravel-5-4-key-too-long-error" target="blank" rel="nofollow">fix</a>. Apply the fix in the repo, then issue "git pull origin master" so that this copy will receive the fix . Then go to PhpMyAdmin, drop all the tables there and try running the migrate command again.
 </blockquote>
 
-
-finally, set the permission of the storage folder so that the web server can write to it
+set the permission of the storage folder so that the web server can write to it
 
 {% highlight bash %}
 chmod -R 775 storage
+{% endhighlight %}
+
+finally, optimize things up!
+{% highlight bash %}
+php composer dumpautoload -o
+php artisan config:cache
+php artisan route:cache
 {% endhighlight %}
 
 <h2>Make the app accessible to public</h2>
