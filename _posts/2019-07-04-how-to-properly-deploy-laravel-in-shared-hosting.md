@@ -12,7 +12,7 @@ tags:
     - how to install laravel in cpanel 
 ---
 
-<h1>So you want to deploy your Laravel app ( Laravel 5.8 a the time of writing) in cPanel?</h1>
+<h1>So you want to deploy your Laravel app ( Laravel 5.8 at the time of writing) in cPanel?</h1>
 
 <p>You might have your own reasons, but Laravel is best hosted in a VPS or cheap virtual machine like <a href="https://m.do.co/c/21ed578f8cd3" target="_blank" rel="nofollow">Digital Ocean</a> which offers as low as $5/month.</p>
 
