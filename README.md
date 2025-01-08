@@ -22,3 +22,17 @@ You can run `jekyll serve --watch` and `grunt watch` at the same time to watch f
 ## Support
 
 Visit Clean Blog's template overview page on Start Bootstrap at http://startbootstrap.com/template-overviews/clean-blog/ and leave a comment, email feedback@startbootstrap.com, or open an issue here on GitHub for support.
+
+
+
+## Workflow
+
+install jekyll
+```
+gem install --user-install jekyll
+```
+
+run jekyll
+```
+jekyll serve
+```
