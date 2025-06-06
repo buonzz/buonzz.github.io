@@ -2,6 +2,7 @@
 title: "The Hidden Costs of AI Tools: What Business Owners Need to Know"
 date: 2025-05-09
 author: Darwin
+subtitle: "AI tools today offer **unprecedented power and flexibility** for businesses. But it’s easy to get swept up in the excitement and start building systems that rely on **chains of third-party services** — without realizing the privacy, reliability, and cost tradeoffs hidden underneath"
 ---
 
 AI tools have exploded in popularity over the past few years, making tasks like summarizing documents, generating content, and building chatbots faster and easier than ever.  
