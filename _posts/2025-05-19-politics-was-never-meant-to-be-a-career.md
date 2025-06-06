@@ -1,3 +1,7 @@
+---
+subtitle: "Politics should be **an extension of real life**, not a separate class of careerists. When leaders come from the same industries, communities, and experiences as the people they represent, decisions are more grounded, honest, and effective"
+---
+
 # Politics Was Never Meant to Be a Career
 
 In modern times, politics has become a profession in itself. Many politicians spend their entire adult lives campaigning, building alliances, and staying in office. But that was never how politics was supposed to work.
