@@ -3,6 +3,7 @@ layout: post
 title: "How I Transferred a 2TB Backblaze B2 Snapshot to AWS Glacier for $2"
 date: 2025-04-16
 tags: [aws, glacier, s3, backblaze, rclone, devops]
+subtitle: "If you're storing large backups in **Backblaze B2** but want to archive them long-term into **AWS S3 Glacier Deep Archive**, this guide will walk you through exactly how I did that — **for just around $2**."
 ---
 
 If you're storing large backups in **Backblaze B2** but want to archive them long-term into **AWS S3 Glacier Deep Archive**, this guide will walk you through exactly how I did that — **for just around $2**.
