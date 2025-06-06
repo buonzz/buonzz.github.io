@@ -2,6 +2,7 @@
 title: "Not a Snob, Just Focused: Why I Chose a Different Path"
 date: 2025-05-02
 tags: [mindset, personal, intentional-living]
+subtitle: "Some might see my distance as being antisocial.The truth is much simpler: **I just prioritize differently**"
 ---
 
 Some of you might have noticed that I don’t always show up to every gathering. I don’t stay out late, I don’t jump into every group conversation, and I don’t post much on social media — at least not the way many people expect.  
