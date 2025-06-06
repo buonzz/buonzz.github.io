@@ -2,6 +2,7 @@
 layout: post
 title: "Competency-Based Voting"
 date: 2025-05-12
+subtitle: "Without civic knowledge, elections become popularity contests, easily manipulated by media, money, and misinformation"
 ---
 
 # Competency-Based Voting
