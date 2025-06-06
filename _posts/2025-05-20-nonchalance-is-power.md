@@ -1,3 +1,6 @@
+---
+subtitle: "Most people think nonchalance means you don’t care. But I believe true nonchalance means you care deeply — just not about everything"
+---
 In today’s digital world, silence is suspicious and privacy is misunderstood. We live in an age where speaking up is seen as strength, where presence is measured by posts, and where silence is often mistaken for apathy. But I’ve come to believe the opposite: that there is immense power in nonchalance, in restraint, and in choosing to keep parts of your life — and your thoughts — to yourself.
 
 Most people think nonchalance means you don’t care. But I believe true nonchalance means you care deeply — just not about everything. It's not apathy, it’s control. It’s refusing to be pulled in every direction by external noise. It’s responding only when necessary and staying grounded when others are chasing validation, outrage, or attention.
