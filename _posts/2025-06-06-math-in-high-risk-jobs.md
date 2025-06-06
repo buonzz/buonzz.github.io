@@ -3,7 +3,7 @@ title: "Why School Math Feels Useless (And Why That Says More About Your Job Tha
 date: 2025-06-05
 categories: [education, work, critical-thinking]
 tags: [math, education, accountability, careers, logic]
-subtitle: Why did we even learn algebra or calculus? I never use it in real life!
+subtitle: "Why did we even learn algebra or calculus? I never use it in real life!"
 ---
 
 Most of us have heard this complaint: _"Why did we even learn algebra or calculus? I never use it in real life!"_ 
