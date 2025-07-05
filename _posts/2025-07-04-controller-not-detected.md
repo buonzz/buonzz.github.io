@@ -6,7 +6,7 @@ tags: [dji, simudrone, android, troubleshooting, drone-simulator]
 
 When I tried using **SimuDrone**—a drone flight simulator—with my **DJI RC-N3** controller connected to my Android phone, I ran into this frustrating error:
 
-![SimuDrone Error - Remote Controller Not Detected](/assets/simudrone-remote-not-detected.jpg)
+![SimuDrone Error - Remote Controller Not Detected](/assets/Screenshot_2025-07-05-16-13-50-64_953bf323e6d2bf82e0a5bdd2961113f4.jpg)
 
 > **Remote Controller not detected.  
 Please connect to remote controller and restart SimuDrone. Or, you can enable virtual joysticks to play.**
