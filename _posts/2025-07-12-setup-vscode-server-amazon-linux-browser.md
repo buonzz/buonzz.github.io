@@ -3,7 +3,7 @@ layout: post
 title: "How to Set Up VS Code Server on Amazon Linux 2023 (Browser-based Development)"
 date: 2025-07-12
 tags: [vscode, amazon-linux, code-server, apache, ssl, devops]
-subtitle: If you're like me and want to **develop on a remote EC2 instance** using just your **browser**, this guide walks through setting up **VS Code Server** (`code-server`) on **Amazon Linux 2023**, securely served over **HTTPS** with **Apache and Let's Encrypt**. 
+subtitle: If you're like me and want to develop on a remote EC2 instance using just your browser, this guide walks through setting up VS Code Server (`code-server`) on Amazon Linux 2023, securely served over HTTPS with Apache and Let's Encrypt. 
 ---
 
 If you're like me and want to **develop on a remote EC2 instance** using just your **browser**, this guide walks through setting up **VS Code Server** (`code-server`) on **Amazon Linux 2023**, securely served over **HTTPS** with **Apache and Let's Encrypt**.
