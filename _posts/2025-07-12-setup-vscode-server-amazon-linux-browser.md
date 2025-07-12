@@ -207,6 +207,26 @@ Certbot installs an automatic renewal job. You can test it manually with:
 sudo certbot renew --dry-run
 ```
 
+## Security
+
+If you want to make it so that only you can access this code-server instance, edit /etc/httpd/conf.d/code.example.com-le-ssl.conf and add
+
+
+```
+<Location />
+  Require ip X.X.X.X
+</Location>
+```
+*X.X.X.X is your IP address*
+
+This locks down the code.example.com to your IP address
+
+restart apache
+```
+sudo systemctl restart httpd
+```
+Note: you need to update the IP address if your IP changes. If you are constantly travelling, you might want to use IP address range instead.
+
 ---
 
 ## 🧠 Conclusion
