@@ -1,5 +1,6 @@
 ---
 title: "The vibe coding horror nobody tells you about"
+subtitle: "Before you dive into the hype of vibe coding, read this first!"
 ---
 
 You know those coding horror stories people don’t warn you about? Here’s mine—navigating AI coding tools felt like stumbling through a haunted house blindfolded.
