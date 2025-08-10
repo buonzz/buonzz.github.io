@@ -44,6 +44,14 @@ You know those coding horror stories people don’t warn you about? Here’s min
 
 **Warning**: Even if you're *paying*, Copilot often denies premium access mid-project. Quotas aren’t obvious in advance, and resetting them might take weeks. You may get downgraded mid-code.
 
+
+## Windsurf
+Im not sure if this is specific to this product, but im constantly getting 
+```
+Resource exhausted: Encountered retryable error from model provider: Global rate limit reached for this model due to high demand. Your request was not processed and your credits have been refunded. Please upgrade to a pro account for priority access or try again in a few minutes.: Rate limit error
+```
+![GitHub Copilot quota exceeded error](/img/windsurf.png)
+
 ---
 
 ### TL;DR – Friendly Warnings for the Unprepared
