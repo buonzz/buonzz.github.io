@@ -7,56 +7,58 @@ You know those coding horror stories people don’t warn you about? Here’s min
 
 ## Cursor AI: Card declined, usage blocked, no mercy
 
-- I tried Cursor and was greeted with the dreaded **"You've hit your usage limit"**—fine, I get it, fair enough. But when I tried upgrading to Pro... **“Your card has been declined.”** Only AliPay and Cash App Pay were available; if you're not in the U.S., good luck.
+- I tried Cursor and was greeted with the dreaded **"You've hit your usage limit"**—fine, I get it. But when I tried upgrading to Pro... **“Your card has been declined.”** Only Alipay and Cash App Pay were available; if you're not in the U.S., good luck.
 
-![Cursor payment declined screenshot](/img/cursor1.png)
+![Cursor payment declined screenshot](/img/cursor1.png)  
 ![Cursor usage limit screenshot](/img/cursor2.png)
 
-- Community forums are full of complaints about just that. One user from Italy shared, “Trying to buy a monthly pro, but it will decline my card for no reason…” even though the card works elsewhere ([forum.cursor.com](https://forum.cursor.com/t/cursor-wont-take-my-money/19406?page=2&utm_source=chatgpt.com)).  
-- Issues persist worldwide. A user in the Philippines lamented, “Been paying for 6 months … suddenly all payment methods not working for me here” ([forum.cursor.com](https://forum.cursor.com/t/cursor-wont-take-my-money/19406?page=2&utm_source=chatgpt.com)).  
-- Others report that their card issuer has blacklisted Cursor due to “fraud detection”—completely blocking access ([forum.cursor.com](https://forum.cursor.com/t/cursor-ai-on-blacklist-at-my-bank/24662?utm_source=chatgpt.com)).  
-- Even Alipay is unreliable. Users report multiple deductions with no Pro access granted or refunds issued ([forum.cursor.com](https://forum.cursor.com/t/using-alipay-to-subscribe-the-fee-was-successfully-deducted-but-the-pro-was-not-opened-prompting-an-error/108432?utm_source=chatgpt.com)).  
-- One shared frustration: “The payment still would not go through. My card works perfectly everywhere else, just not here” ([forum.cursor.com](https://forum.cursor.com/t/cursor-wont-take-my-money/19406?utm_source=chatgpt.com)).
+- Community forums are full of complaints about this. One user from Italy shared, “Trying to buy a monthly pro, but it will decline my card for no reason…” even though the card works elsewhere.  
+- Issues persist worldwide. A user in the Philippines lamented, “Been paying for 6 months … suddenly all payment methods not working for me here.”  
+- Others report that their card issuer has blacklisted Cursor due to “fraud detection”—completely blocking access.  
+- Even Alipay is unreliable for some users: multiple deductions reported without Pro access or refunds issued.  
+- One shared frustration: “The payment still would not go through. My card works perfectly everywhere else, just not here.”
 
-**Warning**: Cursor’s payment system is a minefield. If you're outside the U.S., or even within it, be prepared for endless decline messages, no refund support, and few functional payment options.
+**Warning:** Cursor’s payment system can be a minefield. If you're outside the U.S., or sometimes even inside it, be prepared for decline messages, slow refunds, and limited payment options.
 
 ## Claude Code: Phone-number maze and temp-roadblocks
 
-- Claude Code forces phone verification—but many hit a roadblock named **“phone_number_temp_blocked.”** Users on Reddit report being blocked mid-onboarding despite multiple attempts ([reddit.com](https://www.reddit.com/r/ClaudeAI/comments/1h1q0ya/cant_get_through_onboarding_phone_number_temp/?utm_source=chatgpt.com)).  
+- Claude Code forces phone verification—but many hit a roadblock named **“phone_number_temp_blocked.”** Users report being blocked mid-onboarding despite multiple attempts.
 
 ![Claude AI phone verification error](/img/claude.jpg)
 
-- Some report that logging off and trying again later or using a different device worked—pure luck ([reddit.com](https://www.reddit.com/r/ClaudeAI/comments/1h1q0ya/cant_get_through_onboarding_phone_number_temp/?utm_source=chatgpt.com)).  
-- Workarounds include using virtual phone numbers or signing up via Google instead of SMS—but these aren’t official solutions, just band-aids ([anakin.ai](https://anakin.ai/blog/error-sending-code-double-check-your-phone-number/?utm_source=chatgpt.com), [calilio.com](https://www.calilio.com/blogs/how-to-use-claude-ai-without-a-phone-number?utm_source=chatgpt.com)).
+- Some get through by logging off and trying again later or using a different device—pure luck.  
+- Workarounds include using virtual phone numbers or signing up via Google instead of SMS—but these are band-aids, not official fixes.
 
-**Warning**: Claude’s phone system is a gateway straight to frustration. You may never see that verification code—be ready with virtual numbers or VPNs if you're not in a supported region.
+**Warning:** Claude’s phone system can lead straight to frustration. You may never see that verification code—be ready with alternatives if your region isn't supported.
 
 ## GitHub Copilot: Quota nightmare—even with paid plans
 
-- I hit a wall: “You have exceeded your premium request allowance…” even on a paid account.  
+- I hit a wall: **“You have exceeded your premium request allowance…”** even on a paid account.
 
 ![GitHub Copilot quota exceeded error](/img/copilot.png)
 
-- Turns out the system is by design. Copilot Pro+ gives a specific number of premium-model requests per billing cycle. Once that’s used—bam—you’re downgraded to GPT-4.1 ([github.com](https://github.com/orgs/community/discussions/162585?utm_source=chatgpt.com)).  
-- Some users reported hitting the limit immediately after purchase—or before using it at all! ([github.com](https://github.com/orgs/community/discussions/164613?utm_source=chatgpt.com)). Students on educational plans had the same issue: no usage, yet flagged as exceeded ([github.com](https://github.com/orgs/community/discussions/165869?utm_source=chatgpt.com)).  
-- It seems the quotas reset only according to billing cycles—not the calendar month—adding to the confusion ([github.com](https://github.com/orgs/community/discussions/164643?utm_source=chatgpt.com)).  
-- The system now shows multipliers: e.g., GPT-4.5 consumes **50×** a single premium request; Claude Opus 4 uses **10×**. Expect your budget to vanish fast ([github.com](https://github.com/orgs/community/discussions/165480?utm_source=chatgpt.com)).  
-- Users are crying foul: “I only used 13 requests… still can’t get more without paying extra” ([reddit.com](https://www.reddit.com/r/GithubCopilot/comments/1lell0w/you_have_exceeded_your_premium_request_allowance/?utm_source=chatgpt.com)).
+- Copilot Pro+ gives a limited number of premium-model requests per billing cycle. Use them up and you’re downgraded to a lower model.  
+- Some users reported the limit triggering immediately after purchase—or before using it at all. Students on educational plans reported similar surprises.  
+- Quotas often track billing cycles (not calendar months), which adds confusion.  
+- Premium-model multipliers can annihilate your budget fast (e.g., some premium models consume many “request units” per call).  
+- People report being blocked after only a handful of calls and then having to wait weeks for resolution.
 
-**Warning**: Even if you're *paying*, Copilot often denies premium access mid-project. Quotas aren’t obvious in advance, and resetting them might take weeks. You may get downgraded mid-code.
-
+**Warning:** Even if you're paying, hidden quota mechanics can interrupt a project mid-work.
 
 ## Windsurf
-Im not sure if this is specific to this product, but im constantly getting 
+
+I keep seeing this error:
+
 ```
 Resource exhausted: Encountered retryable error from model provider: Global rate limit reached for this model due to high demand. Your request was not processed and your credits have been refunded. Please upgrade to a pro account for priority access or try again in a few minutes.: Rate limit error
 ```
+
 ![Windsurf error](/img/windsurf.png)
 
 ## Anthropic
 
-This request would exceed the rate limit for your organization<br>
-![Windsurf error](/img/anthropic.png)
+This request would exceed the rate limit for your organization.  
+![Anthropic rate limit error](/img/anthropic.png)
 
 ---
 
@@ -64,18 +66,27 @@ This request would exceed the rate limit for your organization<br>
 
 | Tool            | Common Pitfall                                            | Real-World Reports                           |
 |-----------------|------------------------------------------------------------|-----------------------------------------------|
-| **Cursor AI**    | Payment failures, limited options, no refunds             | Global users stuck with declined cards ([forum.cursor.com](https://forum.cursor.com/t/cursor-wont-take-my-money/19406?page=2&utm_source=chatgpt.com)) |
-| **Claude Code**  | Razor-tight phone verification, vague blocks             | Onboarding blocked by “phone_number_temp_blocked” ([reddit.com](https://www.reddit.com/r/ClaudeAI/comments/1h1q0ya/cant_get_through_onboarding_phone_number_temp/?utm_source=chatgpt.com), [anakin.ai](https://anakin.ai/blog/error-sending-code-double-check-your-phone-number/?utm_source=chatgpt.com)) |
-| **GitHub Copilot** | Hidden quota limits—even paid can't use premium models | Quotas hit immediately; students affected ([github.com](https://github.com/orgs/community/discussions/162585?utm_source=chatgpt.com), [reddit.com](https://www.reddit.com/r/GithubCopilot/comments/1lell0w/you_have_exceeded_your_premium_request_allowance/?utm_source=chatgpt.com)) |
+| **Cursor AI**    | Payment failures, limited options, poor refund support    | Global users stuck with declined cards |
+| **Claude Code**  | Razor-tight phone verification, vague blocks              | Onboarding blocked by phone verification issues |
+| **GitHub Copilot** | Hidden quota limits—even paid can't use premium models  | Quotas triggered unexpectedly; students affected |
 
 ---
 
 ### My Advice to Future Users
 
-- **Cursor**: Have backup payment methods (virtual cards, international-friendly) ready. Proceed only if your billing system plays nice globally.
-- **Claude**: Use virtual numbers or Google sign-in as a backup; test onboarding early before committing.
-- **Copilot**: Track your usage from day one. Understand hidden quotas and be prepared for fallback. Budget extras or avoid using premium-heavy features mid-project.
+- **Cursor:** Have backup payment methods (virtual cards, international-friendly) ready. Test payments before committing.  
+- **Claude:** Try Google sign-in or a virtual number as a fallback; test onboarding early.  
+- **Copilot:** Track usage closely from day one, and budget for premium-model consumption.
 
 ---
 
-Hope this helps anyone venturing into AI-powered coding—be wary. It's a vibe, but in the worst possible way.
+### The Escape Hatch: No More Limits, No More Payment Nightmares
+
+After trying (and failing) to make all these tools behave, I found a simple, reliable alternative that fixed the problems for me:
+
+1. Install **Roo** in Visual Studio Code (search for *Roo* in the VS Code Marketplace or [install it here](https://marketplace.visualstudio.com/items?itemName=roocode.roo)).  
+2. Sign up for a free account at [OpenRouter](https://openrouter.ai/).  
+3. Generate an **API key** in your OpenRouter dashboard.  
+4. Open Roo in VS Code and enter your OpenRouter API key in Roo’s settings.
+
+That’s it—no declined payments, no SMS gatekeeping, no hidden quota cliffs. Roo + OpenRouter gave me smooth, uninterrupted AI-assisted coding.
