@@ -10,30 +10,6 @@ If you’re a developer (like me, coming from PHP and web apps), stepping into t
 There are **too many new words** — some are company names, some are research concepts, some are tools you can actually install.  
 
 This post is my attempt to make sense of the most common terms I kept bumping into. Hopefully it helps you too.
-
-```mermaid
-graph LR
-  LLMs["LLMs (GPT, Claude, Gemini, DeepSeek, LLaMA)"]
-  Embeddings["Embeddings"]
-  VectorDB["Vector Databases<br/>(Pinecone, Weaviate, Milvus)"]
-  RAG["RAG (Retrieval-Augmented Generation)"]
-  LangChain["LangChain<br/>(App Framework)"]
-  HF["Hugging Face<br/>(Model & Dataset Hub)"]
-  Ollama["Ollama<br/>(Local Runtime)"]
-  n8n["n8n / Lovable<br/>(Automation & Low-Code)"]
-  Agentic["Agentic AI"]
-  Vibe["Vibe Coding"]
-
-  LLMs --> Embeddings --> VectorDB --> RAG
-  LLMs --> RAG
-  RAG --> LangChain
-  LangChain --> n8n
-  LangChain --> Agentic
-  LangChain --> Vibe
-  HF --> LLMs
-  HF --> Ollama --> LangChain
-```
-
 ---
 
 ## 🧠 Core AI & LLM Concepts
