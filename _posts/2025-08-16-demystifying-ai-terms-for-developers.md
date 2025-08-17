@@ -86,6 +86,19 @@ An open-source workflow automation tool (like Zapier) that can integrate LLMs, A
 ### **Lovable**
 A YC-backed startup that lets you generate full-stack apps with natural language prompts. Think of it as "AI + coding copilot" on steroids.
 
+### **LangChain**
+A developer framework (Python/JS) for building AI apps. It helps you connect LLMs with tools, manage RAG pipelines, and build AI agents that can take actions.  
+Think of it as a **framework layer** that makes LLMs practical in real-world applications.
+
+### **Hugging Face**
+An open-source AI hub and community. It provides:  
+- **Model Hub** (download/share models like LLaMA, Mistral, Stable Diffusion)  
+- **Transformers library** (Python package for using models)  
+- **Datasets Hub** (shared datasets for training/fine-tuning)  
+- **Spaces** (hosted demos and apps)  
+
+Think of it as the **GitHub of AI models and tools**.
+
 ---
 
 ## 🌟 New AI Trends
