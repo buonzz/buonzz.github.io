@@ -11,7 +11,6 @@ There are **too many new words** — some are company names, some are research c
 
 This post is my attempt to make sense of the most common terms I kept bumping into. Hopefully it helps you too.
 
-<pre>
 ```mermaid
 graph LR
   LLMs["LLMs (GPT, Claude, Gemini, DeepSeek, LLaMA)"]
@@ -34,7 +33,6 @@ graph LR
   HF --> LLMs
   HF --> Ollama --> LangChain
 ```
-</pre>
 
 ---
 
