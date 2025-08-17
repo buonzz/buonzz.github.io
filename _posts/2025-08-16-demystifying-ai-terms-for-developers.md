@@ -10,6 +10,9 @@ If you’re a developer (like me, coming from PHP and web apps), stepping into t
 There are **too many new words** — some are company names, some are research concepts, some are tools you can actually install.  
 
 This post is my attempt to make sense of the most common terms I kept bumping into. Hopefully it helps you too.
+
+
+
 ---
 
 ## 🧠 Core AI & LLM Concepts
