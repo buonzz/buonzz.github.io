@@ -1,10 +1,11 @@
 ---
 layout: post
 title: "MySQL Database Time Travel with Docker Snapshots"
-date: 2024-12-19
+date: 2025-09-27
 slug: mysql-database-time-travel-docker-snapshots
 categories: [mysql, docker, backup, devops]
 tags: [mysql, docker, snapshots, backup, registry, blackblaze]
+subtitle: "Do you wish you could have database time travel capabilities, making it easy to restore not just data, but the complete database environment from any point in time?"
 ---
 
 # MySQL Database Time Travel with Docker Snapshots
