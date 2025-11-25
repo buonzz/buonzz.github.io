@@ -1,9 +1,11 @@
 ---
 layout: post
 title: "Fixing Sentry MCP Server Authentication in Remote VS Code (Code-Server)"
-date: 2025-11-25 10:00:00 -0800
+date: 2025-11-25
 categories: [DevOps, AI, Sentry, VSCode]
+slug: sentry-mcp-stdio-fix
 tags: [MCP, Sentry, AmazonQ, code-server, OAuth]
+subtitle: "Let Amazon Q access your Sentry.io account"
 ---
 
 The Model Context Protocol (MCP) is a powerful standard that allows AI assistants—like **Amazon Q**, Cursor, or GitHub Copilot—to interact directly with developer tools. However, integrating the Sentry MCP Server into a remote IDE environment, such as VS Code running on a `code-server` instance, often hits a wall due to the **OAuth authentication flow**.
