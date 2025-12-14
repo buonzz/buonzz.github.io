@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Vibe Coding From Anywhere: Agentic CLI + Tailscale + Termux"
-date: 2025-11-25
+date: 2025-12-14
 categories: [DevOps, AI, Sentry, VSCode]
 tags: [devops, productivity, ai]
 subtitle: "How I SSH into my home server and talk to my codebase from my phone"
