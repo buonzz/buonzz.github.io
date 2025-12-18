@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Vibe Coding From Anywhere: Agentic CLI + Tailscale + Termux"
+title: "Vibe Coding From Anywhere: Agentic CLI + Tailscale + ConnectBot"
 date: 2025-12-14
 categories: [DevOps, AI, Sentry, VSCode]
 tags: [devops, productivity, ai]
@@ -34,11 +34,11 @@ This setup works surprisingly well and feels almost unfairly powerful:
 - **DeepSeek Coder** as the LLM backend
 - **Tailscale** → zero-config private networking
 - **Android phone**
-- **Termux** → real Linux shell on mobile
+- **ConnectBot** → real Linux shell on mobile
 
 In short:
 
-> 📱 Phone → Termux → SSH → Fedora server → Continue.dev → AI understands your repo
+> 📱 Phone → ConnectBot → SSH → Fedora server → Continue.dev → AI understands your repo
 
 ---
 
@@ -95,21 +95,11 @@ All over SSH.
 
 ---
 
-## Termux: Real Linux on Android
+## ConnectBot: Real Linux on Android
 
-Termux turns your phone into a legit Linux terminal.
+ConnectBot turns your phone into a legit Linux terminal.
 
-Minimal setup:
-
-```bash
-pkg install openssh
-```
-
-Then SSH straight into the server using its **Tailscale IP**:
-
-```bash
-ssh user@100.x.y.z
-```
+just enter your SSH credentials after installing the app.
 
 Once connected:
 
@@ -168,7 +158,7 @@ This is far safer than exposing SSH to the internet.
 
 ## Final Thoughts
 
-Agentic CLI + Tailscale + Termux turns your phone into:
+Agentic CLI + Tailscale + ConnectBot turns your phone into:
 
 > A secure, private, AI-augmented terminal to your home server
 
