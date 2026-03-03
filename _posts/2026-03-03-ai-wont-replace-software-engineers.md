@@ -12,6 +12,7 @@ tags:
 - Agentic Systems
 title: AI Won't Replace Software Engineers. It Will Force Them to Think
   Like Project Managers.
+subtitle: "AI is going to replace software engineers. That's the wrong frame."
 ---
 
 For months now, the loudest narrative around AI and code has been
@@ -21,7 +22,7 @@ simple:
 
 That's the wrong frame.
 
-AI isn't replacing software engineers.\
+AI isn't replacing software engineers.
 It's compressing execution --- and forcing engineers to level up into
 something closer to project managers.
 
@@ -33,16 +34,16 @@ And that's a fundamentally different shift.
 
 Traditionally, software engineers were valued for:
 
--   Translating requirements into code\
--   Designing technical architecture\
--   Debugging complex systems\
+-   Translating requirements into code
+-   Designing technical architecture
+-   Debugging complex systems
 -   Writing efficient, maintainable implementations
 
 Project managers handled:
 
--   Clarifying goals\
--   Aligning stakeholders\
--   Breaking projects into structured tasks\
+-   Clarifying goals
+-   Aligning stakeholders
+-   Breaking projects into structured tasks
 -   Managing timelines and tradeoffs
 
 There was a clear separation between *deciding what should be built* and
@@ -56,10 +57,10 @@ Agentic coding tools change the balance.
 
 They can:
 
--   Scaffold entire applications\
--   Write boilerplate instantly\
--   Refactor large codebases\
--   Generate tests and documentation\
+-   Scaffold entire applications
+-   Write boilerplate instantly
+-   Refactor large codebases
+-   Generate tests and documentation
 -   Debug with surprising competence
 
 In other words, they compress the mechanical act of coding.
@@ -74,19 +75,19 @@ And the new bottleneck is thinking.
 
 With AI, output quality depends almost entirely on:
 
--   Clarity of instructions\
--   Constraint definition\
--   System boundaries\
--   Edge case anticipation\
+-   Clarity of instructions
+-   Constraint definition
+-   System boundaries
+-   Edge case anticipation
 -   Iterative refinement
 
 That's not "just coding."
 
 That's:
 
--   Requirement engineering\
--   Scope design\
--   Risk anticipation\
+-   Requirement engineering
+-   Scope design
+-   Risk anticipation
 -   Quality evaluation
 
 Those are project management skills.
@@ -97,48 +98,48 @@ Those are project management skills.
 
 In the AI-augmented workflow, engineers increasingly:
 
--   Frame problems precisely\
--   Define constraints clearly\
--   Evaluate outputs critically\
--   Iterate with strategic intent\
+-   Frame problems precisely
+-   Define constraints clearly
+-   Evaluate outputs critically
+-   Iterate with strategic intent
 -   Balance trade-offs deliberately
 
 Instead of typing every line, they:
 
--   Architect solution space\
--   Design feedback loops\
--   Orchestrate AI agents\
+-   Architect solution space
+-   Design feedback loops
+-   Orchestrate AI agents
 -   Integrate generated systems into coherent products
 
 They move up a layer of abstraction.
 
-Not away from engineering.\
+Not away from engineering.
 Deeper into it.
 
 ------------------------------------------------------------------------
 
 ## This Isn't Downgrading Engineering. It's Upgrading It.
 
-Low-level implementation becomes cheaper.\
+Low-level implementation becomes cheaper.
 High-level thinking becomes more valuable.
 
 The engineer of the AI era isn't someone who:
 
--   Knows the most syntax\
--   Memorizes APIs\
+-   Knows the most syntax
+-   Memorizes APIs
 -   Manually writes boilerplate fastest
 
 It's someone who can:
 
--   Translate ambiguous goals into structured systems\
--   Design reliable architectures\
--   Anticipate failure modes\
--   Define clean interfaces\
+-   Translate ambiguous goals into structured systems
+-   Design reliable architectures
+-   Anticipate failure modes
+-   Define clean interfaces
 -   Evaluate trade-offs under uncertainty
 
 In other words:
 
-> Engineers aren't being replaced.\
+> Engineers aren't being replaced.
 > They're being forced to think like project managers.
 
 But with technical depth.
@@ -151,21 +152,21 @@ The engineers most at risk aren't those who can't code.
 
 They're those who:
 
--   Wait to be told exactly what to build\
--   Execute blindly without questioning scope\
+-   Wait to be told exactly what to build
+-   Execute blindly without questioning scope
 -   Avoid ownership of system-level decisions
 
-AI reduces the premium on pure execution.\
+AI reduces the premium on pure execution.
 It increases the premium on ownership.
 
 ------------------------------------------------------------------------
 
 ## Final Thought
 
-The future engineer looks less like a ticket-closer\
+The future engineer looks less like a ticket-closer
 and more like a systems strategist.
 
-Less like a typist\
+Less like a typist
 and more like a designer of outcomes.
 
 AI won't replace software engineers.
