@@ -3,7 +3,7 @@ layout: default
 ---
 
 <!-- Post Header -->
-{% assign header_img = page.header-img %}
+{% assign header_img = page["header-img"] %}
 {% if header_img %}
     {% assign header_src = header_img %}
 {% else %}

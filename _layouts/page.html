@@ -3,8 +3,8 @@ layout: default
 ---
 
 <!-- Page Header -->
-{% assign header_img = page.header-img %}
-{% assign is_home = page["is_home"] or page.url == '/' %}
+{% assign header_img = page["header-img"] %}
+{% assign is_home = page["is_home"] or page.url == '/' or page.url == '/index.html' %}
 {% if is_home %}
     {% assign header_src = site.homepage-video %}
 {% elsif header_img %}
@@ -13,7 +13,13 @@ layout: default
     {% assign header_src = site.default-banner-img %}
 {% endif %}
 {% assign header_is_video = header_src contains '.mp4' or header_src contains '.webm' %}
-{% if header_is_video %}
+{% if is_home %}
+<header class="intro-header video-header">
+    <video autoplay muted loop playsinline preload="auto">
+        <source src="{{ site.baseurl }}/{{ header_src }}" type="video/mp4">
+        Your browser does not support the video background.
+    </video>
+{% elsif header_is_video %}
 <header class="intro-header video-header">
     <video autoplay muted loop playsinline preload="auto">
         <source src="{{ site.baseurl }}/{{ header_src }}" type="video/mp4">
