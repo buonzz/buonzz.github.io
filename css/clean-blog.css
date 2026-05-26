@@ -135,6 +135,7 @@ hr.small {
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
+  min-height: 300px;
   margin-bottom: 50px;
 }
 .intro-header.video-header {
