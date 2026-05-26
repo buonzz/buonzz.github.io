@@ -11,7 +11,13 @@ layout: default
         Your browser does not support the video background.
     </video>
 {% else %}
-    {% assign header_img = page["header-img"] | default: site.header-img | default: site.default-banner-img %}
+    {% if page["header-img"] %}
+        {% assign header_img = page["header-img"] %}
+    {% elsif site.header-img %}
+        {% assign header_img = site.header-img %}
+    {% else %}
+        {% assign header_img = site.default-banner-img %}
+    {% endif %}
 <header class="intro-header" style="background-image: url('{{ site.baseurl }}/{{ header_img }}')">
 {% endif %}
     <div class="container">
