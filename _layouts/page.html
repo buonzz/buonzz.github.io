@@ -3,8 +3,7 @@ layout: default
 ---
 
 <!-- Page Header -->
-{% assign is_home = page["is_home"] or page.url == '/' or page.url == '/index.html' %}
-{% if is_home %}
+{% if page.url == '/' or page.url == '/index.html' %}
 <header class="intro-header video-header">
     <video autoplay muted loop playsinline preload="auto">
         <source src="{{ site.baseurl }}/{{ site.homepage-video }}" type="video/mp4">
@@ -23,7 +22,7 @@ layout: default
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                {% if is_home %}
+                {% if page.url == '/' or page.url == '/index.html' %}
                 <div class="site-heading">
                     <h1></h1>
                     <hr class="small">
