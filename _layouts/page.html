@@ -3,25 +3,41 @@ layout: default
 ---
 
 <!-- Page Header -->
-{% assign header_img = page.header-img | default: site.header-img %}
-{% assign header_is_video = header_img contains '.mp4' or header_img contains '.webm' %}
-{% if header_is_video %}
+{% assign header_img = page.header-img %}
+{% assign is_home = page.is_home or page.url == '/' %}
+{% if is_home %}
 <header class="intro-header video-header">
     <video autoplay muted loop playsinline preload="auto">
-        <source src="{{ site.baseurl }}/{{ header_img }}" type="video/mp4">
+        <source src="{{ site.baseurl }}/{{ site.homepage-video }}" type="video/mp4">
         Your browser does not support the video background.
     </video>
 {% else %}
-<header class="intro-header" style="background-image: url('{{ site.baseurl }}/{{ header_img }}')">
+    {% if header_img %}
+        {% assign header_src = header_img %}
+    {% else %}
+        {% assign header_src = site.default-banner-img %}
+    {% endif %}
+    {% assign header_is_video = header_src contains '.mp4' or header_src contains '.webm' %}
+    {% if header_is_video %}
+<header class="intro-header video-header">
+    <video autoplay muted loop playsinline preload="auto">
+        <source src="{{ site.baseurl }}/{{ header_src }}" type="video/mp4">
+        Your browser does not support the video background.
+    </video>
+    {% else %}
+<header class="intro-header" style="background-image: url('{{ site.baseurl }}/{{ header_src }}')">
+    {% endif %}
 {% endif %}
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                {% unless page.no-header %}
                 <div class="site-heading">
                     <h1>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h1>
                     <hr class="small">
                     <span class="subheading">{{ page.description }}</span>
                 </div>
+                {% endunless %}
             </div>
         </div>
     </div>
