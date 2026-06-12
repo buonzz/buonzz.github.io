@@ -3,15 +3,39 @@ layout: default
 ---
 
 <!-- Page Header -->
-<header class="intro-header" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')">
+{% if page.url == '/' or page.url == '/index.html' %}
+<header class="intro-header video-header">
+    <video autoplay muted loop playsinline preload="auto">
+        <source src="{{ site.baseurl }}/{{ site.homepage-video }}" type="video/mp4">
+        Your browser does not support the video background.
+    </video>
+{% else %}
+    {% if page["header-img"] %}
+        {% assign header_img = page["header-img"] %}
+    {% elsif site.header-img %}
+        {% assign header_img = site.header-img %}
+    {% else %}
+        {% assign header_img = site.default-banner-img %}
+    {% endif %}
+<header class="intro-header" style="background-image: url('{{ site.baseurl }}/{{ header_img }}')">
+{% endif %}
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                {% if page.url == '/' or page.url == '/index.html' %}
+                <div class="site-heading">
+                    <h1></h1>
+                    <hr class="small">
+                    <span class="subheading"></span>
+                </div>
+                {% elsif page["no-header"] %}
+                {% else %}
                 <div class="site-heading">
                     <h1>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h1>
                     <hr class="small">
                     <span class="subheading">{{ page.description }}</span>
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>
