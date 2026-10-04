@@ -5,10 +5,34 @@ description: "Projects and companies I've worked on"
 header-img: "img/15965818108_2cf5008cfb_k.jpg"
 ---
 
+<div class="portfolio-page">
+
+<style>
+.container:has(.portfolio-page) { max-width: 1400px; width: 92%; }
+.container:has(.portfolio-page) .col-lg-8,
+.container:has(.portfolio-page) .col-md-10 { width: 100%; margin-left: 0; }
+
+.portfolio-grid { display: flex; flex-wrap: wrap; }
+.portfolio-grid > [class*="col-"] { display: flex; margin-bottom: 20px; }
+.portfolio-grid .thumbnail {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 0;
+    border-radius: 4px;
+}
+.portfolio-grid .thumbnail > a { display: block; line-height: 0; }
+.portfolio-grid .caption { padding: 8px 10px 10px; }
+.portfolio-grid .caption h4 { margin: 0 0 4px; font-size: 15px; line-height: 1.25; }
+.portfolio-grid .caption p { margin: 0; font-size: 13px; line-height: 1.35; color: #555; }
+.portfolio-grid .caption p.meta { margin-top: 6px; font-size: 12px; color: #888; }
+</style>
+
 <h2>Personal Projects</h2>
 
-<div class="row">
-    <div class="col-sm-6">
+<div class="row portfolio-grid">
+
+    <div class="col-md-3 col-sm-6">
         <div class="thumbnail">
             <a href="https://maketeams.org/">
                 <img class="img-responsive" src="/img/portfolio/maketeams.jpg" alt="MakeTeams screenshot">
@@ -16,26 +40,25 @@ header-img: "img/15965818108_2cf5008cfb_k.jpg"
             <div class="caption">
                 <h4>MakeTeams</h4>
                 <p>Understand the conflict. Think for yourself.</p>
-                <p><small>Aug 2026</small></p>
+                <p class="meta">Aug 2026</p>
             </div>
         </div>
     </div>
-    <div class="col-sm-6">
+
+    <div class="col-md-3 col-sm-6">
         <div class="thumbnail">
             <a href="https://pinoyvo.com/">
                 <img class="img-responsive" src="/img/portfolio/pinoyvo.jpg" alt="PinoyVO screenshot">
             </a>
             <div class="caption">
-                <h4>PinoyVO &mdash; Generate Filipino Voiceover</h4>
+                <h4>PinoyVO</h4>
                 <p>AI-powered voiceover generator for Filipino content creators.</p>
-                <p><small>Jul 2026</small></p>
+                <p class="meta">Jul 2026</p>
             </div>
         </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="col-sm-6">
+    <div class="col-md-3 col-sm-6">
         <div class="thumbnail">
             <a href="https://vibecoding-therightway.com/">
                 <img class="img-responsive" src="/img/portfolio/vibe-coding-the-right-way.jpg" alt="Vibe Coding The Right Way screenshot">
@@ -43,11 +66,12 @@ header-img: "img/15965818108_2cf5008cfb_k.jpg"
             <div class="caption">
                 <h4>Vibe Coding The Right Way</h4>
                 <p>Vibe code with confidence. Ship apps that last.</p>
-                <p><small>May 2026 &middot; <a href="https://open.spotify.com/show/033pDLRgQrihXxhZfVsJor">Podcast</a></small></p>
+                <p class="meta">May 2026 &middot; <a href="https://open.spotify.com/show/033pDLRgQrihXxhZfVsJor">Podcast</a></p>
             </div>
         </div>
     </div>
-    <div class="col-sm-6">
+
+    <div class="col-md-3 col-sm-6">
         <div class="thumbnail">
             <a href="https://marites.app/">
                 <img class="img-responsive" src="/img/portfolio/marites-drive.jpg" alt="Marites Drive screenshot">
@@ -55,14 +79,12 @@ header-img: "img/15965818108_2cf5008cfb_k.jpg"
             <div class="caption">
                 <h4>Marites Drive</h4>
                 <p>Taglish GPS navigation with funny Filipino commentary.</p>
-                <p><small>Jan 2025 &middot; <a href="https://play.google.com/store/apps/details?id=com.bilersolutions.marites">Google Play</a></small></p>
+                <p class="meta">Jan 2025 &middot; <a href="https://play.google.com/store/apps/details?id=com.bilersolutions.marites">Google Play</a></p>
             </div>
         </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="col-sm-6">
+    <div class="col-md-3 col-sm-6">
         <div class="thumbnail">
             <a href="https://play.google.com/store/apps/details?id=com.bilersolutions.rawfiles">
                 <img class="img-responsive" src="/img/portfolio/rawfiles.jpg" alt="Rawfiles screenshot">
@@ -70,26 +92,25 @@ header-img: "img/15965818108_2cf5008cfb_k.jpg"
             <div class="caption">
                 <h4>Rawfiles</h4>
                 <p>Browse Backblaze B2 Cloud Storage like a gallery of photos and videos.</p>
-                <p><small><a href="https://play.google.com/store/apps/details?id=com.bilersolutions.rawfiles">Google Play</a></small></p>
+                <p class="meta"><a href="https://play.google.com/store/apps/details?id=com.bilersolutions.rawfiles">Google Play</a></p>
             </div>
         </div>
     </div>
-    <div class="col-sm-6">
+
+    <div class="col-md-3 col-sm-6">
         <div class="thumbnail">
             <a href="https://play.google.com/store/apps/details?id=com.bilersolutions.adjuvant">
                 <img class="img-responsive" src="/img/portfolio/adjuvant.jpg" alt="Adjuvant screenshot">
             </a>
             <div class="caption">
                 <h4>Adjuvant</h4>
-                <p>A native Android AI assistant for cloud operators. Ask a question in plain English and Adjuvant picks the right tool, queries your AWS account directly with your own credentials, and explains the answer. No console tabs, no region hunting, no CLI flags.</p>
-                <p><small><a href="https://play.google.com/store/apps/details?id=com.bilersolutions.adjuvant">Google Play</a></small></p>
+                <p>A native Android AI assistant for cloud operators. Ask a question in plain English and Adjuvant picks the right tool, queries your AWS account directly with your own credentials, and explains the answer.</p>
+                <p class="meta"><a href="https://play.google.com/store/apps/details?id=com.bilersolutions.adjuvant">Google Play</a></p>
             </div>
         </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="col-sm-6">
+    <div class="col-md-3 col-sm-6">
         <div class="thumbnail">
             <a href="https://play.google.com/store/apps/details?id=com.bilersolutions.myboarders">
                 <img class="img-responsive" src="/img/portfolio/myboarders.jpg" alt="MyBoarders screenshot">
@@ -97,10 +118,11 @@ header-img: "img/15965818108_2cf5008cfb_k.jpg"
             <div class="caption">
                 <h4>MyBoarders</h4>
                 <p>Android app for small accommodation operators &mdash; boarding houses, bed spacers, transient houses and small hotels. Manage properties, boarders, bookings and billing without needing the cloud.</p>
-                <p><small><a href="https://play.google.com/store/apps/details?id=com.bilersolutions.myboarders">Google Play</a></small></p>
+                <p class="meta"><a href="https://play.google.com/store/apps/details?id=com.bilersolutions.myboarders">Google Play</a></p>
             </div>
         </div>
     </div>
+
 </div>
 
 <p>More on <a href="https://www.producthunt.com/@darwin_biler">Product Hunt</a>.</p>
@@ -163,3 +185,5 @@ header-img: "img/15965818108_2cf5008cfb_k.jpg"
     <li><strong>Infrastructure:</strong> nginx, Apache, HAProxy, memcached, Redis, Beanstalkd, ElasticSearch, MongoDB, Linux (Fedora/Ubuntu)</li>
     <li><strong>Practice:</strong> system analysis, scaling, microservices, product translation and integration</li>
 </ul>
+
+</div>
